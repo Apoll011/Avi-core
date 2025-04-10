@@ -1,3 +1,8 @@
+mod version;
+mod utils;
+
+use crate::utils::cli;
+
 fn main() {
-    println!("Hello, world!");
+    cli::header();
 }
