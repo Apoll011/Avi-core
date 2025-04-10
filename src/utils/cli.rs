@@ -4,10 +4,10 @@ use crate::version;
 pub fn print_centered_header(text: &str) {
     let width = match terminal_size() {
         Some((Width(w), _)) => w as usize,
-        None => 80, // fallback width
+        None => 40,
     };
 
-    let total_text = format!(" {} ", text); // add space padding
+    let total_text = format!(" {} ", text);
     let text_len = total_text.len();
     let rem = if width > text_len { width - text_len } else { 0 };
 
@@ -15,7 +15,7 @@ pub fn print_centered_header(text: &str) {
     let line = format!(
         "{}{}{}",
         "=".repeat(half),
-        total_text,
+        if text_len > 2 { total_text } else { "==".to_string() },
         "=".repeat(width - text_len - half)
     );
 
@@ -27,4 +27,6 @@ pub fn header() {
     println!("{}", "Version: ".to_owned() + version::VERSION);
     println!("Embrace, Inc, by {}", version::AUTHOR);
     println!("{}", "Build Date: ".to_owned() + version::BUILD_DATE);
+    println!("Copyright (C) 2025");
+    print_centered_header("");
 }
