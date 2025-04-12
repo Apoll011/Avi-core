@@ -1,0 +1,55 @@
+use serde_json;
+use std::collections::HashMap;
+use std::error::Error;
+use std::fs;
+use std::path::Path;
+use crate::intent::intent::{Intent, IntentFile};
+use crate::intent::sloth::{DefaultSlotManager, SlotDefinition};
+
+pub struct IntentManager {
+    pub(crate) intents: Vec<Intent>,
+    pub(crate) default_slots: DefaultSlotManager,
+}
+
+impl IntentManager {
+    pub(crate) fn new() -> Self {
+        IntentManager {
+            intents: Vec::new(),
+            default_slots: DefaultSlotManager::new(),
+        }
+    }
+
+    pub(crate) fn load_intent<P: AsRef<Path>>(&mut self, file_path: P) -> Result<(), Box<dyn Error>> {
+        let content = fs::read_to_string(file_path)?;
+        let data: IntentFile = serde_json::from_str(&content)?;
+
+        let slots = self.parse_slot_defs(&data.slots)?;
+
+        let intent = Intent {
+            name: data.intent,
+            patterns: data.patterns,
+            regex_patterns: data.regex_patterns,
+            slots,
+        };
+
+        self.intents.push(intent);
+        Ok(())
+    }
+
+    fn parse_slot_defs(&self, raw_slots: &HashMap<String, serde_json::Value>) -> Result<HashMap<String, SlotDefinition>, Box<dyn Error>> {
+        let mut defs = HashMap::new();
+
+        for (slot, val) in raw_slots {
+            if val.is_string() && val.as_str().unwrap() == "*" {
+                defs.insert(slot.clone(), SlotDefinition::new_catch_all());
+            } else if val.is_array() {
+                let values: Vec<String> = serde_json::from_value(val.clone())?;
+                defs.insert(slot.clone(), SlotDefinition::new_enumeration(values));
+            } else {
+                return Err(format!("Invalid slot definition for {}: {:?}", slot, val).into());
+            }
+        }
+
+        Ok(defs)
+    }
+}

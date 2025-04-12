@@ -25,7 +25,7 @@ pub fn print_centered_header(text: &str) {
 pub fn header() {
     print_centered_header("Avi Core");
     println!("{}", "Version: ".to_owned() + version::VERSION);
-    println!("Embrace, Inc, by {}", version::AUTHOR);
+    println!("Embrace, Inc. By {}.", version::AUTHOR);
     println!("{}", "Build Date: ".to_owned() + version::BUILD_DATE);
     println!("Copyright (C) 2025");
     print_centered_header("");
