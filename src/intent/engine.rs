@@ -6,14 +6,14 @@ use std::path::Path;
 use crate::intent::intent::{Intent, IntentFile};
 use crate::intent::sloth::{DefaultSlotManager, SlotDefinition};
 
-pub struct IntentManager {
+pub struct IntentEngine {
     pub(crate) intents: Vec<Intent>,
     pub(crate) default_slots: DefaultSlotManager,
 }
 
-impl IntentManager {
+impl IntentEngine {
     pub(crate) fn new() -> Self {
-        IntentManager {
+        IntentEngine {
             intents: Vec::new(),
             default_slots: DefaultSlotManager::new(),
         }

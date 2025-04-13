@@ -1,13 +1,13 @@
-use crate::intent::intent_manager::IntentManager;
+use crate::intent::engine::IntentEngine;
 use crate::intent::sloth_extrator::{ExtractedSlots, SlotExtractor};
 
 pub struct Recognizer<'a> {
-    intent_manager: &'a IntentManager,
+    intent_manager: &'a IntentEngine,
     slot_extractor: SlotExtractor<'a>,
 }
 
 impl<'a> Recognizer<'a> {
-    pub(crate) fn new(intent_manager: &'a IntentManager) -> Self {
+    pub(crate) fn new(intent_manager: &'a IntentEngine) -> Self {
         Recognizer {
             intent_manager,
             slot_extractor: SlotExtractor::new(&intent_manager.default_slots),

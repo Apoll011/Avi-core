@@ -4,7 +4,7 @@ mod intent;
 
 use std::error::Error;
 use std::fs;
-use crate::intent::intent_manager::IntentManager;
+use crate::intent::engine::IntentEngine;
 use crate::intent::recognizer::Recognizer;
 use crate::utils::cli;
 
@@ -69,8 +69,8 @@ fn create_sample_intent_files() -> Result<(), Box<dyn Error>> {
 
 fn main() {
     cli::header();
-    create_sample_intent_files().expect("TODO: panic message");
-    let mut im = IntentManager::new();
+    //create_sample_intent_files().expect("TODO: panic message");
+    let mut im = IntentEngine::new();
 
     im.load_intent("intents/find_hotel.json").expect("TODO: panic message");
     im.load_intent("intents/book_flight.json").expect("TODO: panic message");
