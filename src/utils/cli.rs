@@ -1,5 +1,17 @@
+use std::io;
+use std::io::Write;
 use terminal_size::{Width, terminal_size};
 use crate::version;
+
+pub fn input(prompt: &str) -> &str {
+    print!("{}", prompt);
+    io::stdout().flush().unwrap();
+
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Failed to read line");
+
+    input.trim()
+}
 
 pub fn print_centered_header(text: &str) {
     let width = match terminal_size() {
