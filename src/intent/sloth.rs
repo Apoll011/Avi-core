@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize)]
 #[serde(tag = "type")]
 pub enum SlotDefinition {
     #[serde(rename = "enumeration")]
@@ -9,7 +9,14 @@ pub enum SlotDefinition {
 
     #[serde(rename = "catch_all")]
     CatchAll,
+
+    #[serde(rename = "catch_process")]
+    CatchProcess {
+        #[serde(skip)]
+        processor: fn(String) -> Option<String>,
+    },
 }
+
 
 impl SlotDefinition {
     pub(crate) fn new_enumeration(values: Vec<String>) -> Self {
@@ -18,6 +25,10 @@ impl SlotDefinition {
 
     pub(crate) fn new_catch_all() -> Self {
         SlotDefinition::CatchAll
+    }
+
+    pub(crate) fn new_processor(processor: fn(String) -> Option<String>) -> Self {
+        SlotDefinition::CatchProcess { processor }
     }
 }
 
@@ -39,7 +50,12 @@ impl DefaultSlotManager {
             ]),
         );
 
-        defaults.insert("dates".to_string(), SlotDefinition::new_catch_all());
+        defaults.insert("dates".to_string(), SlotDefinition::new_processor(|date| {
+            println!("{}", date);
+            Option::from(date)
+        }));
+
+
 
         DefaultSlotManager { defaults }
     }

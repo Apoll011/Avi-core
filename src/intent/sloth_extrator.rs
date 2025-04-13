@@ -18,6 +18,24 @@ impl<'a> SlotExtractor<'a> {
         SlotExtractor { default_slots }
     }
 
+    fn validate_and_process_slot(
+        &self,
+        val_text: String,
+        defn: &SlotDefinition,
+    ) -> Option<String> {
+        match defn {
+            SlotDefinition::Enumeration { values } => {
+                if values.iter().any(|v| v.eq_ignore_ascii_case(&val_text)) {
+                    Some(val_text)
+                } else {
+                    None
+                }
+            }
+            SlotDefinition::CatchAll => Some(val_text),
+            SlotDefinition::CatchProcess { processor } => processor(val_text),
+        }
+    }
+
     pub(crate) fn extract_from_pattern(
         &self,
         pattern: &str,
@@ -25,45 +43,30 @@ impl<'a> SlotExtractor<'a> {
         intent_name: &str,
         intent_slots: &HashMap<String, SlotDefinition>,
     ) -> Option<ExtractedSlots> {
-        let regex = self.pattern_to_regex(pattern, intent_slots)?;
+        let regex = self.pattern_to_regex(pattern)?;
         let captures = regex.captures(text)?;
 
         let mut slots = HashMap::new();
 
         for name in regex.capture_names().flatten() {
             if let Some(val) = captures.name(name) {
-                let val_text = val.as_str().to_string();
+                let mut val_text = val.as_str().to_string();
+                let defn;
 
-                // Check if it's a default slot
                 if name.starts_with("default_") {
                     let default_name = &name[8..]; // Skip "default_"
-                    let defn = self.default_slots.get(default_name)?;
-
-                    match defn {
-                        SlotDefinition::Enumeration { values } => {
-                            if !values.iter().any(|v| v.eq_ignore_ascii_case(&val_text)) {
-                                return None; // Not valid
-                            }
-                        }
-                        SlotDefinition::CatchAll => {}
-                    }
-
-                    slots.insert(name.to_string(), val_text);
+                    defn = self.default_slots.get(default_name)?;
                 } else {
-                    // Intent-specific slot
-                    let defn = intent_slots.get(name)?;
-
-                    match defn {
-                        SlotDefinition::Enumeration { values } => {
-                            if !values.iter().any(|v| v.eq_ignore_ascii_case(&val_text)) {
-                                return None; // Not valid
-                            }
-                        }
-                        SlotDefinition::CatchAll => {}
-                    }
-
-                    slots.insert(name.to_string(), val_text);
+                    defn = intent_slots.get(name)?;
                 }
+
+                let processed = self.validate_and_process_slot(val.as_str().to_string(), defn);
+                if processed.is_none() {
+                    return None;
+                }
+                val_text = processed.unwrap().as_str().to_string();
+
+                slots.insert(name.to_string(), val_text);
             }
         }
 
@@ -91,18 +94,15 @@ impl<'a> SlotExtractor<'a> {
 
         for name in regex.capture_names().flatten() {
             if let Some(val) = captures.name(name) {
-                let val_text = val.as_str().to_string();
+                let mut val_text = val.as_str().to_string();
 
                 // Intent-specific slot
                 if let Some(defn) = intent_slots.get(name) {
-                    match defn {
-                        SlotDefinition::Enumeration { values } => {
-                            if !values.iter().any(|v| v.eq_ignore_ascii_case(&val_text)) {
-                                return None; // Not valid
-                            }
-                        }
-                        SlotDefinition::CatchAll => {}
+                    let processed = self.validate_and_process_slot(val.as_str().to_string(), defn);
+                    if processed.is_none() {
+                        return None;
                     }
+                    val_text = processed.unwrap().as_str().to_string();
                 }
 
                 slots.insert(name.to_string(), val_text);
@@ -118,7 +118,6 @@ impl<'a> SlotExtractor<'a> {
     fn pattern_to_regex(
         &self,
         pattern: &str,
-        intent_slots: &HashMap<String, SlotDefinition>,
     ) -> Option<Regex> {
         let mut regex_str = "^".to_string();
         let mut current_pos = 0;
@@ -161,6 +160,9 @@ impl<'a> SlotExtractor<'a> {
                                 regex_str.push_str(&format!("(?P<{}>{})",&group_name, alt));
                             }
                             SlotDefinition::CatchAll => {
+                                regex_str.push_str(&format!("(?P<{}>.+?)", &group_name));
+                            }
+                            SlotDefinition::CatchProcess { .. } => {
                                 regex_str.push_str(&format!("(?P<{}>.+?)", &group_name));
                             }
                         }
