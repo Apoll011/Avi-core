@@ -16,7 +16,6 @@ Avi is a high-performance, extensible voice assistant framework reimagined in Ru
   AviScript-based DSL for creating and managing assistant behaviors.
 
 - **Voice-First Architecture**  
-  With integrated support for [Neon Audio](https://github.com/neongeckocom/neon_audio) and [Neon Speech](https://github.com/neongeckocom/neon_speech).
 
 - **Cross-Device Enclosure Support**  
   Deploy the `avi-enclosure` on any compatible IoT, edge device, or satellite node.
@@ -35,7 +34,6 @@ Avi is a high-performance, extensible voice assistant framework reimagined in Ru
 
 - **Multi-Language Support**  
   Current support: English 🇺🇸, Portuguese 🇵🇹🇧🇷  
-  More via AviScript extensions.
 
 - **Psychological & Emotional Layer**  
   Built on modernized ELIZA-style interaction for mental health support.
@@ -46,8 +44,6 @@ Avi is a high-performance, extensible voice assistant framework reimagined in Ru
 
 > Prerequisites:
 > - Rust (latest stable)
-> - Neon Modules (Audio/Speech/Messagebus)
-> - AviBaseAPI (in progress)
 
 1. **Clone the repository:**
 ```bash
@@ -58,14 +54,6 @@ cd Avi
 2. **Build the core system:**
 ```bash
 cargo build --release
-```
-
-3. **Install and configure the Neon stack:**
-```bash
-# Follow installation for:
-# https://github.com/neongeckocom/neon_audio
-# https://github.com/neongeckocom/neon_speech
-# https://github.com/neongeckocom/neon_messagebus
 ```
 
 4. **Run Avi:**
@@ -101,8 +89,7 @@ Docs: [AviScript Guide (WIP)](docs/aviscript.md)
 - **avi-enclosure** – Lightweight binary for embedded devices
 - **avi-gui** – Desktop or web interface for Avi interaction
 - **avi-studio** – IDE for skill creation with AviScript
-- **avi-messagebus** – Communication layer (based on Neon Messagebus)
-- **neon_audio / neon_speech / neon_messagebus** – Voice and audio infrastructure
+- **avi-audio** – Voice and audio infrastructure
 
 ---
 
