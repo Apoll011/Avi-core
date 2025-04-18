@@ -106,7 +106,7 @@ Docs: [AviScript Guide (WIP)](docs/aviscript.md)
 
 ## 🧪 Contributing
 
-We ❤️ contributions. Jump in and build a skill, interface, or even a new enclosure:
+I ❤️ contributions. Jump in and build a skill, interface, or even a new enclosure:
 
 1. Fork the repo
 2. Create a feature branch
