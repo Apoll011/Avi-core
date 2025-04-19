@@ -4,16 +4,6 @@ use rhai_fs::FilesystemPackage;
 use rhai_url::UrlPackage;
 use crate::intent::slot_extrator::ExtractedSlots;
 
-// TODO:
-/*
------------
-on_intent "get_weather" |intent| {
-    let city = intent.slots.get("city") ?? "your location";
-    say("Let me check the weather in " + city + ".");
-}
------------
-
-*/
 fn on_intent_syntax_handler(
     context: &mut EvalContext,
     inputs: &[Expression]

@@ -1,4 +1,5 @@
 use rhai::{export_module, exported_module, Engine, EvalAltResult};
+use rhai::module_resolvers::StaticModuleResolver;
 use rhai::plugin::*;
 
 use uuid::Uuid;
@@ -67,15 +68,8 @@ mod config {
 
     pub fn has(name: &str) -> bool { false }
     pub fn type_of(name: &str) -> String { "".into() }
-}
 
-#[export_module]
-mod setting {
-    pub fn get(name: &str) -> rhai::Dynamic { ().into() }
-    pub fn set(name: &str, value: rhai::Dynamic) {}
-
-    pub fn save() {}
-    pub fn list() -> rhai::Array { rhai::Array::new() }
+    pub fn constant(name: &str) -> String { "".into() }
 }
 
 #[export_module]
@@ -148,17 +142,20 @@ mod translation {
 
 
 pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
+    let mut resolver = StaticModuleResolver::new();
+
+    resolver.insert("http", exported_module!(http).into());
+
+
     engine.register_static_module("speak", exported_module!(speak).into())
         .register_static_module("ask", exported_module!(ask).into())
         .register_static_module("assets", exported_module!(assets).into())
         .register_static_module("audio", exported_module!(audio).into())
         .register_static_module("context", exported_module!(context).into())
         .register_static_module("config", exported_module!(config).into())
-        .register_static_module("setting", exported_module!(setting).into())
         .register_static_module("events", exported_module!(events).into())
         .register_static_module("translation", exported_module!(translation).into())
-        .register_static_module("utils", exported_module!(utils).into())
-        .register_static_module("http", exported_module!(http).into());
+        .register_global_module(exported_module!(utils).into());
 
     Ok(())
 }
