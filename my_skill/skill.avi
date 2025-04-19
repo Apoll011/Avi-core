@@ -1,15 +1,13 @@
-fn hi() {
+on_start {
     print("hi");
 }
 
 on_intent "find_hotel" {
     print(intent.name);
     print(intent.get("default_locations"));
-    hi();
 }
 
 on_intent "book_figth" {
     print(intent.name);
     print(intent.get("default_locations"));
-    hi();
 }

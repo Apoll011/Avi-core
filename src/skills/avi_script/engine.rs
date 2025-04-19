@@ -21,7 +21,9 @@ fn on_intent_syntax_handler(
     let intent_name = inputs[0].get_string_value().unwrap().to_string();
     let block = &inputs[1];
 
-    if context.scope().get_value::<ImmutableString>("INTENT_NAME").unwrap().eq_ignore_ascii_case(&*intent_name) {
+    let i_name = context.scope().get_value::<ImmutableString>("INTENT_NAME");
+
+    if !i_name.is_none() && i_name.unwrap().eq_ignore_ascii_case(&*intent_name) {
         let scope = context.scope_mut();
         scope.push_constant("name", intent_name);
         scope.push_constant("intent", scope.get_value::<ExtractedSlots>("INTENT").unwrap());
@@ -31,6 +33,39 @@ fn on_intent_syntax_handler(
 
     Ok(Dynamic::UNIT)
 }
+
+fn on_start_syntax_handler(
+    context: &mut EvalContext,
+    inputs: &[Expression]
+) -> Result<Dynamic, Box<EvalAltResult>> {
+    let block = &inputs[0];
+
+    if context.scope().get_value::<bool>("STARTED").is_none() {
+        let scope = context.scope_mut();
+        scope.push_constant("STARTED", true);
+
+        let _ = context.eval_expression_tree(block);
+    }
+
+    Ok(Dynamic::UNIT)
+}
+
+fn on_end_syntax_handler(
+    context: &mut EvalContext,
+    inputs: &[Expression]
+) -> Result<Dynamic, Box<EvalAltResult>> {
+    let block = &inputs[0];
+
+    let e_name = context.scope().get_value::<bool>("END");
+
+    if !e_name.is_none() && e_name.unwrap() {
+        let _ = context.eval_expression_tree(block);
+    }
+
+    Ok(Dynamic::UNIT)
+}
+
+
 pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), Box<EvalAltResult>>) -> Result<Engine, Box<dyn std::error::Error>> {
     let mut engine = Engine::new();
 
@@ -52,6 +87,18 @@ pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), 
         ["on_intent", "$string$", "$block$"],
         false,
         on_intent_syntax_handler
+    )?;
+
+    engine.register_custom_syntax(
+        ["on_start", "$block$"],
+        false,
+        on_start_syntax_handler
+    )?;
+
+    engine.register_custom_syntax(
+        ["on_end", "$block$"],
+        false,
+        on_end_syntax_handler
     )?;
 
     engine.register_custom_operator("or", 160)?

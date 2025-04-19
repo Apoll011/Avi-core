@@ -40,20 +40,42 @@ pub struct Skill<'a> {
 
 impl<'a> Skill<'a> {
     pub(crate) fn new(path: &str, metadata: SkillMetadata, scope: Scope<'a>) -> Self {
-        Skill {
+        let skill = Skill {
             path: path.to_string(),
             metadata,
             scope
-        }
+        };
+        
+        skill
+    }
+    
+    pub(crate) fn metadata(&self) -> &SkillMetadata {
+        &self.metadata
+    }
+    
+    pub(crate) fn start(&mut self, engine: &Engine) {
+        let skill_path = Path::new(&self.path).join("skill.avi");
+        let skill_path_file = skill_path.to_str().unwrap();
+        
+        run_avi_script(engine, skill_path_file, &mut self.scope).expect("Skill Start error!!");
     }
 
+    pub(crate) fn stop(&mut self, engine: &Engine) {
+        self.scope.push_constant("END", true);
+        
+        let skill_path = Path::new(&self.path).join("skill.avi");
+        let skill_path_file = skill_path.to_str().unwrap();
+
+        run_avi_script(engine, skill_path_file, &mut self.scope).expect("Skill End error!!");
+    }
+    
     pub(crate) fn on_intent(&mut self, intent: ExtractedSlots, engine: &Engine) -> Result<(), &'static str> {
         self.scope.push_constant("INTENT_NAME", intent.intent.clone())
             .push_constant("INTENT", intent.clone());
 
         let skill_path = Path::new(&self.path).join("skill.avi");
         let skill_path_file = skill_path.to_str().unwrap();
-        
+
         run_avi_script(engine, skill_path_file, &mut self.scope).expect("Skill error!!");
 
         Ok(())
