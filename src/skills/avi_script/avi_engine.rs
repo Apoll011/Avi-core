@@ -10,16 +10,8 @@ pub fn get_avi_script_engine() -> Result<Engine, Box<dyn Error>>
     Ok(engine?)
 }
 
-pub fn run_avi_script(engine: Engine, path: String) -> Result<(), Box<dyn Error>>{
-    let mut scope = Scope::new();
-
-    let supported_languages: Array = vec!["pt".into(), "en".into()];
-
-    scope.push_constant("SKILL_NAME", "test")
-        .push_constant("CURRENT_LANGUAGE", "pt")
-        .push_constant("SUPPORTED_LANGUAGES", supported_languages);
-
-    engine.run_file_with_scope(&mut scope, path.into())?;
+pub fn run_avi_script(engine: &Engine, path: &str, scope: &mut Scope) -> Result<(), Box<dyn Error>>{
+    engine.run_file_with_scope(scope, path.into())?;
 
     Ok(())
 }
