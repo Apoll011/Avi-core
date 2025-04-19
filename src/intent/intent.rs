@@ -12,7 +12,7 @@ pub struct IntentFile {
     pub(crate) slots: HashMap<String, serde_json::Value>,
 }
 
-#[derive(Debug)]
+#[derive(Clone)]
 pub struct Intent {
     pub(crate) name: String,
     pub(crate) patterns: Vec<String>,

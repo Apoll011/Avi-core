@@ -1,18 +1,9 @@
-let url = Url("http://example.com/?q=query");
+fn hi() {
+    print("hi");
+}
 
-print(url);                 // prints 'http://example.com/?q=query'
-print(url.href);            // prints 'http://example.com/?q=query'
-
-print(url.query);           // prints 'q=query'
-
-print(url.fragment);        // prints ''
-print(url.hash);            // prints ''
-
-url.query_clear();
-
-print(url.query);           // prints ''
-
-url.query_remove("q");
-url.query_append("q", "name");
-
-print(url);
+on_intent "get_weather" {
+    print("intent hi");
+    print(name);
+    hi();
+}
