@@ -2,7 +2,7 @@ use rhai::{Dynamic, Engine, EvalAltResult, EvalContext, Expression, ImmutableStr
 use rhai::packages::Package;
 use rhai_fs::FilesystemPackage;
 use rhai_url::UrlPackage;
-use crate::intent::intent::Intent;
+use crate::intent::sloth_extrator::ExtractedSlots;
 
 // TODO:
 /*
@@ -24,11 +24,11 @@ fn on_intent_syntax_handler(
     if context.scope().get_value::<ImmutableString>("INTENT_NAME").unwrap().eq_ignore_ascii_case(&*intent_name) {
         let scope = context.scope_mut();
         scope.push_constant("name", intent_name);
-        scope.push_constant("intent", scope.get_value::<Intent>("INTENT").unwrap());
+        scope.push_constant("intent", scope.get_value::<ExtractedSlots>("INTENT").unwrap());
 
         let _ = context.eval_expression_tree(block);
     }
-    
+
     Ok(Dynamic::UNIT)
 }
 pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), Box<EvalAltResult>>) -> Result<Engine, Box<dyn std::error::Error>> {
@@ -67,6 +67,23 @@ pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), 
         .register_fn("@@", |a: ImmutableString, b: ImmutableString| format!("{}{}", a, b));
 
     modules_register(&mut engine).expect("A module did not load successfully!!");
+
+    engine.register_type_with_name::<ExtractedSlots>("Intent")
+        .register_get("name", ExtractedSlots::get_name)
+        .register_get("slots", ExtractedSlots::get_slots)
+        .register_fn("get", ExtractedSlots::get)
+        .register_fn("get_raw", ExtractedSlots::get_raw)
+        .register_fn("require", ExtractedSlots::require)
+        .register_fn("optional", ExtractedSlots::optional)
+        .register_fn("exists", ExtractedSlots::exists)
+        .register_fn("equal", ExtractedSlots::equal)
+        .register_fn("in_list", ExtractedSlots::in_list)
+        .register_fn("in_dict", ExtractedSlots::in_dict)
+        .register_fn("obj", ExtractedSlots::obj)
+        .register_fn("count", ExtractedSlots::count)
+        .register_fn("all", ExtractedSlots::all)
+        .register_fn("match_pattern", ExtractedSlots::match_pattern)
+        .register_fn("is_type", ExtractedSlots::is_type);;
 
     let fs = FilesystemPackage::new();
     fs.register_into_engine(&mut engine);

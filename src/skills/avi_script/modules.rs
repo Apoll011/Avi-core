@@ -32,27 +32,6 @@ mod ask {
 }
 
 #[export_module]
-mod intent {
-    pub fn get(slot: &str) -> rhai::Dynamic { ().into() }
-    pub fn get_raw(slot: &str) -> rhai::Dynamic { ().into() }
-    pub fn require(slot: &str) -> rhai::Dynamic { ().into() }
-    pub fn optional(slot: &str) -> rhai::Dynamic { ().into() }
-
-    pub fn exists(slot1: &str, slot2: &str) -> bool { false }
-    pub fn equal(slot: &str, value: &str) -> bool { false }
-
-    pub fn in_list(slot: &str, list: rhai::Array) -> bool { false }
-    pub fn in_dict(slot: &str, map: rhai::Map) -> bool { false }
-
-    pub fn obj(slot: &str) -> rhai::Dynamic { ().into() }
-    pub fn count() -> i64 { 0 }
-    pub fn all() -> rhai::Map { rhai::Map::new() }
-
-    pub fn match_pattern(slot: &str, pattern: &str) -> bool { false }
-    pub fn is_type(slot: &str, type_name: &str) -> bool { false }
-}
-
-#[export_module]
 mod assets {
     pub fn get(file: &str) -> String { "".into() }
     pub fn exists(file: &str) -> bool { false }
@@ -171,7 +150,6 @@ mod translation {
 pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
     engine.register_static_module("speak", exported_module!(speak).into())
         .register_static_module("ask", exported_module!(ask).into())
-        .register_static_module("intent", exported_module!(intent).into())
         .register_static_module("assets", exported_module!(assets).into())
         .register_static_module("audio", exported_module!(audio).into())
         .register_static_module("context", exported_module!(context).into())

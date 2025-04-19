@@ -1,12 +1,100 @@
 use std::collections::HashMap;
 use regex::{Regex, RegexBuilder};
-
+use rhai::{Array, Dynamic, Map};
 use crate::intent::sloth::{DefaultSlotManager, SlotDefinition};
 
 #[derive(Debug, Clone)]
 pub struct ExtractedSlots {
     pub(crate) intent: String,
     pub(crate) slots: HashMap<String, String>,
+}
+
+impl ExtractedSlots {
+    pub(crate) fn get_name(&mut self) -> String {
+        println!("Intent: {}", self.intent);
+        self.intent.clone()
+    }
+
+    pub(crate) fn get_slots(&mut self) -> HashMap<String, String> {
+        self.slots.clone()
+    }
+
+    pub(crate) fn get(&mut self, slot: &str) -> Dynamic {
+        self.slots.get(slot).cloned().unwrap_or_default().into()
+    }
+
+    pub(crate) fn get_raw(&mut self, slot: &str) -> Dynamic {
+        self.get(slot) // For now behaves same as get; can differ if raw format needed
+    }
+
+    pub(crate) fn require(&mut self, slot: &str) -> Dynamic {
+        self.slots.get(slot)
+            .map(|v| v.clone().into())
+            .expect(&format!("Required slot '{}' not found", slot))
+    }
+
+    pub(crate) fn optional(&mut self, slot: &str) -> Dynamic {
+        self.get(slot)
+    }
+
+    pub(crate) fn exists(&mut self, slot1: &str, slot2: &str) -> bool {
+        self.slots.contains_key(slot1) && self.slots.contains_key(slot2)
+    }
+
+    pub(crate) fn equal(&mut self, slot: &str, value: &str) -> bool {
+        self.slots.get(slot).map_or(false, |v| v == value)
+    }
+
+    pub(crate) fn in_list(&mut self, slot: &str, list: Array) -> bool {
+        match self.slots.get(slot) {
+            Some(value) => list.iter().any(|item| item.to_string() == *value),
+            None => false,
+        }
+    }
+
+    pub(crate) fn in_dict(&mut self, slot: &str, map: Map) -> bool {
+        match self.slots.get(slot) {
+            Some(value) => map.contains_key(value.as_str()),
+            None => false,
+        }
+    }
+
+    pub(crate) fn obj(&mut self, slot: &str) -> Dynamic {
+        self.get(slot) // Can be enhanced to return structured data
+    }
+
+    pub(crate) fn count(&mut self) -> i64 {
+        self.slots.len() as i64
+    }
+
+    pub(crate) fn all(&mut self) -> Map {
+        let mut map = Map::new();
+        for (k, v) in &self.slots {
+            map.insert(k.into(), v.clone().into());
+        }
+        map
+    }
+
+    pub(crate) fn match_pattern(&mut self, slot: &str, pattern: &str) -> bool {
+        use regex::Regex;
+        match self.slots.get(slot) {
+            Some(value) => Regex::new(pattern).map_or(false, |re| re.is_match(value)),
+            None => false,
+        }
+    }
+
+    pub(crate) fn is_type(&mut self, slot: &str, type_name: &str) -> bool {
+        match self.slots.get(slot) {
+            Some(value) => match type_name {
+                "int" => value.parse::<i64>().is_ok(),
+                "float" => value.parse::<f64>().is_ok(),
+                "bool" => value.parse::<bool>().is_ok(),
+                "string" => true,
+                _ => false,
+            },
+            None => false,
+        }
+    }
 }
 
 pub struct SlotExtractor<'a> {

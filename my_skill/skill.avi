@@ -2,8 +2,8 @@ fn hi() {
     print("hi");
 }
 
-on_intent "get_weather" {
-    print("intent hi");
-    print(name);
+on_intent "find_hotel" {
+    print(intent.name);
+    print(intent.get("default_locations"));
     hi();
 }

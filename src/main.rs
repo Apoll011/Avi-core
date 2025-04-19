@@ -4,8 +4,11 @@ mod intent;
 mod skills;
 
 use crate::intent::engine::IntentEngine;
+use crate::intent::intent::Intent;
 use crate::intent::recognizer::Recognizer;
 use crate::skills::avi_script::avi_engine::{get_avi_script_engine};
+use crate::skills::skill::Skill;
+use crate::skills::utils::load_skill;
 use crate::utils::cli;
 use crate::utils::cli::input;
 /*
@@ -28,11 +31,11 @@ fn main() {
     let mut im = IntentEngine::new();
 
     im.load_intent("intents/find_hotel.json").expect("TODO: panic message");
-    im.load_intent("intents/book_flight.json").expect("TODO: panic message");
 
     let rec = Recognizer::new(&im);
 
-    let engine = get_avi_script_engine().unwrap();
+    /*
+    im.load_intent("intents/book_flight.json").expect("TODO: panic message");
 
 
     loop {
@@ -46,5 +49,11 @@ fn main() {
                 println!("  Slots: {:?}", m.slots);
             }
         }
-    }
+    }*/
+
+    let engine = get_avi_script_engine().unwrap();
+
+    let mut skill = load_skill("my_skill").expect("Failed to load skill");
+    
+    skill.on_intent(rec.recognize("find me a hotel in paris")[0].clone(), &engine).expect("REASON")
 }

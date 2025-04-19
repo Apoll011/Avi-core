@@ -27,8 +27,8 @@ license = "MIT"
 ```
 */
 use std::path::{Path};
-use rhai::{Array, Engine, Scope};
-use crate::intent::intent::Intent;
+use rhai::{Engine, Scope};
+use crate::intent::sloth_extrator::ExtractedSlots;
 use crate::skills::avi_script::avi_engine::run_avi_script;
 use crate::skills::skill_metadata::SkillMetadata;
 
@@ -46,11 +46,11 @@ impl<'a> Skill<'a> {
             scope
         }
     }
-    
-    pub(crate) fn on_intent(&mut self, intent: Intent, engine: &Engine) -> Result<(), &'static str> {
-        self.scope.push_constant("INTENT_NAME", intent.name.clone())
+
+    pub(crate) fn on_intent(&mut self, intent: ExtractedSlots, engine: &Engine) -> Result<(), &'static str> {
+        self.scope.push_constant("INTENT_NAME", intent.intent.clone())
             .push_constant("INTENT", intent.clone());
-        
+
         let skill_path = Path::new(&self.path).join("skill.avi");
         let skill_path_file = skill_path.to_str().unwrap();
         
