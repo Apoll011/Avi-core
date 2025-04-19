@@ -3,10 +3,9 @@ mod utils;
 mod intent;
 mod skills;
 
-use std::error::Error;
 use crate::intent::engine::IntentEngine;
 use crate::intent::recognizer::Recognizer;
-use crate::skills::avi_script::avi_engine::{get_avi_script_engine, run_avi_script};
+use crate::skills::avi_script::avi_engine::{get_avi_script_engine};
 use crate::utils::cli;
 use crate::utils::cli::input;
 /*
@@ -35,7 +34,6 @@ fn main() {
 
     let engine = get_avi_script_engine().unwrap();
 
-    run_avi_script(engine, "s.avi".parse().unwrap()).expect("TODO: panic message");
 
     loop {
         let inp = input("Your prompt: ");

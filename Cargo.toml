@@ -13,3 +13,4 @@ rhai = { version = "*", features = ["debugging", "decimal", "serde" ] }
 uuid = { version = "*", features = ["v4"] }
 rhai-fs = "*"
 rhai-url = "*"
+lazy_static = "1.5.0"
