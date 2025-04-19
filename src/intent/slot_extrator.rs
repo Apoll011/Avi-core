@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use regex::{Regex, RegexBuilder};
 use rhai::{Array, Dynamic, Map};
-use crate::intent::sloth::{DefaultSlotManager, SlotDefinition};
+use crate::intent::slot::{DefaultSlotManager, SlotDefinition};
 
 #[derive(Debug, Clone)]
 pub struct ExtractedSlots {

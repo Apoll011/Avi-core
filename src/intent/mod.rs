@@ -1,5 +1,5 @@
 pub mod engine;
-mod sloth;
+mod slot;
 pub mod intent;
-pub mod sloth_extrator;
+pub mod slot_extrator;
 pub mod recognizer;

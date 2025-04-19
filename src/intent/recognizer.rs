@@ -1,5 +1,5 @@
 use crate::intent::engine::IntentEngine;
-use crate::intent::sloth_extrator::{ExtractedSlots, SlotExtractor};
+use crate::intent::slot_extrator::{ExtractedSlots, SlotExtractor};
 
 pub struct Recognizer<'a> {
     intent_manager: &'a IntentEngine,

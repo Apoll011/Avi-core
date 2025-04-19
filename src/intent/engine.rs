@@ -4,7 +4,7 @@ use std::error::Error;
 use std::fs;
 use std::path::Path;
 use crate::intent::intent::{Intent, IntentFile};
-use crate::intent::sloth::{DefaultSlotManager, SlotDefinition};
+use crate::intent::slot::{DefaultSlotManager, SlotDefinition};
 
 pub struct IntentEngine {
     pub(crate) intents: Vec<Intent>,

@@ -2,7 +2,7 @@ use rhai::{Dynamic, Engine, EvalAltResult, EvalContext, Expression, ImmutableStr
 use rhai::packages::Package;
 use rhai_fs::FilesystemPackage;
 use rhai_url::UrlPackage;
-use crate::intent::sloth_extrator::ExtractedSlots;
+use crate::intent::slot_extrator::ExtractedSlots;
 
 // TODO:
 /*

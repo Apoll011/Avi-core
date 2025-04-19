@@ -28,7 +28,7 @@ license = "MIT"
 */
 use std::path::{Path};
 use rhai::{Engine, Scope};
-use crate::intent::sloth_extrator::ExtractedSlots;
+use crate::intent::slot_extrator::ExtractedSlots;
 use crate::skills::avi_script::avi_engine::run_avi_script;
 use crate::skills::skill_metadata::SkillMetadata;
 
