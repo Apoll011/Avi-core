@@ -1,0 +1,7 @@
+name = "Greeting Skill"
+id = "greet.skill"
+version = "1.0.0"
+author = "You"
+description = "Greets the user and responds with kind words."
+language = ["en", "es"]
+license = "MIT"

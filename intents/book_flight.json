@@ -1,0 +1,15 @@
+{
+      "intent": "book_flight",
+      "patterns": [
+        "book a flight to {default/locations}",
+        "find flights to {default/locations} for {date}"
+      ],
+      "regex_patterns": [
+        "flight from (?P<origin>\\w+) to (?P<destination>\\w+)"
+      ],
+      "slots": {
+        "date": ["2025-04-15", "2025-04-16"],
+        "origin": "*",
+        "destination": "*"
+      }
+    }

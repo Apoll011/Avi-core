@@ -1,0 +1,15 @@
+{
+      "intent": "find_hotel",
+      "patterns": [
+        "find me a hotel in {default/locations}",
+        "book hotel at {default/locations} for {default/dates}"
+      ],
+      "regex_patterns": [
+        "hotel (?P<location>\\w+) (?P<checkin>\\d{4}-\\d{2}-\\d{2}) to (?P<checkout>\\d{4}-\\d{2}-\\d{2})"
+      ],
+      "slots": {
+        "date": ["2025-04-15", "2025-04-16"],
+        "checkin": "*",
+        "checkout": "*"
+      }
+    }
