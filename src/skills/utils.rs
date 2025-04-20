@@ -9,14 +9,14 @@ fn is_valid_skill_folder(path: &str) -> bool {
         return false;
     }
     
-    let required_folders = vec!["config", "intents", "responses"];
+    let required_folders = vec!["intents", "responses"];
     for req_folder in required_folders {
         if !folder.join(req_folder).exists() || !folder.join(req_folder).is_dir(){
             return false;
         }
     }
     
-    let required_files = vec!["skill.avi", "metadata.avi", "config/default.json", "config/runtime.json"];
+    let required_files = vec!["skill.avi", "metadata.avi", "skill.config"];
     for req_files in required_files {
         if !folder.join(req_files).exists() || !folder.join(req_files).is_file() {
             return false;

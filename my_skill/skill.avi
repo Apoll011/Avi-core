@@ -1,8 +1,10 @@
 import "utils" as u;
+import "config" as c;
 
 on_start {
     u::avi_start();
     assets::get("avi");
+    print(c::get_const("API_ENDPOINT"));
     print(read_string(open_file("./my_skill/skill.config")))
 }
 

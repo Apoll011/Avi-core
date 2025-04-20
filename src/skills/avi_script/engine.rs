@@ -1,8 +1,10 @@
-use rhai::{Dynamic, Engine, EvalAltResult, EvalContext, Expression, ImmutableString};
+use rhai::{Dynamic, Engine, EvalAltResult, EvalContext, Expression, ImmutableString, Position};
 use rhai::packages::Package;
 use rhai_fs::FilesystemPackage;
 use rhai_url::UrlPackage;
+use serde_json::Value;
 use crate::intent::slot_extrator::ExtractedSlots;
+use crate::utils::json::{dynamic_to_json, json_to_dynamic};
 
 fn on_intent_syntax_handler(
     context: &mut EvalContext,
@@ -56,6 +58,38 @@ fn on_end_syntax_handler(
 }
 
 
+pub fn register_json_functions(engine: &mut Engine) {
+    engine
+        .register_fn("parse_json", parse_json)
+        .register_fn("to_json", to_json);
+}
+
+fn parse_json(json_str: &str) -> Result<Dynamic, Box<EvalAltResult>> {
+    match serde_json::from_str::<Value>(json_str) {
+        Ok(value) => Ok(json_to_dynamic(value)),
+        Err(err) => Err(Box::new(EvalAltResult::ErrorRuntime(
+            format!("JSON parse error: {}", err).into(),
+            Position::NONE,
+        ))),
+    }
+}
+
+fn to_json(value: Dynamic) -> Result<String, Box<EvalAltResult>> {
+    match dynamic_to_json(value) {
+        Ok(json_value) => match serde_json::to_string_pretty(&json_value) {
+            Ok(json_str) => Ok(json_str),
+            Err(err) => Err(Box::new(EvalAltResult::ErrorRuntime(
+                format!("JSON stringify error: {}", err).into(),
+                Position::NONE,
+            ))),
+        },
+        Err(err) => Err(Box::new(EvalAltResult::ErrorRuntime(
+            err.to_string().parse().unwrap(),
+            Position::NONE,
+        ))),
+    }
+}
+
 pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), Box<EvalAltResult>>) -> Result<Engine, Box<dyn std::error::Error>> {
     let mut engine = Engine::new();
 
@@ -104,6 +138,8 @@ pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), 
         .register_fn("@@", |a: ImmutableString, b: ImmutableString| format!("{}{}", a, b));
 
     modules_register(&mut engine).expect("A module did not load successfully!!");
+
+    register_json_functions(&mut engine);
 
     engine.register_type_with_name::<ExtractedSlots>("Intent")
         .register_get("name", ExtractedSlots::get_name)
