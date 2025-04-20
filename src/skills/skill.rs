@@ -26,23 +26,31 @@ language = ["en", "es"]
 license = "MIT"
 ```
 */
+use std::env::set_current_dir;
 use std::path::{Path};
+use std::time::Instant;
 use rhai::{Engine, Scope};
 use crate::intent::slot_extrator::ExtractedSlots;
-use crate::skills::avi_script::avi_engine::run_avi_script;
+use crate::skills::avi_script::avi_engine::{get_avi_script_engine, run_avi_script};
 use crate::skills::skill_metadata::SkillMetadata;
 
 pub struct Skill<'a> {
     path: String,
     metadata: SkillMetadata,
+    engine: Engine,
     scope: Scope<'a>
 }
 
 impl<'a> Skill<'a> {
     pub(crate) fn new(path: &str, metadata: SkillMetadata, scope: Scope<'a>) -> Self {
+        let _guard = set_current_dir(Path::new(path)).expect("Failed to set temporary CWD");
+        
+        let engine = get_avi_script_engine().unwrap();
+
         let skill = Skill {
             path: path.to_string(),
             metadata,
+            engine,
             scope
         };
         
@@ -53,30 +61,20 @@ impl<'a> Skill<'a> {
         &self.metadata
     }
     
-    pub(crate) fn start(&mut self, engine: &Engine) {
-        let skill_path = Path::new(&self.path).join("skill.avi");
-        let skill_path_file = skill_path.to_str().unwrap();
-        
-        run_avi_script(engine, skill_path_file, &mut self.scope).expect("Skill Start error!!");
+    pub(crate) fn start(&mut self) {
+        run_avi_script(&self.engine, "skill.avi", &mut self.scope).expect("Skill Start error!!");
     }
 
-    pub(crate) fn stop(&mut self, engine: &Engine) {
+    pub(crate) fn stop(&mut self) {
         self.scope.push_constant("END", true);
-        
-        let skill_path = Path::new(&self.path).join("skill.avi");
-        let skill_path_file = skill_path.to_str().unwrap();
-
-        run_avi_script(engine, skill_path_file, &mut self.scope).expect("Skill End error!!");
+        run_avi_script(&self.engine, "skill.avi", &mut self.scope).expect("Skill End error!!");
     }
     
-    pub(crate) fn on_intent(&mut self, intent: ExtractedSlots, engine: &Engine) -> Result<(), &'static str> {
+    pub(crate) fn on_intent(&mut self, intent: ExtractedSlots) -> Result<(), &'static str> {
         self.scope.push_constant("INTENT_NAME", intent.intent.clone())
             .push_constant("INTENT", intent.clone());
-
-        let skill_path = Path::new(&self.path).join("skill.avi");
-        let skill_path_file = skill_path.to_str().unwrap();
-
-        run_avi_script(engine, skill_path_file, &mut self.scope).expect("Skill error!!");
+        
+        run_avi_script(&self.engine, "skill.avi", &mut self.scope).expect("Skill error!!");
 
         Ok(())
     }

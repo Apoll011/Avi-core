@@ -1,10 +1,9 @@
 import "utils" as u;
-import "math_utils" as math;
 
 on_start {
+    u::avi_start();
     assets::get("avi");
-    let result = math::add(5, 10);
-    print(result);
+    print(read_string(open_file("./my_skill/skill.config")))
 }
 
 on_intent "find_hotel" {

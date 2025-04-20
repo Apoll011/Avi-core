@@ -5,7 +5,6 @@ mod skills;
 
 use crate::intent::engine::IntentEngine;
 use crate::intent::recognizer::Recognizer;
-use crate::skills::avi_script::avi_engine::{get_avi_script_engine};
 use crate::skills::utils::load_skill;
 use crate::utils::cli;
 
@@ -48,9 +47,8 @@ fn main() {
         }
     }*/
 
-    let engine = get_avi_script_engine().unwrap();
 
     let mut skill = load_skill("my_skill").expect("Failed to load skill");
-    skill.start(&engine);
-    skill.on_intent(rec.recognize("find me a hotel in paris")[0].clone(), &engine).expect("REASON")
+    skill.start();
+    skill.on_intent(rec.recognize("find me a hotel in paris")[0].clone()).expect("REASON")
 }
