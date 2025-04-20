@@ -4,6 +4,7 @@ use rhai::plugin::*;
 
 use uuid::Uuid;
 
+use crate::skills::avi_librarymanager::initialize_rhai_library;
 
 #[export_module]
 mod speak {
@@ -147,8 +148,13 @@ pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
     static_resolver.insert("http", exported_module!(http).into());
     let file_resolver = FileModuleResolver::new_with_extension("avi");
 
+    let lib_manager = initialize_rhai_library().unwrap();
+
+    let lib_resolver = FileModuleResolver::new_with_path_and_extension(lib_manager.library_dir(), "avi");
+
     resolvers += file_resolver;
     resolvers += static_resolver;
+    resolvers += lib_resolver;
 
     engine.set_module_resolver(resolvers);
 

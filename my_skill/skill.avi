@@ -1,8 +1,10 @@
 import "utils" as u;
+import "math_utils" as math;
 
 on_start {
-    print("hi");
     assets::get("avi");
+    let result = math::add(5, 10);
+    print(result);
 }
 
 on_intent "find_hotel" {
