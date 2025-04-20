@@ -1,5 +1,5 @@
 use rhai::{export_module, exported_module, Engine, EvalAltResult};
-use rhai::module_resolvers::StaticModuleResolver;
+use rhai::module_resolvers::{FileModuleResolver, ModuleResolversCollection, StaticModuleResolver};
 use rhai::plugin::*;
 
 use uuid::Uuid;
@@ -41,24 +41,16 @@ mod assets {
     pub fn read_json(file: &str) -> rhai::Map { rhai::Map::new() }
 
     pub fn image(file: &str) -> rhai::Dynamic { ().into() }
-}
 
-#[export_module]
-mod audio {
-    pub fn play(file: &str) {}
-    pub fn stop() {}
-    pub fn is_playing() -> bool { false }
+    pub mod audio {
+        pub fn play(file: &str) {}
+        pub fn stop() {}
+        pub fn is_playing() -> bool { false }
 
-    pub fn volume(level: i64) {}
-    pub fn mute() {}
-    pub fn unmute() {}
-}
-
-#[export_module]
-mod context {
-    pub fn save(name: &str, value: rhai::Dynamic) {}
-    pub fn load(name: &str) -> rhai::Dynamic { ().into() }
-    pub fn clear(name: &str) {}
+        pub fn volume(level: i64) {}
+        pub fn mute() {}
+        pub fn unmute() {}
+    }
 }
 
 #[export_module]
@@ -70,28 +62,6 @@ mod config {
     pub fn type_of(name: &str) -> String { "".into() }
 
     pub fn constant(name: &str) -> String { "".into() }
-}
-
-#[export_module]
-mod http {
-    pub fn call(route: &str, method: &str, params: rhai::Map) -> rhai::Dynamic { ().into() }
-
-    pub fn get(route: &str, params: rhai::Map) -> rhai::Dynamic { ().into() }
-    pub fn post(route: &str, body: rhai::Map) -> rhai::Dynamic { ().into() }
-
-    pub fn status() -> i64 { 200 }
-}
-
-#[export_module]
-mod events {
-    pub fn emit(name: &str, payload: rhai::Map) {}
-
-    pub fn listen(name: &str, callback: rhai::FnPtr) {}
-}
-
-#[export_module]
-mod utils {
-    pub fn uuid() -> String { Uuid::new_v4().into() }
 }
 
 #[export_module]
@@ -140,17 +110,52 @@ mod translation {
     }
 }
 
+#[export_module]
+mod context {
+    pub fn save(name: &str, value: rhai::Dynamic) {}
+    pub fn load(name: &str) -> rhai::Dynamic { ().into() }
+    pub fn clear(name: &str) {}
+}
+
+#[export_module]
+mod http {
+    pub fn call(route: &str, method: &str, params: rhai::Map) -> rhai::Dynamic { ().into() }
+
+    pub fn get(route: &str, params: rhai::Map) -> rhai::Dynamic { ().into() }
+    pub fn post(route: &str, body: rhai::Map) -> rhai::Dynamic { ().into() }
+
+    pub fn status() -> i64 { 200 }
+}
+
+#[export_module]
+mod events {
+    pub fn emit(name: &str, payload: rhai::Map) {}
+
+    pub fn listen(name: &str, callback: rhai::FnPtr) {}
+}
+
+#[export_module]
+mod utils {
+    #[rhai_fn(volatile)]
+    pub fn uuid() -> String { Uuid::new_v4().into() }
+}
 
 pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
-    let mut resolver = StaticModuleResolver::new();
+    let mut resolvers = ModuleResolversCollection::new();
 
-    resolver.insert("http", exported_module!(http).into());
+    let mut static_resolver = StaticModuleResolver::new();
+    static_resolver.insert("http", exported_module!(http).into());
+    let file_resolver = FileModuleResolver::new_with_extension("avi");
+
+    resolvers += file_resolver;
+    resolvers += static_resolver;
+
+    engine.set_module_resolver(resolvers);
 
 
     engine.register_static_module("speak", exported_module!(speak).into())
         .register_static_module("ask", exported_module!(ask).into())
         .register_static_module("assets", exported_module!(assets).into())
-        .register_static_module("audio", exported_module!(audio).into())
         .register_static_module("context", exported_module!(context).into())
         .register_static_module("config", exported_module!(config).into())
         .register_static_module("events", exported_module!(events).into())

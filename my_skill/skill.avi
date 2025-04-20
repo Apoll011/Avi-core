@@ -1,5 +1,8 @@
+import "utils" as u;
+
 on_start {
     print("hi");
+    assets::get("avi");
 }
 
 on_intent "find_hotel" {

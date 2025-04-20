@@ -1,0 +1,3 @@
+fn avi_start() {
+    print("Bye Hi dont know");
+}
