@@ -8,8 +8,6 @@ use crate::intent::recognizer::Recognizer;
 use crate::skills::utils::load_skill;
 use crate::utils::cli;
 
-use std::mem;
-
 /*
 Architecture
 Todo:
@@ -53,6 +51,4 @@ fn main() {
     let mut skill = load_skill("my_skill").expect("Failed to load skill");
     skill.start();
     skill.on_intent(rec.recognize("find me a hotel in paris")[0].clone()).expect("REASON");
-   
-   printnl!(mem::size_of::<crate::skills::skill::Skill>());
 }
