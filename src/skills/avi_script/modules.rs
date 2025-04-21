@@ -41,8 +41,6 @@ mod assets {
     pub fn read_text(file: &str) -> String { "".into() }
     pub fn read_json(file: &str) -> rhai::Map { rhai::Map::new() }
 
-    pub fn image(file: &str) -> rhai::Dynamic { ().into() }
-
     pub mod audio {
         pub fn play(file: &str) {}
         pub fn stop() {}
@@ -52,17 +50,6 @@ mod assets {
         pub fn mute() {}
         pub fn unmute() {}
     }
-}
-
-#[export_module]
-mod config {
-    pub fn get(name: &str) -> rhai::Dynamic { ().into() }
-    pub fn set(name: &str, value: rhai::Dynamic) {}
-
-    pub fn has(name: &str) -> bool { false }
-    pub fn type_of(name: &str) -> String { "".into() }
-
-    pub fn constant(name: &str) -> String { "".into() }
 }
 
 #[export_module]
@@ -146,6 +133,10 @@ pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
 
     let mut static_resolver = StaticModuleResolver::new();
     static_resolver.insert("http", exported_module!(http).into());
+    static_resolver.insert("speak", exported_module!(speak).into());
+    static_resolver.insert("ask", exported_module!(ask).into());
+    static_resolver.insert("events", exported_module!(events).into());
+    static_resolver.insert("context", exported_module!(context).into());
     let file_resolver = FileModuleResolver::new_with_extension("avi");
 
     let lib_manager = initialize_rhai_library().unwrap();
@@ -159,12 +150,7 @@ pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
     engine.set_module_resolver(resolvers);
 
 
-    engine.register_static_module("speak", exported_module!(speak).into())
-        .register_static_module("ask", exported_module!(ask).into())
-        .register_static_module("assets", exported_module!(assets).into())
-        .register_static_module("context", exported_module!(context).into())
-        .register_static_module("config", exported_module!(config).into())
-        .register_static_module("events", exported_module!(events).into())
+    engine.register_static_module("assets", exported_module!(assets).into())
         .register_static_module("translation", exported_module!(translation).into())
         .register_global_module(exported_module!(utils).into());
 
