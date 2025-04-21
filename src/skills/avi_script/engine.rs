@@ -94,20 +94,6 @@ pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), 
     let mut engine = Engine::new();
 
     engine.register_custom_syntax(
-        ["whenis", "$expr$", "?", "$expr$", ":", "$expr$"],
-        false,
-        |context, inputs| match context.eval_expression_tree(&inputs[0])?.as_bool() {
-            Ok(true) => context.eval_expression_tree(&inputs[1]),
-            Ok(false) => context.eval_expression_tree(&inputs[2]),
-            Err(typ) => Err(Box::new(EvalAltResult::ErrorMismatchDataType(
-                "bool".to_string(),
-                typ.to_string(),
-                inputs[0].position(),
-            ))),
-        },
-    )?;
-
-    engine.register_custom_syntax(
         ["on_intent", "$string$", "$block$"],
         false,
         on_intent_syntax_handler
