@@ -76,7 +76,6 @@ impl<'a> Skill<'a> {
                     eprintln!("Error importing intents for skill {}: {}", name, err);
                     continue;
                 }
-                println!("Intent {} loaded", entry.path().display());
             }
         } else {
             eprintln!("Could not read intents directory for skill {},  {:?}", name, intents_path);
