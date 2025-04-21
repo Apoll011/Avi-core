@@ -66,6 +66,27 @@ impl<'a> Skill<'a> {
         run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope).expect("Skill Start error!!");
     }
 
+    pub(crate) fn load_intents(&mut self, intent_engine: &mut IntentEngine) {
+        let name = self.metadata.name.clone();
+        let intents_path = std::env::current_dir().unwrap().join(self.get_path()).join("intents");
+        
+        if let Ok(entries) = fs::read_dir(&intents_path) {
+            for entry in entries.flatten() {
+                if let Err(err) = intent_engine.load_intent(entry.path()) {
+                    eprintln!("Error importing intents for skill {}: {}", name, err);
+                    continue;
+                }
+                println!("Intent {} loaded", entry.path().display());
+            }
+        } else {
+            eprintln!("Could not read intents directory for skill {},  {:?}", name, intents_path);
+        }
+    }
+
+    pub(crate) fn get_path(&self) -> PathBuf {
+        Path::new(self.path.as_str()).to_path_buf()
+    }
+
     pub(crate) fn stop(&mut self) {
         self.scope.push_constant("END", true);
         run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope).expect("Skill End error!!");

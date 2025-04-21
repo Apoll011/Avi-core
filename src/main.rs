@@ -7,7 +7,7 @@ use crate::intent::engine::IntentEngine;
 use crate::intent::recognizer::Recognizer;
 use crate::skills::utils::load_skill;
 use crate::utils::cli;
-
+use crate::utils::cli::input;
 /*
 Architecture
 Todo:
@@ -26,12 +26,11 @@ fn main() {
     cli::header();
     let mut im = IntentEngine::new();
 
-    im.load_intent("intents/find_hotel.json").expect("TODO: panic message");
+    let mut skill = load_skill("my_skill").expect("Failed to load skill");
+    skill.load_intents(&mut im);
+    skill.start();
 
     let rec = Recognizer::new(&im);
-
-    /*
-    im.load_intent("intents/book_flight.json").expect("TODO: panic message");
 
 
     loop {
@@ -41,14 +40,8 @@ fn main() {
             println!("Sorry, I didn't understand.");
         } else {
             for m in matches {
-                println!("→ Intent: {}", m.intent);
-                println!("  Slots: {:?}", m.slots);
+                skill.on_intent(m).expect("REASON");
             }
         }
-    }*/
-
-
-    let mut skill = load_skill("my_skill").expect("Failed to load skill");
-    skill.start();
-    skill.on_intent(rec.recognize("find me a hotel in paris")[0].clone()).expect("REASON");
+    }
 }
