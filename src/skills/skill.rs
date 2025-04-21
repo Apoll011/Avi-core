@@ -27,9 +27,11 @@ license = "MIT"
 ```
 */
 use std::env::set_current_dir;
-use std::path::{Path};
+use std::fs;
+use std::path::{Path, PathBuf};
 use std::time::Instant;
 use rhai::{Engine, Scope};
+use crate::intent::engine::IntentEngine;
 use crate::intent::slot_extrator::ExtractedSlots;
 use crate::skills::avi_script::avi_engine::{get_avi_script_engine, run_avi_script};
 use crate::skills::skill_metadata::SkillMetadata;
@@ -43,8 +45,7 @@ pub struct Skill<'a> {
 
 impl<'a> Skill<'a> {
     pub(crate) fn new(path: &str, metadata: SkillMetadata, scope: Scope<'a>) -> Self {
-        let _guard = set_current_dir(Path::new(path)).expect("Failed to set temporary CWD");
-        
+
         let engine = get_avi_script_engine().unwrap();
 
         let skill = Skill {
@@ -53,7 +54,7 @@ impl<'a> Skill<'a> {
             engine,
             scope
         };
-        
+
         skill
     }
     
@@ -62,19 +63,19 @@ impl<'a> Skill<'a> {
     }
     
     pub(crate) fn start(&mut self) {
-        run_avi_script(&self.engine, "skill.avi", &mut self.scope).expect("Skill Start error!!");
+        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope).expect("Skill Start error!!");
     }
 
     pub(crate) fn stop(&mut self) {
         self.scope.push_constant("END", true);
-        run_avi_script(&self.engine, "skill.avi", &mut self.scope).expect("Skill End error!!");
+        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope).expect("Skill End error!!");
     }
     
     pub(crate) fn on_intent(&mut self, intent: ExtractedSlots) -> Result<(), &'static str> {
         self.scope.push_constant("INTENT_NAME", intent.intent.clone())
             .push_constant("INTENT", intent.clone());
         
-        run_avi_script(&self.engine, "skill.avi", &mut self.scope).expect("Skill error!!");
+        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope).expect("Skill error!!");
 
         Ok(())
     }
