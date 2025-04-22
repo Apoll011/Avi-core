@@ -3,7 +3,7 @@ Functions
 
 AviScript supports defining functions in script via the `fn` keyword.
 
-Valid function names are the same as valid [variable](variables.md) names.
+Valid function names are the same as valid [variable](variables/variables.md) names.
 
 ```rust
 fn add(x, y) {
@@ -88,7 +88,7 @@ No Access to External Scope
 Functions are not _closures_. They do not capture the calling environment and can only access their
 own parameters.
 
-They cannot access [variables](variables.md) external to the function itself.
+They cannot access [variables](variables/variables.md) external to the function itself.
 
 ```rust
 let x = 42;
@@ -137,10 +137,10 @@ fn foo(x) {
 Automatic Global Module
 -----------------------
 
-When a [constant](constants.md) is declared at global scope, it is added to a special
-[module](modules/index.md) called [`global`](global.md).
+When a [constant](variables/constants.md) is declared at global scope, it is added to a special
+[module](modules/index.md) called `global`.
 
-Functions can access those [constants](constants.md) via the special [`global`](global.md)
+Functions can access those [constants](variables/constants.md) via the special `global`
 [module](modules/index.md).
 
 ```rust
@@ -206,5 +206,5 @@ x == 500;           // 'x' is NOT changed!
 ```admonish warning.small "AviScript functions are pure"
 
 The only possibility for a AviScript script-defined function to modify an external variable is
-via the [`this`](fn-method.md) pointer.
+via the [`this`](functions/fn-method.md) pointer.
 ```

@@ -5,8 +5,8 @@ Statements are terminated by semicolons `;` and they are mandatory, except for t
 in a _block_ (enclosed by `{` ... `}` pairs) where it can be omitted.
 
 Semicolons can also be omitted for statement types that always end in a block &ndash; for example
-the [`if`](if.md), [`while`](while.md), [`for`](for.md),  [`loop`](loop.md) and
-[`switch`](switch.md) statements.
+the [`if`](control-flow/if.md), [`while`](control-flow/while.md), [`for`](control-flow/for.md),  [`loop`](control-flow/loop.md) and
+[`switch`](control-flow/switch.md)statements.
 
 ```rust
 let a = 42;             // normal assignment statement
@@ -43,7 +43,7 @@ Statements blocks in AviScript are formed by enclosing zero or more statements w
 
 A statements block forms a _closed_ scope.
 
-Any [variable](variable.md) and/or [constant](constant.md) defined within the block are removed
+Any [variable](variables/variables.md) and/or [constant](variables/constants.md) defined within the block are removed
 outside the block, so are [modules](modules/index.md) [imported](modules/import.md) within the block.
 
 ```rust

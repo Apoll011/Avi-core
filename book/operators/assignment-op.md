@@ -1,7 +1,7 @@
 Compound Assignments
 ====================
 
-Compound assignments are [assignments](assignments.md) with a [binary operator](operators.md) attached.
+Compound assignments are [assignments](variables/assignments.md) with a [binary operator](operators/operators.md) attached.
 
 ```rust
 number += 8;            // number = number + 8
@@ -31,7 +31,7 @@ number ^= 0x00ff;       // number = number ^ 0x00ff;
 The Flexible `+=`
 -----------------
 
-The the `+` and `+=` operators are often [overloaded](overload.md) to perform build-up
+The the `+` and `+=` operators are often [overloaded](functions/overload.md) to perform build-up
 operations for different data types.
 
 ### Build strings

@@ -3,7 +3,7 @@ Function Pointers
 
 It is possible to store a _function pointer_ in a variable just like a normal value.
 
-A function pointer is created via the `Fn` function, which takes a [string](strings-chars.md) parameter.
+A function pointer is created via the `Fn` function, which takes a [string](types/strings-chars.md) parameter.
 
 Call a function pointer via the `call` method.
 
@@ -16,11 +16,11 @@ Short-Hand Notation
 Native Rust functions cannot use this short-hand notation.
 ```
 
-Having to write `Fn("foo")` in order to create a function pointer to the [function](functions.md)
+Having to write `Fn("foo")` in order to create a function pointer to the [function](../functions/functions.md)
 `foo` is a chore, so there is a short-hand available.
 
-A function pointer to any _script-defined_ [function](functions.md) _within the same script_ can be
-obtained simply by referring to the [function's](functions.md) name.
+A function pointer to any _script-defined_ [function](../functions/functions.md) _within the same script_ can be
+obtained simply by referring to the [function's](../functions/functions.md) name.
 
 ```rust
 fn foo() { ... }        // function definition
@@ -32,8 +32,8 @@ let f = Fn("foo");      // <- the above is equivalent to this
 let g = bar;            // error: variable 'bar' not found
 ```
 
-The short-hand notation is particularly useful when passing [functions](functions.md) as
-[closure](fn-closure.md) arguments.
+The short-hand notation is particularly useful when passing [functions](../functions/functions.md) as
+[closure](../functions/fn-closure.md) arguments.
 
 ```rust
 fn is_even(n) { n % 2 == 0 }
@@ -53,11 +53,11 @@ Built-in Functions
 
 The following standard methods operate on function pointers.
 
-| Function                           | Parameter(s) | Description                                                                                  |
-| ---------------------------------- | ------------ | -------------------------------------------------------------------------------------------- |
-| `name` method and property         | _none_       | returns the name of the [function](functions.md) encapsulated by the function pointer        |
-| `is_anonymous` method and property | _none_       | does the function pointer refer to an [anonymous function](fn-anon.md)?                      |
-| `call`                             | _arguments_  | calls the [function](functions.md) matching the function pointer's name with the _arguments_ |
+| Function                           | Parameter(s) | Description                                                                                              |
+| ---------------------------------- | ------------ |----------------------------------------------------------------------------------------------------------|
+| `name` method and property         | _none_       | returns the name of the [function](../functions/functions.md) encapsulated by the function pointer       |
+| `is_anonymous` method and property | _none_       | does the function pointer refer to an [anonymous function](functions/fn-closure.md)?                               |
+| `call`                             | _arguments_  | calls the [function](../functions/functions.md) matching the function pointer's name with the _arguments_ |
 
 
 Examples
@@ -100,10 +100,10 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 
 Beware that function pointers are _not_ first-class functions.
 
-They are _syntactic sugar_ only, capturing only the _name_ of a [function](functions.md) to call.
-They do not hold the actual [functions](functions.md).
+They are _syntactic sugar_ only, capturing only the _name_ of a [function](functions/functions.md) to call.
+They do not hold the actual [functions](functions/functions.md).
 
-The actual [function](functions.md) must be defined in the appropriate namespace for the call to
+The actual [function](functions/functions.md) must be defined in the appropriate namespace for the call to
 succeed.
 ```
 
@@ -112,7 +112,7 @@ succeed.
 Because of their dynamic nature, function pointers cannot refer to functions in
 [`import`](modules/import.md)-ed [modules](modules/index.md).
 
-They can only refer to [functions](functions.md) defined globally within the script
+They can only refer to [functions](functions/functions.md) defined globally within the script
 or a built-in function.
 
 ```js
@@ -140,7 +140,7 @@ The purpose of function pointers is to enable rudimentary _dynamic dispatch_, me
 at runtime, which function to call among a group.
 
 Although it is possible to simulate dynamic dispatch via a number and a large
-[`if-then-else-if`](if.md) statement, using function pointers significantly simplifies the code.
+[`if-then-else-if`](control-flow/if.md) statement, using function pointers significantly simplifies the code.
 
 ```rust
 let x = some_calculation();
@@ -212,7 +212,7 @@ x.call(func, 1);            // 'this' is bound to 'x', dispatched to 'func'
 x == 42;
 ```
 
-Beware that this only works for [_method-call_](fn-method.md) style.
+Beware that this only works for [_method-call_](../functions/fn-method.md) style.
 Normal function-call style cannot bind the `this` pointer (for syntactic reasons).
 
 

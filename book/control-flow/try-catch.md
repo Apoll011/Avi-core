@@ -1,7 +1,7 @@
 Catch Exceptions
 ================
 
-When an [exception](throw.md) is thrown via a [`throw`](throw.md) statement, the script halts with
+When an [exception](control-flow/throw.md) is thrown via a [`throw`](control-flow/throw.md) statement, the script halts with
 the exception value.
 
 It is possible, via the `try` ... `catch` statement, to _catch_ exceptions, optionally with an
@@ -50,7 +50,7 @@ catch
 ~~~admonish tip "Tip: Re-throw exception"
 
 Like the `try` ... `catch` syntax in most languages, it is possible to _re-throw_ an exception
-within the `catch` block simply by another [`throw`](throw.md) statement without a value.
+within the `catch` block simply by another [`throw`](control-flow/throw.md) statement without a value.
 
 ```js
 try
@@ -75,22 +75,22 @@ Many script-oriented exceptions can be caught via `try` ... `catch`.
 
 | Error type                                                                                      |              Error value               |
 | ----------------------------------------------------------------------------------------------- | :------------------------------------: |
-| Runtime error thrown by a [`throw`](throw.md) statement                                         | value in [`throw`](throw.md) statement |
-| Arithmetic error                                                                                |      [object map](object-maps.md)      |
-| [Variable](variables.md) not found                                                              |      [object map](object-maps.md)      |
-| [Function](functions.md) not found                                                              |      [object map](object-maps.md)      |
-| [Module](modules/index.md) not found                                                            |      [object map](object-maps.md)      |
-| Unbound `this`                                                                                  |      [object map](object-maps.md)      |
-| Data type mismatch                                                                              |      [object map](object-maps.md)      |
-| Assignment to a calculated/[constant](constants.md) value                                       |      [object map](object-maps.md)      |
-| [Array](arrays.md)/[string](strings-chars.md)/[bit-field](bit-fields.md) indexing out-of-bounds |      [object map](object-maps.md)      |
-| Indexing with an inappropriate data type                                                        |      [object map](object-maps.md)      |
-| Error in property access                                                                        |      [object map](object-maps.md)      |
-| [`for`](for.md) statement on a type that is not iterable                                        |      [object map](object-maps.md)      |
-| Data race detected                                                                              |      [object map](object-maps.md)      |
-| Other runtime error                                                                             |      [object map](object-maps.md)      |
+| Runtime error thrown by a [`throw`](control-flow/throw.md) statement                                         | value in [`throw`](control-flow/throw.md) statement |
+| Arithmetic error                                                                                |      [object map](types/object-maps.md)      |
+| [Variable](variables/variables.md) not found                                                              |      [object map](types/object-maps.md)      |
+| [Function](functions/functions.md) not found                                                              |      [object map](types/object-maps.md)      |
+| [Module](modules/index.md) not found                                                            |      [object map](types/object-maps.md)      |
+| Unbound `this`                                                                                  |      [object map](types/object-maps.md)      |
+| Data type mismatch                                                                              |      [object map](types/object-maps.md)      |
+| Assignment to a calculated/[constant](variables/constants.md) value                                       |      [object map](types/object-maps.md)      |
+| [array](types/arrays.md)/[string](types/strings-chars.md)/[bit-field](types/bit-fields.md) indexing out-of-bounds |      [object map](types/object-maps.md)      |
+| Indexing with an inappropriate data type                                                        |      [object map](types/object-maps.md)      |
+| Error in property access                                                                        |      [object map](types/object-maps.md)      |
+| [`for`](control-flow/for.md) statement on a type that is not iterable                                        |      [object map](types/object-maps.md)      |
+| Data race detected                                                                              |      [object map](types/object-maps.md)      |
+| Other runtime error                                                                             |      [object map](types/object-maps.md)      |
 
-The error value in the `catch` clause is an [object map](object-maps.md) containing information on
+The error value in the `catch` clause is an [object map](types/object-maps.md) containing information on
 the particular error, including its type, line and character position (if any), and source etc.
 ```
 

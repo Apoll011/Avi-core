@@ -27,7 +27,7 @@ Doc-Comments
 
 Comments starting with `///` (three slashes) or `/**` (two asterisks) are _doc-comments_.
 
-Doc-comments can only appear in front of [function](functions.md) definitions, not any other elements.
+Doc-comments can only appear in front of [function](functions/functions.md) definitions, not any other elements.
 
 ```rust
 /// This is a valid one-line doc-comment

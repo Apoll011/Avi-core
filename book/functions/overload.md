@@ -1,6 +1,6 @@
 Function Overloading
 ====================
-[Functions](functions.md) defined in script can be _overloaded_ by _arity_ (i.e. they are resolved
+[Functions](functions/functions.md) defined in script can be _overloaded_ by _arity_ (i.e. they are resolved
 purely upon the function's _name_ and _number_ of parameters, but not parameter _types_ since all
 parameters are dynamic).
 

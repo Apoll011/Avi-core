@@ -32,7 +32,7 @@ For example: `c3po` and `_r2d2_` are valid variable names, but `3abc` and `____4
 
 Variable names are case _sensitive_.
 
-Variable names also cannot be the same as a [keyword](keywords.md) (active or reserved).
+Variable names also cannot be the same as a [keyword](meta/keywords.md) (active or reserved).
 
 ```admonish warning "Avoid names longer than 11 letters on 32-Bit"
 
@@ -73,7 +73,7 @@ If none is provided, it defaults to `()`.
 
 ```admonish warning.small "Variables are local"
 
-A variable defined within a [statements block](statements.md) is _local_ to that block.
+A variable defined within a [statements block](statements/statements.md) is _local_ to that block.
 ```
 
 ~~~admonish tip.small "Tip: `is_def_var`"

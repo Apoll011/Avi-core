@@ -15,7 +15,7 @@ X = 123;            // <- syntax error: constant modified
 
 ```admonish tip.small "Tip: Naming"
 
-Constants follow the same naming rules as [variables](variables.md),
+Constants follow the same naming rules as [variables](variables/variables.md),
 but as a convention are often named with all-capital letters.
 ```
 
@@ -23,10 +23,10 @@ but as a convention are often named with all-capital letters.
 Automatic Global Module
 -----------------------
 
-When a [constant](constants.md) is declared at global scope, it is added to a special
+When a [constant](variables/constants.md) is declared at global scope, it is added to a special
 [module](modules/index.md) called `global`.
 
-[Functions](functions.md) can access those [constants](constants.md) via the special `global`
+[Functions](functions/functions.md) can access those [constants](variables/constants.md) via the special `global`
 [module](modules/index.md).
 
 ```rust

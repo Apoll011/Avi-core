@@ -1,7 +1,7 @@
 Export Variables, Functions and Sub-Modules From a Script
 =========================================================
 
-The easiest way to expose a collection of [functions](../functions.md) as a self-contained [module](index.md)
+The easiest way to expose a collection of [functions](../functions.md) as a self-contained [module](modules/index.md)
 is to do it via a AviScript script itself.
 
 The script text is evaluated.
@@ -10,7 +10,7 @@ The script text is evaluated.
 
 [Functions](../functions.md) defined by the script are automatically exported, unless marked as `private`.
 
-Modules loaded within this [module](index.md) at the global level become _sub-modules_ and are also
+Modules loaded within this [module](modules/index.md) at the global level become _sub-modules_ and are also
 automatically exported.
 
 
@@ -18,12 +18,12 @@ Export Global Constants
 -----------------------
 
 The `export` statement, which can only be at global level, exposes a selected
-[variable](../variables.md) as member of a [module](index.md).
+[variable](../variables.md) as member of a [module](modules/index.md).
 
 [Variables](../variables.md) not exported are _private_ and hidden. They are merely used to
-initialize the [module](index.md), but cannot be accessed from outside.
+initialize the [module](modules/index.md), but cannot be accessed from outside.
 
-Everything exported from a [module](index.md) is **[constant](../constants.md)** (i.e. read-only).
+Everything exported from a [module](modules/index.md) is **[constant](../constants.md)** (i.e. read-only).
 
 ```js
 // This is a module script.
@@ -73,7 +73,7 @@ Export Functions
 
 ```admonish info.side.wide "Private functions"
 
-`private` [functions](../functions.md) are commonly called within the [module](index.md) only.
+`private` [functions](../functions.md) are commonly called within the [module](modules/index.md) only.
 They cannot be accessed otherwise.
 ```
 
@@ -94,11 +94,11 @@ private fn foo() {}     // private function - hidden
 Sub-Modules
 -----------
 
-All loaded [modules](index.md) are automatically exported as sub-modules.
+All loaded [modules](modules/index.md) are automatically exported as sub-modules.
 
 ~~~admonish tip.small "Tip: Skip exporting a module"
 
-To prevent a [module](index.md) from being exported, load it inside a block statement
+To prevent a [module](modules/index.md) from being exported, load it inside a block statement
 so that it goes away at the end of the block.
 
 ```js
