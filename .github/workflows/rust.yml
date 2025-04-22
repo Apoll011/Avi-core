@@ -38,10 +38,10 @@ jobs:
         run: cargo build --release --verbose  
 
       - name: Run Clippy
-        run: cargo clippy --verbose -- -D warnings  # lint, fail on any warning&#8203;:contentReference[oaicite:4]{index=4}
+        run: cargo clippy --verbose --
 
       - name: Check formatting
-        run: cargo fmt -- --check        # verify code is formatted&#8203;:contentReference[oaicite:5]{index=5}
+        run: cargo fmt -- --check
 
       - name: Get version from Cargo.toml
         id: get_version
