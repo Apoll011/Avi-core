@@ -275,28 +275,3 @@ let name = user_input or "Anonymous";  // name will be "Anonymous"
 let greeting = "Hello";
 let message = greeting or "Hi";  // message will be "Hello"
 ```
-
-## `@@` String Concatenation Operator
-
-The `@@` operator provides a concise way to concatenate strings.
-
-### Syntax
-
-```
-string1 @@ string2
-```
-
-### Behavior
-
-Concatenates two strings together.
-
-### Example
-
-```
-let first_name = "John";
-let last_name = "Doe";
-let full_name = first_name @@ " " @@ last_name;  // "John Doe"
-
-// This is equivalent to:
-let full_name = first_name + " " + last_name;
-```
