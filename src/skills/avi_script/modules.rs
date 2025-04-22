@@ -137,6 +137,8 @@ pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
     static_resolver.insert("ask", exported_module!(ask).into());
     static_resolver.insert("events", exported_module!(events).into());
     static_resolver.insert("context", exported_module!(context).into());
+    static_resolver.insert("translation", exported_module!(translation).into());
+    static_resolver.insert("assets", exported_module!(assets).into());
     let file_resolver = FileModuleResolver::new_with_extension("avi");
 
     let lib_manager = initialize_rhai_library().unwrap();
@@ -150,9 +152,7 @@ pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
     engine.set_module_resolver(resolvers);
 
 
-    engine.register_static_module("assets", exported_module!(assets).into())
-        .register_static_module("translation", exported_module!(translation).into())
-        .register_global_module(exported_module!(utils).into());
+    engine.register_global_module(exported_module!(utils).into());
 
     Ok(())
 }
