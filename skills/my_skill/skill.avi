@@ -1,4 +1,4 @@
-import "skills/my_skill/utils" as u;
+import "utils" as u;
 import "config" as c;
 
 on_start {
