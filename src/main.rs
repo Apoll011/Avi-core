@@ -1,7 +1,7 @@
-mod version;
-mod utils;
 mod intent;
 mod skills;
+mod utils;
+mod version;
 
 use crate::intent::engine::IntentEngine;
 use crate::intent::recognizer::Recognizer;
@@ -31,7 +31,6 @@ fn main() {
     skill.start();
 
     let rec = Recognizer::new(&im);
-
 
     loop {
         let inp = input("Your prompt: ");

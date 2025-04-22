@@ -1,7 +1,7 @@
+use std::collections::HashMap;
 use std::fs::{self, File};
 use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
-use std::collections::HashMap;
 
 pub struct AviScriptLibraryManager {
     library_dir: PathBuf,
@@ -134,10 +134,9 @@ pub fn initialize_rhai_library() -> io::Result<AviScriptLibraryManager> {
 
     let mut manager = AviScriptLibraryManager::new(library_dir);
 
-    manager.register_scripts(&[
-        (
-            "config.avi",
-            r#"
+    manager.register_scripts(&[(
+        "config.avi",
+        r#"
 fn load_file_as_map(file_path) {
     let content = read_string(open_file(file_path));
     if content.len() == 0 {
@@ -284,9 +283,8 @@ fn is_compatible_type(value, expected_type) {
 
     return false;
 }
-            "#
-        )
-    ]);
+            "#,
+    )]);
 
     manager.install_scripts()?;
 

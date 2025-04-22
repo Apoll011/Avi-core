@@ -1,14 +1,16 @@
+use crate::version;
 use std::io;
 use std::io::Write;
 use terminal_size::{Width, terminal_size};
-use crate::version;
 
 pub fn input(prompt: &str) -> String {
     print!("{}", prompt);
     io::stdout().flush().unwrap();
 
     let mut input = String::new();
-    io::stdin().read_line(&mut input).expect("Failed to read line");
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read line");
 
     input.trim().to_string()
 }
@@ -27,7 +29,11 @@ pub fn print_centered_header(text: &str) {
     let line = format!(
         "{}{}{}",
         "=".repeat(half),
-        if text_len > 2 { total_text } else { "==".to_string() },
+        if text_len > 2 {
+            total_text
+        } else {
+            "==".to_string()
+        },
         "=".repeat(width - text_len - half)
     );
 

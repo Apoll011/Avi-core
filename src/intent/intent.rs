@@ -1,6 +1,6 @@
-use std::collections::HashMap;
-use serde::Deserialize;
 use crate::intent::slot::SlotDefinition;
+use serde::Deserialize;
+use std::collections::HashMap;
 
 #[derive(Debug, Deserialize)]
 pub struct IntentFile {

@@ -1,14 +1,14 @@
-use rhai::{Dynamic, Engine, EvalAltResult, EvalContext, Expression, ImmutableString, Position};
+use crate::intent::slot_extrator::ExtractedSlots;
+use crate::utils::json::{dynamic_to_json, json_to_dynamic};
 use rhai::packages::Package;
+use rhai::{Dynamic, Engine, EvalAltResult, EvalContext, Expression, ImmutableString, Position};
 use rhai_fs::FilesystemPackage;
 use rhai_url::UrlPackage;
 use serde_json::Value;
-use crate::intent::slot_extrator::ExtractedSlots;
-use crate::utils::json::{dynamic_to_json, json_to_dynamic};
 
 fn on_intent_syntax_handler(
     context: &mut EvalContext,
-    inputs: &[Expression]
+    inputs: &[Expression],
 ) -> Result<Dynamic, Box<EvalAltResult>> {
     let intent_name = inputs[0].get_string_value().unwrap().to_string();
     let block = &inputs[1];
@@ -18,7 +18,10 @@ fn on_intent_syntax_handler(
     if i_name.is_some() && i_name.unwrap().eq_ignore_ascii_case(&intent_name) {
         let scope = context.scope_mut();
         scope.push_constant("name", intent_name);
-        scope.push_constant("intent", scope.get_value::<ExtractedSlots>("INTENT").unwrap());
+        scope.push_constant(
+            "intent",
+            scope.get_value::<ExtractedSlots>("INTENT").unwrap(),
+        );
 
         let _ = context.eval_expression_tree(block);
     }
@@ -28,7 +31,7 @@ fn on_intent_syntax_handler(
 
 fn on_start_syntax_handler(
     context: &mut EvalContext,
-    inputs: &[Expression]
+    inputs: &[Expression],
 ) -> Result<Dynamic, Box<EvalAltResult>> {
     let block = &inputs[0];
 
@@ -44,7 +47,7 @@ fn on_start_syntax_handler(
 
 fn on_end_syntax_handler(
     context: &mut EvalContext,
-    inputs: &[Expression]
+    inputs: &[Expression],
 ) -> Result<Dynamic, Box<EvalAltResult>> {
     let block = &inputs[0];
 
@@ -56,7 +59,6 @@ fn on_end_syntax_handler(
 
     Ok(Dynamic::UNIT)
 }
-
 
 pub fn register_json_functions(engine: &mut Engine) {
     engine
@@ -90,44 +92,42 @@ fn to_json(value: Dynamic) -> Result<String, Box<EvalAltResult>> {
     }
 }
 
-pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), Box<EvalAltResult>>) -> Result<Engine, Box<dyn std::error::Error>> {
+pub fn create_avi_script_engine(
+    modules_register: fn(&mut Engine) -> Result<(), Box<EvalAltResult>>,
+) -> Result<Engine, Box<dyn std::error::Error>> {
     let mut engine = Engine::new();
 
     engine.register_custom_syntax(
         ["on_intent", "$string$", "$block$"],
         false,
-        on_intent_syntax_handler
+        on_intent_syntax_handler,
     )?;
 
-    engine.register_custom_syntax(
-        ["on_start", "$block$"],
-        false,
-        on_start_syntax_handler
-    )?;
+    engine.register_custom_syntax(["on_start", "$block$"], false, on_start_syntax_handler)?;
 
-    engine.register_custom_syntax(
-        ["on_end", "$block$"],
-        false,
-        on_end_syntax_handler
-    )?;
+    engine.register_custom_syntax(["on_end", "$block$"], false, on_end_syntax_handler)?;
 
-    engine.register_custom_operator("or", 160)?
-        .register_fn("or", |a: Dynamic, b: Dynamic| {
-            if a.to_string().is_empty() {
-                b
-            } else {
-                a
-            }
+    engine
+        .register_custom_operator("or", 160)?
+        .register_fn(
+            "or",
+            |a: Dynamic, b: Dynamic| {
+                if a.to_string().is_empty() { b } else { a }
+            },
+        );
+
+    engine
+        .register_custom_operator("@@", 160)?
+        .register_fn("@@", |a: ImmutableString, b: ImmutableString| {
+            format!("{}{}", a, b)
         });
-
-    engine.register_custom_operator("@@", 160)?
-        .register_fn("@@", |a: ImmutableString, b: ImmutableString| format!("{}{}", a, b));
 
     modules_register(&mut engine).expect("A module did not load successfully!!");
 
     register_json_functions(&mut engine);
 
-    engine.register_type_with_name::<ExtractedSlots>("Intent")
+    engine
+        .register_type_with_name::<ExtractedSlots>("Intent")
         .register_get("name", ExtractedSlots::get_name)
         .register_get("slots", ExtractedSlots::get_slots)
         .register_fn("get", ExtractedSlots::get)

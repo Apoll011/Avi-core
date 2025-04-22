@@ -17,7 +17,6 @@ pub enum SlotDefinition {
     },
 }
 
-
 impl SlotDefinition {
     pub(crate) fn new_enumeration(values: Vec<String>) -> Self {
         SlotDefinition::Enumeration { values }
@@ -50,12 +49,13 @@ impl DefaultSlotManager {
             ]),
         );
 
-        defaults.insert("dates".to_string(), SlotDefinition::new_processor(|date| {
-            println!("{}", date);
-            Option::from(date)
-        }));
-
-
+        defaults.insert(
+            "dates".to_string(),
+            SlotDefinition::new_processor(|date| {
+                println!("{}", date);
+                Option::from(date)
+            }),
+        );
 
         DefaultSlotManager { defaults }
     }

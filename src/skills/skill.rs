@@ -1,4 +1,3 @@
-
 /*
     ```
 my_skill/
@@ -26,48 +25,49 @@ language = ["en", "es"]
 license = "MIT"
 ```
 */
-use std::fs;
-use std::path::{Path, PathBuf};
-use rhai::{Engine, Scope};
 use crate::intent::engine::IntentEngine;
 use crate::intent::slot_extrator::ExtractedSlots;
 use crate::skills::avi_script::avi_engine::{get_avi_script_engine, run_avi_script};
 use crate::skills::skill_metadata::SkillMetadata;
+use rhai::{Engine, Scope};
+use std::fs;
+use std::path::{Path, PathBuf};
 
 pub struct Skill<'a> {
     path: String,
     metadata: SkillMetadata,
     engine: Engine,
-    scope: Scope<'a>
+    scope: Scope<'a>,
 }
 
 impl<'a> Skill<'a> {
     pub(crate) fn new(path: &str, metadata: SkillMetadata, scope: Scope<'a>) -> Self {
-
         let engine = get_avi_script_engine().unwrap();
-
-        
 
         Skill {
             path: path.to_string(),
             metadata,
             engine,
-            scope
+            scope,
         }
     }
-    
+
     pub(crate) fn metadata(&self) -> &SkillMetadata {
         &self.metadata
     }
-    
+
     pub(crate) fn start(&mut self) {
-        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope).expect("Skill Start error!!");
+        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope)
+            .expect("Skill Start error!!");
     }
 
     pub(crate) fn load_intents(&mut self, intent_engine: &mut IntentEngine) {
         let name = self.metadata.name.clone();
-        let intents_path = std::env::current_dir().unwrap().join(self.get_path()).join("intents");
-        
+        let intents_path = std::env::current_dir()
+            .unwrap()
+            .join(self.get_path())
+            .join("intents");
+
         if let Ok(entries) = fs::read_dir(&intents_path) {
             for entry in entries.flatten() {
                 if let Err(err) = intent_engine.load_intent(entry.path()) {
@@ -76,7 +76,10 @@ impl<'a> Skill<'a> {
                 }
             }
         } else {
-            eprintln!("Could not read intents directory for skill {},  {:?}", name, intents_path);
+            eprintln!(
+                "Could not read intents directory for skill {},  {:?}",
+                name, intents_path
+            );
         }
     }
 
@@ -86,16 +89,18 @@ impl<'a> Skill<'a> {
 
     pub(crate) fn stop(&mut self) {
         self.scope.push_constant("END", true);
-        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope).expect("Skill End error!!");
+        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope)
+            .expect("Skill End error!!");
     }
-    
+
     pub(crate) fn on_intent(&mut self, intent: ExtractedSlots) -> Result<(), &'static str> {
-        self.scope.push_constant("INTENT_NAME", intent.intent.clone())
+        self.scope
+            .push_constant("INTENT_NAME", intent.intent.clone())
             .push_constant("INTENT", intent.clone());
-        
-        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope).expect("Skill error!!");
+
+        run_avi_script(&self.engine, "skill.avi", self.get_path(), &mut self.scope)
+            .expect("Skill error!!");
 
         Ok(())
     }
 }
-

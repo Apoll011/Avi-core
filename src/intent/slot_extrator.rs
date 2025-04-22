@@ -1,7 +1,7 @@
-use std::collections::HashMap;
+use crate::intent::slot::{DefaultSlotManager, SlotDefinition};
 use regex::{Regex, RegexBuilder};
 use rhai::{Array, Dynamic, Map};
-use crate::intent::slot::{DefaultSlotManager, SlotDefinition};
+use std::collections::HashMap;
 
 #[derive(Debug, Clone)]
 pub struct ExtractedSlots {
@@ -28,7 +28,8 @@ impl ExtractedSlots {
     }
 
     pub(crate) fn require(&mut self, slot: &str) -> Dynamic {
-        self.slots.get(slot)
+        self.slots
+            .get(slot)
             .map(|v| v.clone().into())
             .unwrap_or_else(|| panic!("Required slot '{}' not found", slot))
     }
@@ -106,11 +107,7 @@ impl<'a> SlotExtractor<'a> {
         SlotExtractor { default_slots }
     }
 
-    fn validate_and_process_slot(
-        &self,
-        val_text: String,
-        defn: &SlotDefinition,
-    ) -> Option<String> {
+    fn validate_and_process_slot(&self, val_text: String, defn: &SlotDefinition) -> Option<String> {
         match defn {
             SlotDefinition::Enumeration { values } => {
                 if values.iter().any(|v| v.eq_ignore_ascii_case(&val_text)) {
@@ -199,10 +196,7 @@ impl<'a> SlotExtractor<'a> {
         })
     }
 
-    fn pattern_to_regex(
-        &self,
-        pattern: &str,
-    ) -> Option<Regex> {
+    fn pattern_to_regex(&self, pattern: &str) -> Option<Regex> {
         let mut regex_str = "^".to_string();
         let mut current_pos = 0;
 
@@ -241,7 +235,7 @@ impl<'a> SlotExtractor<'a> {
                         match defn {
                             SlotDefinition::Enumeration { values } => {
                                 let alt = values.join("|");
-                                regex_str.push_str(&format!("(?P<{}>{})",&group_name, alt));
+                                regex_str.push_str(&format!("(?P<{}>{})", &group_name, alt));
                             }
                             SlotDefinition::CatchAll => {
                                 regex_str.push_str(&format!("(?P<{}>.+?)", &group_name));

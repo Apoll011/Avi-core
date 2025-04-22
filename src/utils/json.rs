@@ -1,5 +1,5 @@
 use rhai::{Dynamic, Map};
-use serde_json::{Value};
+use serde_json::Value;
 use std::result::Result;
 
 pub fn json_to_dynamic(value: Value) -> Dynamic {
@@ -37,7 +37,9 @@ pub fn dynamic_to_json(value: Dynamic) -> Result<Value, String> {
     match value.type_name() {
         "()" => Ok(Value::Null),
         "bool" => Ok(Value::Bool(value.as_bool().unwrap())),
-        "i32" | "i64" => Ok(Value::Number(serde_json::Number::from(value.as_int().unwrap()))),
+        "i32" | "i64" => Ok(Value::Number(serde_json::Number::from(
+            value.as_int().unwrap(),
+        ))),
         "f32" | "f64" => {
             let float_val = value.as_float().unwrap();
             match serde_json::Number::from_f64(float_val) {
@@ -45,7 +47,9 @@ pub fn dynamic_to_json(value: Dynamic) -> Result<Value, String> {
                 None => Err(format!("Cannot convert float {} to JSON number", float_val)),
             }
         }
-        "string" | "ImmutableString" => Ok(Value::String(value.into_immutable_string()?.to_string())),
+        "string" | "ImmutableString" => {
+            Ok(Value::String(value.into_immutable_string()?.to_string()))
+        }
         "array" => {
             let array = value.into_array().unwrap();
             let mut json_array = Vec::new();

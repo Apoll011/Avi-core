@@ -1,21 +1,21 @@
-use std::path::Path;
-use rhai::{Array, Scope};
 use crate::skills::skill::Skill;
 use crate::skills::skill_metadata::SkillMetadata;
+use rhai::{Array, Scope};
+use std::path::Path;
 
 fn is_valid_skill_folder(path: &str) -> bool {
     let folder = Path::new(path);
     if !folder.exists() || !folder.is_dir() {
         return false;
     }
-    
+
     let required_folders = vec!["intents", "responses"];
     for req_folder in required_folders {
-        if !folder.join(req_folder).exists() || !folder.join(req_folder).is_dir(){
+        if !folder.join(req_folder).exists() || !folder.join(req_folder).is_dir() {
             return false;
         }
     }
-    
+
     let required_files = vec!["skill.avi", "metadata.avi", "skill.config"];
     for req_files in required_files {
         if !folder.join(req_files).exists() || !folder.join(req_files).is_file() {
@@ -51,7 +51,8 @@ pub fn load_skill(path: &str) -> Result<Skill, &'static str> {
 
     let supported_languages: Array = vec!["pt".into(), "en".into()];
 
-    scope.push_constant("SKILL_NAME", metadata.name.clone())
+    scope
+        .push_constant("SKILL_NAME", metadata.name.clone())
         .push_constant("SKILL_ID", metadata.id.clone())
         .push_constant("SKILL_VERSION", metadata.version.clone())
         .push_constant("SKILL_AUTHOR", metadata.author.clone())
@@ -60,4 +61,3 @@ pub fn load_skill(path: &str) -> Result<Skill, &'static str> {
 
     Ok(Skill::new(path, metadata, scope))
 }
-

@@ -1,10 +1,10 @@
+use crate::intent::intent::{Intent, IntentFile};
+use crate::intent::slot::{DefaultSlotManager, SlotDefinition};
 use serde_json;
 use std::collections::HashMap;
 use std::error::Error;
 use std::fs;
 use std::path::Path;
-use crate::intent::intent::{Intent, IntentFile};
-use crate::intent::slot::{DefaultSlotManager, SlotDefinition};
 
 pub struct IntentEngine {
     pub(crate) intents: Vec<Intent>,
@@ -19,7 +19,10 @@ impl IntentEngine {
         }
     }
 
-    pub(crate) fn load_intent<P: AsRef<Path>>(&mut self, file_path: P) -> Result<(), Box<dyn Error>> {
+    pub(crate) fn load_intent<P: AsRef<Path>>(
+        &mut self,
+        file_path: P,
+    ) -> Result<(), Box<dyn Error>> {
         let content = fs::read_to_string(file_path)?;
         let data: IntentFile = serde_json::from_str(&content)?;
 
@@ -36,7 +39,10 @@ impl IntentEngine {
         Ok(())
     }
 
-    fn parse_slot_defs(&self, raw_slots: &HashMap<String, serde_json::Value>) -> Result<HashMap<String, SlotDefinition>, Box<dyn Error>> {
+    fn parse_slot_defs(
+        &self,
+        raw_slots: &HashMap<String, serde_json::Value>,
+    ) -> Result<HashMap<String, SlotDefinition>, Box<dyn Error>> {
         let mut defs = HashMap::new();
 
         for (slot, val) in raw_slots {

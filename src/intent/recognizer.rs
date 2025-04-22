@@ -20,24 +20,20 @@ impl<'a> Recognizer<'a> {
         for intent in &self.intent_manager.intents {
             // 1) Try plain patterns
             for pat in &intent.patterns {
-                if let Some(slots) = self.slot_extractor.extract_from_pattern(
-                    pat,
-                    text,
-                    &intent.name,
-                    &intent.slots,
-                ) {
+                if let Some(slots) =
+                    self.slot_extractor
+                        .extract_from_pattern(pat, text, &intent.name, &intent.slots)
+                {
                     results.push(slots);
                 }
             }
 
             // 2) Try regex patterns
             for rx in &intent.regex_patterns {
-                if let Some(slots) = self.slot_extractor.extract_from_regex(
-                    rx,
-                    text,
-                    &intent.name,
-                    &intent.slots,
-                ) {
+                if let Some(slots) =
+                    self.slot_extractor
+                        .extract_from_regex(rx, text, &intent.name, &intent.slots)
+                {
                     results.push(slots);
                 }
             }
