@@ -17,3 +17,7 @@ on_intent "book_figth" {
     print(intent.name);
     print(intent.get("default_locations"));
 }
+
+on_intent "hi" {
+    print("hello");
+}

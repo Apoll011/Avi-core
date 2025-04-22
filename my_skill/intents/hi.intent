@@ -1,0 +1,9 @@
+{
+      "intent": "hi",
+      "patterns": [
+        "hi",
+        "hello",
+        "hello avi",
+        "hi avi"
+      ]
+    }
