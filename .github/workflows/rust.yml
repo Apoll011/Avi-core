@@ -1,0 +1,62 @@
+name: Rust
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Rust
+      uses: actions/setup-rust@v1
+      with:
+        rust-version: stable
+
+    - name: Cache Cargo build dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cargo/registry
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-
+
+    - name: Build
+      run: cargo build --release --verbose
+
+    - name: Get version from Cargo.toml
+      id: get_version
+      run: |
+        VERSION=$(cargo pkgid | sed -E 's/.*#(.*)/\1/')
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+    - name: Run Clippy (optional)
+      run: cargo clippy --verbose -- -D warnings
+
+    - name: Run formatting check (optional)
+      run: cargo fmt -- --check
+
+    - name: Create GitHub Release
+      id: create_release
+      run: |
+        curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -d '{"tag_name": "v${{ env.VERSION }}", "name": "v${{ env.VERSION }}", "body": "Release of version ${{ env.VERSION }}"}' \
+          https://api.github.com/repos/${{ github.repository }}/releases
+
+    - name: Upload Binary to Release
+      run: |
+        curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: application/octet-stream" \
+          --data-binary @target/release/AviCore \
+          "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.id }}/assets?name=AviCore-v${{ env.VERSION }}.tar.gz"
