@@ -1,12 +1,10 @@
-name: Rust
+name: Rust Release
 
 on:
   push:
     branches:
       - "master"
-  pull_request:
-    branches:
-      - "master"
+
 permissions:
   contents: write
 
@@ -14,7 +12,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,8 +22,8 @@ jobs:
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable       
-          override: true        
+          toolchain: stable
+          override: true
           components: rustfmt,clippy
 
       - name: Cache Cargo registry
@@ -34,10 +32,10 @@ jobs:
           path: ~/.cargo/registry
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ runner.os }}-cargo-  
+            ${{ runner.os }}-cargo-
 
       - name: Build (release)
-        run: cargo build --release --verbose  
+        run: cargo build --release --verbose
 
       - name: Run Clippy
         run: cargo clippy --verbose --
@@ -53,7 +51,6 @@ jobs:
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
-
         with:
           tag: ${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
