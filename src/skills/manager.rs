@@ -1,14 +1,11 @@
 use std::collections::HashMap;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use crate::intent::engine::IntentEngine;
 use crate::intent::slot_extrator::ExtractedSlots;
-use crate::skills::avi_script::avi_engine::{get_avi_script_engine, run_avi_script};
 use crate::skills::skill::Skill;
-use crate::skills::skill_metadata::SkillMetadata;
 use crate::skills::utils::load_skill;
-use rhai::{Engine, Scope};
 
 pub struct SkillManager<'a> {
     skills: Vec<Skill<'a>>,

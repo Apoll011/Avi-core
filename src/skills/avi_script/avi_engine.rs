@@ -1,7 +1,7 @@
 use crate::skills::avi_script::engine::create_avi_script_engine;
 use crate::skills::avi_script::modules::register_modules;
 use rhai::{Engine, Scope};
-use std::env::{set_current_dir, current_dir};
+use std::env::{current_dir, set_current_dir};
 use std::error::Error;
 use std::path::{Path, PathBuf};
 
