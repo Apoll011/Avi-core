@@ -5,7 +5,7 @@ mod version;
 
 use crate::intent::engine::IntentEngine;
 use crate::intent::recognizer::Recognizer;
-use crate::skills::utils::load_skill;
+use crate::skills::manager::SkillManager;
 use crate::utils::cli;
 use crate::utils::cli::input;
 /*
@@ -26,9 +26,11 @@ fn main() {
     cli::header();
     let mut im = IntentEngine::new();
 
-    let mut skill = load_skill("my_skill").expect("Failed to load skill");
-    skill.load_intents(&mut im);
-    skill.start();
+    let mut skill_manager = SkillManager::new();
+
+    skill_manager
+        .load_skills_from_directory("skills", &mut im)
+        .unwrap();
 
     let rec = Recognizer::new(&im);
 
@@ -39,7 +41,7 @@ fn main() {
             println!("Sorry, I didn't understand.");
         } else {
             for m in matches {
-                skill.on_intent(m).expect("REASON");
+                skill_manager.process_intent(m);
             }
         }
     }

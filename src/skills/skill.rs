@@ -61,26 +61,35 @@ impl<'a> Skill<'a> {
             .expect("Skill Start error!!");
     }
 
-    pub(crate) fn load_intents(&mut self, intent_engine: &mut IntentEngine) {
+    pub(crate) fn load_intents(&mut self, intent_engine: &mut IntentEngine) -> Vec<String> {
         let name = self.metadata.name.clone();
         let intents_path = std::env::current_dir()
             .unwrap()
             .join(self.get_path())
             .join("intents");
 
+        let mut extracted_names = Vec::<String>::new();
+
         if let Ok(entries) = fs::read_dir(&intents_path) {
             for entry in entries.flatten() {
-                if let Err(err) = intent_engine.load_intent(entry.path()) {
-                    eprintln!("Error importing intents for skill {}: {}", name, err);
-                    continue;
+                match intent_engine.load_intent(entry.path()) {
+                    Ok(slots) => {
+                        extracted_names.push(slots);
+                    }
+                    Err(err) => {
+                        eprintln!("Error importing intents for skill {}: {}", name, err);
+                        continue;
+                    }
                 }
             }
         } else {
             eprintln!(
-                "Could not read intents directory for skill {},  {:?}",
+                "Could not read intents directory for skill {}, {:?}",
                 name, intents_path
             );
         }
+
+        extracted_names
     }
 
     pub(crate) fn get_path(&self) -> PathBuf {

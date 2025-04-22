@@ -22,7 +22,7 @@ impl IntentEngine {
     pub(crate) fn load_intent<P: AsRef<Path>>(
         &mut self,
         file_path: P,
-    ) -> Result<(), Box<dyn Error>> {
+    ) -> Result<String, Box<dyn Error>> {
         let content = fs::read_to_string(file_path)?;
         let data: IntentFile = serde_json::from_str(&content)?;
 
@@ -38,8 +38,9 @@ impl IntentEngine {
             regex_patterns: data.regex_patterns,
             slots,
         };
+        let name = intent.name.clone();
         self.intents.push(intent);
-        Ok(())
+        Ok(name)
     }
 
     fn parse_slot_defs(

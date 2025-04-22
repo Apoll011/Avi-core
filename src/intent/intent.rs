@@ -13,13 +13,11 @@ pub struct IntentFile {
     pub(crate) slots: HashMap<String, serde_json::Value>,
 }
 
-
 impl IntentFile {
     pub fn is_valid(&self) -> bool {
         (!self.patterns.is_empty() || !self.regex_patterns.is_empty()) && !self.intent.is_empty()
     }
 }
-
 
 #[derive(Clone, Debug)]
 pub struct Intent {
