@@ -285,28 +285,7 @@ fn is_compatible_type(value, expected_type) {
     return false;
 }
             "#
-        ),
-        (
-            "file_utils.avi",
-            r#"
-            // File utility functions
-            fn is_valid_path(path) {
-                path.len() > 0 && !path.contains("../")
-            }
-
-            fn join_paths(base, relative) {
-                if !is_valid_path(relative) {
-                    throw "Invalid path";
-                }
-
-                if base.ends_with("/") {
-                    base + relative
-                } else {
-                    base + "/" + relative
-                }
-            }
-            "#
-        ),
+        )
     ]);
 
     manager.install_scripts()?;

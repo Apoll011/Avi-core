@@ -1,8 +1,15 @@
-use rhai::{export_module, exported_module, Engine, EvalAltResult};
+use rhai::{export_module, exported_module, Engine, EvalAltResult, Array, ImmutableString};
 use rhai::module_resolvers::{FileModuleResolver, ModuleResolversCollection, StaticModuleResolver};
 use rhai::plugin::*;
 
 use uuid::Uuid;
+
+use std::time::Instant;
+use std::{fs, env};
+use std::io::Write;
+use std::fs::OpenOptions;
+use std::path::{Path, PathBuf};
+use std::process::Command;
 
 use crate::skills::avi_librarymanager::initialize_rhai_library;
 
@@ -131,13 +138,13 @@ mod utils {
         std::env::var(key).unwrap_or_else(|_| String::new())
     }
 
-    pub fn env_os() -> &'static str {
+    pub fn env_os() -> String {
         if cfg!(target_os = "windows") {
-            return "windows";
+            "windows".to_string()
         } else if cfg!(target_os = "linux") {
-            return "linux";
+            "linux".to_string()
         } else {
-            return "unknown";
+            "unknown".to_string()
         }
     }
 
@@ -161,24 +168,17 @@ mod utils {
         a.ends_with(b)
     }
 
-    pub fn sort_strs(a: Array) -> RhaiResult<Array> {
-        let mut ar: Vec<_> = a.into_iter()
-            .map(|a| a.into_immutable_string()
-                .map_err(|e| err!("{:?}", e)))
-            .collect::<RhaiResult<_>>()?;
-        ar.sort();
-
-        let ar = ar.into_iter()
-            .map(Into::into)
-            .collect();
-
-        Ok(ar)
-    }
-
     pub fn sleep(ms: i64) {
         std::thread::sleep(std::time::Duration::from_millis(ms as u64));
     }
+
+    pub fn now() -> i64 {
+        let start = Instant::now();
+        start.elapsed().as_millis() as i64
+    }
+
 }
+
 
 pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
     let mut resolvers = ModuleResolversCollection::new();
