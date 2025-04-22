@@ -126,6 +126,58 @@ mod events {
 mod utils {
     #[rhai_fn(volatile)]
     pub fn uuid() -> String { Uuid::new_v4().into() }
+
+    pub fn env_var(key: &str) -> String {
+        std::env::var(key).unwrap_or_else(|_| String::new())
+    }
+
+    pub fn env_os() -> &'static str {
+        if cfg!(target_os = "windows") {
+            return "windows";
+        } else if cfg!(target_os = "linux") {
+            return "linux";
+        } else {
+            return "unknown";
+        }
+    }
+
+    pub fn trim(s: &str) -> String {
+        s.trim().into()
+    }
+
+    pub fn lowercase(s: &str) -> String {
+        s.to_lowercase()
+    }
+
+    pub fn uppercase(s: &str) -> String {
+        s.to_uppercase()
+    }
+
+    pub fn starts_with(a: &str, b: &str) -> bool {
+        a.starts_with(b)
+    }
+
+    pub fn ends_with(a: &str, b: &str) -> bool {
+        a.ends_with(b)
+    }
+
+    pub fn sort_strs(a: Array) -> RhaiResult<Array> {
+        let mut ar: Vec<_> = a.into_iter()
+            .map(|a| a.into_immutable_string()
+                .map_err(|e| err!("{:?}", e)))
+            .collect::<RhaiResult<_>>()?;
+        ar.sort();
+
+        let ar = ar.into_iter()
+            .map(Into::into)
+            .collect();
+
+        Ok(ar)
+    }
+
+    pub fn sleep(ms: i64) {
+        std::thread::sleep(std::time::Duration::from_millis(ms as u64));
+    }
 }
 
 pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
