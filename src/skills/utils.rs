@@ -38,12 +38,12 @@ fn is_valid_skill_folder(path: &str) -> bool {
     valid
 }
 
-pub fn load_skill(path: &str) -> Result<Skill, &'static str> {
-    if !is_valid_skill_folder(path) {
+pub fn load_skill(path: String) -> Result<Skill<'static>, &'static str> {
+    if !is_valid_skill_folder(&path) {
         return Err("Not a valid skill!");
     }
 
-    let folder = Path::new(path);
+    let folder = Path::new(&path);
 
     let metadata = SkillMetadata::load(folder);
 
@@ -59,5 +59,5 @@ pub fn load_skill(path: &str) -> Result<Skill, &'static str> {
         .push_constant("CURRENT_LANGUAGE", "pt")
         .push_constant("SUPPORTED_LANGUAGES", supported_languages);
 
-    Ok(Skill::new(path, metadata, scope))
+    Ok(Skill::new(&path, metadata, scope))
 }
