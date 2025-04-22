@@ -33,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-  
-            
+
       - name: Build (release)
         run: cargo build --release --verbose  
 
@@ -42,3 +42,18 @@ jobs:
 
       - name: Check formatting
         run: cargo fmt -- --check
+
+      - name: Get version from Cargo.toml
+        id: get_version
+        run: |
+          VERSION=$(cargo pkgid | sed -E 's/.*#(.*)/\1/')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        permissions:
+          contents: write
+        with:
+          tag: ${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
+          artifacts: "target/release/AviCore"
