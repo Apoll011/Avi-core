@@ -35,7 +35,7 @@ fn main() {
 
     loop {
         let inp = input("Your prompt: ");
-        let matches = rec.recognize(&*inp);
+        let matches = rec.recognize(&inp);
         if matches.is_empty() {
             println!("Sorry, I didn't understand.");
         } else {

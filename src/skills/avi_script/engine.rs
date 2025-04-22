@@ -15,7 +15,7 @@ fn on_intent_syntax_handler(
 
     let i_name = context.scope().get_value::<ImmutableString>("INTENT_NAME");
 
-    if !i_name.is_none() && i_name.unwrap().eq_ignore_ascii_case(&*intent_name) {
+    if i_name.is_some() && i_name.unwrap().eq_ignore_ascii_case(&intent_name) {
         let scope = context.scope_mut();
         scope.push_constant("name", intent_name);
         scope.push_constant("intent", scope.get_value::<ExtractedSlots>("INTENT").unwrap());
@@ -50,7 +50,7 @@ fn on_end_syntax_handler(
 
     let e_name = context.scope().get_value::<bool>("END");
 
-    if !e_name.is_none() && e_name.unwrap() {
+    if e_name.is_some() && e_name.unwrap() {
         let _ = context.eval_expression_tree(block);
     }
 

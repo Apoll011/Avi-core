@@ -5,7 +5,6 @@ pub(crate) mod addr;
 pub(crate) mod tcp;
 
 // Re-export types.
-pub use tcp::tcp_functions::{listener_functions::SharedTcpListener, SharedTcpStream};
 
 def_package! {
     /// Package for networking operations.

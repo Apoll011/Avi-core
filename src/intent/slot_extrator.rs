@@ -30,7 +30,7 @@ impl ExtractedSlots {
     pub(crate) fn require(&mut self, slot: &str) -> Dynamic {
         self.slots.get(slot)
             .map(|v| v.clone().into())
-            .expect(&format!("Required slot '{}' not found", slot))
+            .unwrap_or_else(|| panic!("Required slot '{}' not found", slot))
     }
 
     pub(crate) fn optional(&mut self, slot: &str) -> Dynamic {
@@ -42,7 +42,7 @@ impl ExtractedSlots {
     }
 
     pub(crate) fn equal(&mut self, slot: &str, value: &str) -> bool {
-        self.slots.get(slot).map_or(false, |v| v == value)
+        self.slots.get(slot).is_some_and(|v| v == value)
     }
 
     pub(crate) fn in_list(&mut self, slot: &str, list: Array) -> bool {
@@ -78,7 +78,7 @@ impl ExtractedSlots {
     pub(crate) fn match_pattern(&mut self, slot: &str, pattern: &str) -> bool {
         use regex::Regex;
         match self.slots.get(slot) {
-            Some(value) => Regex::new(pattern).map_or(false, |re| re.is_match(value)),
+            Some(value) => Regex::new(pattern).is_ok_and(|re| re.is_match(value)),
             None => false,
         }
     }
@@ -149,9 +149,7 @@ impl<'a> SlotExtractor<'a> {
                 }
 
                 let processed = self.validate_and_process_slot(val.as_str().to_string(), defn);
-                if processed.is_none() {
-                    return None;
-                }
+                processed.as_ref()?;
                 val_text = processed.unwrap().as_str().to_string();
 
                 slots.insert(name.to_string(), val_text);
@@ -187,9 +185,7 @@ impl<'a> SlotExtractor<'a> {
                 // Intent-specific slot
                 if let Some(defn) = intent_slots.get(name) {
                     let processed = self.validate_and_process_slot(val.as_str().to_string(), defn);
-                    if processed.is_none() {
-                        return None;
-                    }
+                    processed.as_ref()?;
                     val_text = processed.unwrap().as_str().to_string();
                 }
 

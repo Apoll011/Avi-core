@@ -26,10 +26,8 @@ language = ["en", "es"]
 license = "MIT"
 ```
 */
-use std::env::set_current_dir;
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::time::Instant;
 use rhai::{Engine, Scope};
 use crate::intent::engine::IntentEngine;
 use crate::intent::slot_extrator::ExtractedSlots;
@@ -48,14 +46,14 @@ impl<'a> Skill<'a> {
 
         let engine = get_avi_script_engine().unwrap();
 
-        let skill = Skill {
+        
+
+        Skill {
             path: path.to_string(),
             metadata,
             engine,
             scope
-        };
-
-        skill
+        }
     }
     
     pub(crate) fn metadata(&self) -> &SkillMetadata {

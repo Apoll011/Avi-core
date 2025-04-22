@@ -21,7 +21,7 @@ pub fn print_centered_header(text: &str) {
 
     let total_text = format!(" {} ", text);
     let text_len = total_text.len();
-    let rem = if width > text_len { width - text_len } else { 0 };
+    let rem = width.saturating_sub(text_len);
 
     let half = rem / 2;
     let line = format!(
