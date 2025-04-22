@@ -169,7 +169,6 @@ pub mod tcp_functions {
         convert_to_int(written_len)
     }
 
-    #[cfg(not(feature = "no_index"))]
     pub mod blob_functions {
         use rhai::Blob;
 

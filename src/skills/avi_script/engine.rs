@@ -142,7 +142,7 @@ pub fn create_avi_script_engine(modules_register: fn(&mut Engine) -> Result<(), 
         .register_fn("count", ExtractedSlots::count)
         .register_fn("all", ExtractedSlots::all)
         .register_fn("match_pattern", ExtractedSlots::match_pattern)
-        .register_fn("is_type", ExtractedSlots::is_type);;
+        .register_fn("is_type", ExtractedSlots::is_type);
 
     let fs = FilesystemPackage::new();
     fs.register_into_engine(&mut engine);

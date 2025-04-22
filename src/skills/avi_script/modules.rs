@@ -14,6 +14,7 @@ use std::process::Command;
 use crate::skills::avi_librarymanager::initialize_rhai_library;
 
 #[export_module]
+#[allow(clippy::unused_variables)]
 mod speak {
     pub fn say(key: &str, context: rhai::Map) {}
     pub fn text(message: &str) {}
@@ -24,6 +25,7 @@ mod speak {
     pub fn pause(seconds: i64) {}
 }
 
+#[allow(clippy::unused_variables)]
 #[export_module]
 mod ask {
     pub fn question(
@@ -40,6 +42,7 @@ mod ask {
     pub fn number_input(prompt: &str, callback: rhai::FnPtr) {}
 }
 
+#[allow(clippy::unused_variables)]
 #[export_module]
 mod assets {
     pub fn get(file: &str) -> String { "".into() }
@@ -105,6 +108,7 @@ mod translation {
     }
 }
 
+#[allow(clippy::unused_variables)]
 #[export_module]
 mod context {
     pub fn save(name: &str, value: rhai::Dynamic) {}
@@ -112,20 +116,25 @@ mod context {
     pub fn clear(name: &str) {}
 }
 
+#[allow(clippy::unused_variables)]
 #[export_module]
 mod http {
+    #[allow(clippy::unused_variables)]
     pub fn call(route: &str, method: &str, params: rhai::Map) -> rhai::Dynamic { ().into() }
 
+    #[allow(clippy::unused_variables)]
     pub fn get(route: &str, params: rhai::Map) -> rhai::Dynamic { ().into() }
     pub fn post(route: &str, body: rhai::Map) -> rhai::Dynamic { ().into() }
 
+    #[allow(clippy::unused_variables)]
     pub fn status() -> i64 { 200 }
 }
 
 #[export_module]
 mod events {
+    #[allow(clippy::unused_variables)]
     pub fn emit(name: &str, payload: rhai::Map) {}
-
+    #[allow(clippy::unused_variables)]
     pub fn listen(name: &str, callback: rhai::FnPtr) {}
 }
 
