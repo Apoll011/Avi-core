@@ -16,47 +16,56 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Rust
-      uses: actions/setup-rust@v2
-      with:
-        rust-version: stable
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable       
+          override: true        
+          components: rustfmt,clippy
 
-    - name: Cache Cargo build dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.cargo/registry
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-cargo-
+      - name: Cache Cargo registry
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-  # fallback to any cache on OS&#8203;:contentReference[oaicite:1]{index=1}
 
-    - name: Build
-      run: cargo build --release --verbose
+      - name: Build (release)
+        run: cargo build --release --verbose  
 
-    - name: Get version from Cargo.toml
-      id: get_version
-      run: |
-        VERSION=$(cargo pkgid | sed -E 's/.*#(.*)/\1/')
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Run Clippy
+        run: cargo clippy --verbose -- -D warnings  # lint, fail on any warning&#8203;:contentReference[oaicite:4]{index=4}
 
-    - name: Run Clippy (optional)
-      run: cargo clippy --verbose -- -D warnings
+      - name: Check formatting
+        run: cargo fmt -- --check        # verify code is formatted&#8203;:contentReference[oaicite:5]{index=5}
 
-    - name: Run formatting check (optional)
-      run: cargo fmt -- --check
+      - name: Get version from Cargo.toml
+        id: get_version
+        run: |
+          VERSION=$(cargo pkgid | sed -E 's/.*#(.*)/\1/')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-    - name: Create GitHub Release
-      id: create_release
-      run: |
-        curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          -d '{"tag_name": "v${{ env.VERSION }}", "name": "v${{ env.VERSION }}", "body": "Release of version ${{ env.VERSION }}"}' \
-          https://api.github.com/repos/${{ github.repository }}/releases
+      - name: Create GitHub Release
+        id: create_release
+        run: |
+          curl -L -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/releases \
+            -d '{"tag_name":"v${{ env.VERSION }}","name":"v${{ env.VERSION }}","body":"Release v${{ env.VERSION }}"}'  # create release via REST API&#8203;:contentReference[oaicite:6]{index=6}
 
-    - name: Upload Binary to Release
-      run: |
-        curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          -H "Content-Type: application/octet-stream" \
-          --data-binary @target/release/AviCore \
-          "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.id }}/assets?name=AviCore-v${{ env.VERSION }}.tar.gz"
+      - name: Upload AviCore binary
+        run: |
+          UPLOAD_URL=$(curl -s -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/releases/tags/v${{ env.VERSION }} \
+            | jq -r .upload_url | sed -e "s/{?name,label}//")
+          curl -L -X POST \
+            -H "Content-Type: application/octet-stream" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            --data-binary @target/release/AviCore \
+            "$UPLOAD_URL?name=AviCore-v${{ env.VERSION }}.tar.gz"  # upload asset&#8203;:contentReference[oaicite:7]{index=7}
