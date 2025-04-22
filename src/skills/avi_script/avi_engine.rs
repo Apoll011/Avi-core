@@ -7,9 +7,7 @@ use crate::skills::avi_script::modules::register_modules;
 
 pub fn get_avi_script_engine() -> Result<Engine, Box<dyn Error>>
 {
-    let engine = create_avi_script_engine(register_modules);
-
-    engine
+    create_avi_script_engine(register_modules)
 }
 
 pub fn run_avi_script(engine: &Engine, filename: &str, skill_path: PathBuf, scope: &mut Scope) -> Result<(), Box<dyn Error>>{

@@ -1,15 +1,10 @@
-use rhai::{export_module, exported_module, Engine, EvalAltResult, Array, ImmutableString};
+use rhai::{export_module, exported_module, Engine, EvalAltResult, ImmutableString};
 use rhai::module_resolvers::{FileModuleResolver, ModuleResolversCollection, StaticModuleResolver};
 use rhai::plugin::*;
 
 use uuid::Uuid;
 
 use std::time::Instant;
-use std::{fs, env};
-use std::io::Write;
-use std::fs::OpenOptions;
-use std::path::{Path, PathBuf};
-use std::process::Command;
 
 use crate::skills::avi_librarymanager::initialize_rhai_library;
 
@@ -184,13 +179,13 @@ pub fn register_modules(engine: &mut Engine) -> Result<(), Box<EvalAltResult>> {
     let mut resolvers = ModuleResolversCollection::new();
 
     let mut static_resolver = StaticModuleResolver::new();
-    static_resolver.insert("http", exported_module!(http).into());
-    static_resolver.insert("speak", exported_module!(speak).into());
-    static_resolver.insert("ask", exported_module!(ask).into());
-    static_resolver.insert("events", exported_module!(events).into());
-    static_resolver.insert("context", exported_module!(context).into());
-    static_resolver.insert("translation", exported_module!(translation).into());
-    static_resolver.insert("assets", exported_module!(assets).into());
+    static_resolver.insert("http", exported_module!(http));
+    static_resolver.insert("speak", exported_module!(speak));
+    static_resolver.insert("ask", exported_module!(ask));
+    static_resolver.insert("events", exported_module!(events));
+    static_resolver.insert("context", exported_module!(context));
+    static_resolver.insert("translation", exported_module!(translation));
+    static_resolver.insert("assets", exported_module!(assets));
     let file_resolver = FileModuleResolver::new_with_extension("avi");
 
     let lib_manager = initialize_rhai_library().unwrap();
