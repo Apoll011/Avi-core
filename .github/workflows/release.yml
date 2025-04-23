@@ -48,10 +48,47 @@ jobs:
         run: |
           VERSION=$(cargo pkgid | sed -E 's/.*#(.*)/\1/')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+      
+      - name: Get commits since last tag
+        id: generate_log
+        run: |
+          git fetch --tags
+          LAST_TAG=$(git describe --tags --abbrev=0 HEAD^)
+          LOG=$(git log $LAST_TAG..HEAD --pretty=format:"%h %s")
+          echo "COMMITS<<EOF" >> $GITHUB_ENV
+          echo "$LOG" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Generate AI Release Notes
+        id: ai_release_notes
+        run: |
+          RESPONSE=$(curl -s https://api.openai.com/v1/chat/completions \
+            -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "model": "gpt-4",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "You are a helpful release manager assistant who writes clear and structured GitHub release notes for a voice assistant project called AVI - Autonomous Voice Interface."
+                },
+                {
+                  "role": "user",
+                  "content": "Here are the git commits since the last version:\n'"${COMMITS}"'\n\nPlease write release notes in this format:\n\n## AVI - Autonomous Voice Interface vX.X.X\n\n### What's New\n- List new features with short descriptions\n\n### Bug Fixes\n- Describe fixed bugs\n\n### Code Improvements\n- Mention refactors or architectural changes\n\nEnd with a motivational message for contributors and users."
+                }
+              ],
+              "temperature": 0.7
+            }')
+      
+          RELEASE_NOTES=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$RELEASE_NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
+          body: ${{ env.RELEASE_NOTES }}
           artifacts: "target/release/Avi-core"
