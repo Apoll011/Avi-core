@@ -62,11 +62,11 @@ jobs:
       - name: Generate AI Release Notes
         id: ai_release_notes
         run: |
-          RESPONSE=$(curl -s https://api.openai.com/v1/chat/completions \
-            -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
+          RESPONSE=$(curl -s https://openrouter.ai/api/v1/chat/completions \
+            -H "Authorization: Bearer ${{ secrets.OPENROUTER_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "model": "gpt-4",
+              "model": "google/gemma-3-1b-it:free",
               "messages": [
                 {
                   "role": "system",
@@ -77,13 +77,12 @@ jobs:
                   "content": "Here are the git commits since the last version:\n'"${COMMITS}"'\n\nPlease write release notes in this format:\n\n## AVI - Autonomous Voice Interface vX.X.X\n\n### What's New\n- List new features with short descriptions\n\n### Bug Fixes\n- Describe fixed bugs\n\n### Code Improvements\n- Mention refactors or architectural changes\n\nEnd with a motivational message for contributors and users."
                 }
               ],
-              "temperature": 0.7
             }')
       
-          RELEASE_NOTES=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$RELEASE_NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+              RELEASE_NOTES=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
+              echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+              echo "$RELEASE_NOTES" >> $GITHUB_ENV
+              echo "EOF" >> $GITHUB_ENV
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
