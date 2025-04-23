@@ -12,10 +12,6 @@ use crate::utils::cli;
 use crate::utils::cli::input;
 /*
 Architecture
-Todo:
-   - Get Args
-   - Create Init Actions
-   - Add listener for Wake word
 
 Protocols:
    - Skills -> Alex
