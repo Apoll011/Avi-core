@@ -11,8 +11,6 @@ use crate::skills::manager::SkillManager;
 use crate::utils::cli;
 use crate::utils::cli::input;
 /*
-Architecture
-
 Protocols:
    - Skills -> Alex
    - Alex -> (MessageBus (Neon) <-> Avi Message Bus)
