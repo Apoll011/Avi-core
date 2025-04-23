@@ -1,8 +1,10 @@
+mod broker;
 mod intent;
 mod skills;
 mod utils;
 mod version;
 
+use crate::broker::utils::start_mqtt;
 use crate::intent::engine::IntentEngine;
 use crate::intent::recognizer::Recognizer;
 use crate::skills::manager::SkillManager;
@@ -26,6 +28,8 @@ fn main() {
     cli::header();
     let mut im = IntentEngine::new();
 
+    let mqtt = start_mqtt();
+
     let mut skill_manager = SkillManager::new();
 
     skill_manager
@@ -41,7 +45,9 @@ fn main() {
             println!("Sorry, I didn't understand.");
         } else {
             for m in matches {
-                skill_manager.process_intent(m);
+                skill_manager
+                    .process_intent(m)
+                    .expect("Error processing the intent!");
             }
         }
     }

@@ -13,10 +13,6 @@ mod speak {
     pub fn say(key: &str, context: rhai::Map) {}
     pub fn text(message: &str) {}
     pub fn translated(key: &str, context: rhai::Map) {}
-
-    pub fn voice(name: &str) {}
-    pub fn repeat() {}
-    pub fn pause(seconds: i64) {}
 }
 
 #[export_module]
