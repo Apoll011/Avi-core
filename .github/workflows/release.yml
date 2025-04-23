@@ -54,4 +54,4 @@ jobs:
         with:
           tag: ${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
-          artifacts: "target/release/AviCore"
+          artifacts: "target/release/Avi-core"
