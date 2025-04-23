@@ -16,7 +16,6 @@ Todo:
    - Get Args
    - Create Init Actions
    - Add listener for Wake word
-   - Skill Interface And Tools
 
 Protocols:
    - Skills -> Alex
