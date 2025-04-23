@@ -60,7 +60,7 @@ jobs:
         run: |
           git fetch --tags
           LAST_TAG=$(git describe --tags --abbrev=0)
-          LOG=$(git log $LAST_TAG..HEAD --pretty=format:"%h %s")
+          LOG=$(git log $LAST_TAG..HEAD --pretty=format:"%h %s" | paste -sd ' - ')
           echo "COMMITS<<EOF" >> $GITHUB_ENV
           echo "$LOG" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
