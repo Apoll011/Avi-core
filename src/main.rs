@@ -29,7 +29,7 @@ fn main() {
     let mut im = IntentEngine::new();
 
     let mqtt = start_mqtt();
-    
+
     let mut skill_manager = SkillManager::new();
 
     skill_manager

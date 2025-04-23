@@ -88,6 +88,5 @@ fn get_config() -> Config {
 pub fn start_mqtt() -> EmbeddedBroker {
     let config = get_config();
 
-    
     EmbeddedBroker::new(config)
 }
