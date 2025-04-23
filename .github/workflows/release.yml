@@ -84,11 +84,12 @@ jobs:
                 }
               ],
             }')
-      
-              RELEASE_NOTES=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
-              echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-              echo "$RELEASE_NOTES" >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
+          
+          echo $RELEASE_NOTES
+          RELEASE_NOTES=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$RELEASE_NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
