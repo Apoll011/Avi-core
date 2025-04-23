@@ -42,7 +42,7 @@ impl AviScriptLibraryManager {
     pub fn install_scripts(&self) -> io::Result<Vec<String>> {
         self.ensure_library_dir()?;
 
-        let mut installed_scripts = self.update_scripts(false)?;
+        let installed_scripts = self.update_scripts(false)?;
 
         Ok(installed_scripts)
     }
