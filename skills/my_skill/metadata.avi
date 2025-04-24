@@ -3,5 +3,5 @@ let id = "greet.skill";
 let version = "1.0.0";
 let author = "You";
 let description = "Greets the user and responds with kind words.";
-let languages = ["en", "es"];
+let languages = ["en", "pt"];
 let license = "MIT";
