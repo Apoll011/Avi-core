@@ -25,11 +25,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Generate Release Note
-        id: generate-release-note
-        uses: combinatrix-ai/release-note-writer@v1
-        with:
-          api_key: ${{ secrets.GOOGLE_CLOUD_API_KEY }}
+      #- name: Generate Release Note
+        #id: generate-release-note
+        #uses: combinatrix-ai/release-note-writer@v1
+        #with:
+          #api_key: ${{ secrets.GOOGLE_CLOUD_API_KEY }}
 
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
@@ -66,5 +66,5 @@ jobs:
         with:
           tag: ${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
-          body: ${{ steps.generate-release-note.outputs.release_note }}
+          #body: ${{ steps.generate-release-note.outputs.release_note }}
           artifacts: "target/release/Avi-core"
