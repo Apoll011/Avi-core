@@ -7,7 +7,7 @@ on:
     paths-ignore:
       - '**.md'
       - 'book/**'
-      - '.github/**'
+      #- '.github/**'
 
 permissions:
   contents: write
@@ -21,7 +21,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Checkout repository & Generate Release Note
+        name: Checkout repository
+        with:
+          fetch-depth: 0
+
+      - name: Generate Release Note
         id: generate-release-note
         uses: combinatrix-ai/release-note-writer@v1
         with:
