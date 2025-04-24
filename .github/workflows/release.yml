@@ -24,11 +24,20 @@ jobs:
         name: Checkout repository
         with:
           fetch-depth: 0
-
+      
+      - name: Get last tag
+        id: get_tag
+        run: |
+          git fetch --tags
+          LAST_TAG=$(git describe --tags --abbrev=0)
+          echo "LAST_TAG=$LAST_TAG" >> $GITHUB_ENV
+  
       - name: Generate Release Note
         id: generate-release-note
         uses: combinatrix-ai/release-note-writer@v1
         with:
+          compare_to: specified
+          tag: ${{ env.LAST_TAG }}
           api_key: ${{ secrets.GOOGLE_CLOUD_API_KEY }}
 
       - name: Install Rust toolchain
