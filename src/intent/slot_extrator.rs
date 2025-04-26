@@ -11,7 +11,6 @@ pub struct ExtractedSlots {
 
 impl ExtractedSlots {
     pub(crate) fn get_name(&mut self) -> String {
-        println!("Intent: {}", self.intent);
         self.intent.clone()
     }
 
