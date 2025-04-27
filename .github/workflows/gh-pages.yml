@@ -30,7 +30,6 @@ jobs:
 
       - name: Build MkDocs
         run: |
-          cd book
           mkdocs build
 
       - name: Deploy to GitHub Pages
