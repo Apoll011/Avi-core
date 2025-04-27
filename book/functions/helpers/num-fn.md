@@ -43,7 +43,7 @@ The following standard functions operate on floating-point and decimal numbers o
 | Logarithmic      |   yes    | `ln` (base _e_), `log` (base 10)                                                         |
 | Logarithmic      |  **no**  | `log(`_x_`,`_base_`)`                                                                    |
 | Rounding         |   yes    | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
-| Conversion       |   yes    | [`to_int`](operators/convert.md), [`to_decimal`](operators/convert.md), [`to_float`](operators/convert.md)             |
+| Conversion       |   yes    | [`to_int`](../operators/convert.md), [`to_decimal`](operators/convert.md), [`to_float`](operators/convert.md)             |
 | Conversion       |  **no**  | `to_degrees`, `to_radians`                                                               |
 | Comparison       |   yes    | `min`, `max` (also inter-operates with integers)                                         |
 | Testing          |  **no**  | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |

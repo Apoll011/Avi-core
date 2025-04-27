@@ -3,7 +3,7 @@
 
 The `type_of` function detects the actual type of a value.
 
-This is useful because all [variables](variables/variables.md) are dynamic in nature.
+This is useful because all [variables](../variables/variables.md) are dynamic in nature.
 
 ```js
 // Use 'type_of()' to get the actual types of values
@@ -34,5 +34,5 @@ switch type_of(x) {
 
 ```admonish info.small "Standard types"
 
-See [here](type/values-and-types.md) for the `type_of` output of standard types.
+See [here](../type/values-and-types.md) for the `type_of` output of standard types.
 ```

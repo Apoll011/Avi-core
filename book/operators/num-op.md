@@ -44,8 +44,8 @@ Binary Operators
 |               `>=`                | greater than or equals to                                        |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
 |                `<`                | less than                                                        |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
 |               `<=`                | less than or equals to                                           |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
-|               `..`                | exclusive range                                                  | [range](variables/ranges.md) |   yes   |         **no**         |      **no**       |
-|               `..=`               | inclusive range                                                  | [range](variables/ranges.md) |   yes   |         **no**         |      **no**       |
+|               `..`                | exclusive range                                                  | [range](../variables/ranges.md) |   yes   |         **no**         |      **no**       |
+|               `..=`               | inclusive range                                                  | [range](../variables/ranges.md) |   yes   |         **no**         |      **no**       |
 
 
 Examples

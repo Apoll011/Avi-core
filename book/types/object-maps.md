@@ -3,11 +3,11 @@ Object Maps
 
 Object maps are hash dictionaries. Properties are all dynamic values and can be freely added and retrieved.
 
-[`type_of()`](meta/type-of.md) an object map returns `"map"`.
+[`type_of()`](../meta/type-of.md) an object map returns `"map"`.
 
 ~~~admonish tip "Tip: Object maps are _FAST_"
 
-Normally, when [properties](types/oop/getters-setters.md) are accessed, copies of the data values are made.
+Normally, when [properties](../types/oop/getters-setters.md) are accessed, copies of the data values are made.
 This is normally slow.
 
 Object maps have special treatment &ndash; properties are accessed via _references_, meaning that
@@ -50,7 +50,7 @@ commas `,`:
 > `#{` _property_ `:` _value_`,` ... `,` _property_ `:` _value_ `,` `}`     `// trailing comma is OK`
 
 The property _name_ can be a simple identifier following the same naming rules as
-[variables](variables/variables.md), or a [string literal](../appendix/literals.md) without interpolation.
+[variables](../variables/variables.md), or a [string literal](../../appendix/literals.md) without interpolation.
 
 
 Property Access Syntax
@@ -59,13 +59,13 @@ Property Access Syntax
 ### Dot notation
 
 The _dot notation_ allows only property names that follow the same naming rules as
-[variables](variables/variables.md).
+[variables](../variables/variables.md).
 
 > _object_ `.` _property_
 
 ### Elvis notation
 
-The [_Elvis notation_](https://en.wikipedia.org/wiki/Elvis_operator) is similar to the _dot
+The [_Elvis notation_](../https://en.wikipedia.org/wiki/Elvis_operator) is similar to the _dot
 notation_ except that it returns `()` if the object itself is `()`.
 
 > `// returns () if object is ()`  
@@ -77,7 +77,7 @@ notation_ except that it returns `()` if the object itself is `()`.
 ### Index notation
 
 The _index notation_ allows setting/getting properties of arbitrary names (even the empty
-[string](types/strings-chars.md)).
+[string](../types/strings-chars.md)).
 
 > _object_ `[` _property_ `]`
 
@@ -101,7 +101,7 @@ let x = map.bar;            // x == ()
 
 ### Check for property existence
 
-Use the [`in`](operators.md#in-operator) operator to check whether a property exists in an object-map.
+Use the [`in`](../operators.md#in-operator) operator to check whether a property exists in an object-map.
 
 ```rust
 let map = #{ foo: 42 };
@@ -164,11 +164,11 @@ The following methods operate on object maps.
 | `!=` operator             | <ol><li>first object map</li><li>second object map</li></ol>                    | are the two object maps different (elements compared with the `==` operator, if defined)?                                                                                                                                                                     |
 | `fill_with`               | second object map                                                               | adds in all properties of the second object map that do not exist in the object map                                                                                                                                                                           |
 | `contains`, `in` operator | property name                                                                   | does the object map contain a property of a particular name?                                                                                                                                                                                                  |
-| `drain`                   | [function pointer](types/fn-ptr.md) to predicate (usually a [closure](types/fn-closure.md)) | removes all elements (returning them) that return `true` when called with the predicate function taking the following parameters:<ol><li>key</li><li>_(optional)_ object map element (if omitted, the object map element is bound to `this`)</li></ol>        |
-| `retain`                  | [function pointer](types/fn-ptr.md) to predicate (usually a [closure](types/fn-closure.md)) | removes all elements (returning them) that do not return `true` when called with the predicate function taking the following parameters:<ol><li>key</li><li>_(optional)_ object map element (if omitted, the object map element is bound to `this`)</li></ol> |
-| `filter`                  | [function pointer](types/fn-ptr.md) to predicate (usually a [closure](types/fn-closure.md)) | constructs a object map with all elements that return `true` when called with the predicate function taking the following parameters:<ol><li>key</li><li>_(optional)_ object map element (if omitted, the object map element is bound to `this`)</li></ol>    |
-| `keys`                    | _none_                                                                          | returns an [array](types/arrays.md) of all the property names (in random order)                                                                                                                                                                                     |
-| `values`                  | _none_                                                                          | returns an [array](types/arrays.md) of all the property values (in random order)                                                                                                                                                                                    |
+| `drain`                   | [function pointer](../types/fn-ptr.md) to predicate (usually a [closure](../types/fn-closure.md)) | removes all elements (returning them) that return `true` when called with the predicate function taking the following parameters:<ol><li>key</li><li>_(optional)_ object map element (if omitted, the object map element is bound to `this`)</li></ol>        |
+| `retain`                  | [function pointer](../types/fn-ptr.md) to predicate (usually a [closure](../types/fn-closure.md)) | removes all elements (returning them) that do not return `true` when called with the predicate function taking the following parameters:<ol><li>key</li><li>_(optional)_ object map element (if omitted, the object map element is bound to `this`)</li></ol> |
+| `filter`                  | [function pointer](../types/fn-ptr.md) to predicate (usually a [closure](../types/fn-closure.md)) | constructs a object map with all elements that return `true` when called with the predicate function taking the following parameters:<ol><li>key</li><li>_(optional)_ object map element (if omitted, the object map element is bound to `this`)</li></ol>    |
+| `keys`                    | _none_                                                                          | returns an [array](../types/arrays.md) of all the property names (in random order)                                                                                                                                                                                     |
+| `values`                  | _none_                                                                          | returns an [array](../types/arrays.md) of all the property values (in random order)                                                                                                                                                                                    |
 | `to_json`                 | _none_                                                                          | returns a JSON representation of the object map (`()` is mapped to `null`, all other data types must be supported by JSON)                                                                                                                                    |
 
 
@@ -251,14 +251,14 @@ Special Support for OOP
 ------------------------
 
 Object maps can be used to simulate object-oriented programming (OOP) by storing data as properties
-and methods as properties holding [function pointers](types/fn-ptr.md).
+and methods as properties holding [function pointers](../types/fn-ptr.md).
 
-If an object map's property holds a [function pointer](types/fn-ptr.md), the property can simply be called
+If an object map's property holds a [function pointer](../types/fn-ptr.md), the property can simply be called
 like a normal method in method-call syntax.
 
 This is a _short-hand_ to avoid the more verbose syntax of using the `call` function keyword.
 
-When a property holding a [function pointer](types/fn-ptr.md) or a [closure](types/fn-closure.md) is called like
+When a property holding a [function pointer](../types/fn-ptr.md) or a [closure](../types/fn-closure.md) is called like
 a method, it is replaced as a method call on the object map itself.
 
 ```rust

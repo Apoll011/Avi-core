@@ -6,12 +6,12 @@ Import a Module
 
 ```admonish tip.side.wide "Tip"
 
-A [module](modules/index.md) that is only `import`-ed but not given any name is simply run.
+A [module](../modules/index.md) that is only `import`-ed but not given any name is simply run.
 
 This is a very simple way to run another script file from within a script.
 ```
 
-A [module](modules/index.md) can be _imported_ via the `import` statement, and be given a name.
+A [module](../modules/index.md) can be _imported_ via the `import` statement, and be given a name.
 
 Its members can be accessed via `::` similar to C++.
 
@@ -40,7 +40,7 @@ lock::status = "off";           // <- runtime error: cannot modify a constant
 
 ```admonish info "Imports are _scoped_"
 
-[Modules](modules/index.md) imported via `import` statements are only accessible inside the relevant block scope.
+[Modules](../modules/index.md) imported via `import` statements are only accessible inside the relevant block scope.
 
 ~~~js
 import "hacker" as h;           // import module - visible globally
@@ -80,12 +80,12 @@ usually grouped at the top (beginning) of a script for manageability and visibil
 It is not advised to deviate from this common practice unless there is a _Very Good Reason™_.
 
 Especially, do not place an `import` statement within a loop; doing so will repeatedly re-load the
-same [module](modules/index.md) during every iteration of the loop!
+same [module](../modules/index.md) during every iteration of the loop!
 ~~~
 
 ~~~admonish danger "Recursive imports"
 
-Beware of _import cycles_ &ndash; i.e. recursively loading the same [module](modules/index.md).
+Beware of _import cycles_ &ndash; i.e. recursively loading the same [module](../modules/index.md).
 This is a sure-fire way to cause a stack overflow error.
 
 For instance, importing itself always causes an infinite recursion:
@@ -100,7 +100,7 @@ import "hello" as foo;          // import itself - infinite recursion!
 foo::do_something();
 ```
 
-[Modules](modules/index.md) cross-referencing also cause infinite recursion:
+[Modules](../modules/index.md) cross-referencing also cause infinite recursion:
 
 ```js
 ┌────────────┐

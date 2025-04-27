@@ -5,7 +5,7 @@ Built‑in data types: numbers, strings, arrays, maps, blobs, bit‑fields, cons
 
 ## Contents
 
- [Arrays](arrays.md)
+ [Arrays](../arrays.md)
  [Bit Fields](bit-fields.md)
  [Blobs](blobs.md)
  [Fn Ptr](fn-ptr.md)
@@ -15,4 +15,4 @@ Built‑in data types: numbers, strings, arrays, maps, blobs, bit‑fields, cons
  [Timestamps](timestamps.md)
  [Values And Types](values-and-types.md)
  [Dynamic](dynamic/index.md)
- [Oop](oop/index.md)
+ [Oop](../oop/index.md)

@@ -16,7 +16,7 @@ Catch a Thrown Exception
 ------------------------
 
 It is possible to _catch_ an exception, instead of having it abort the script run, via the
-[`try` ... `catch`](control-flow/try-catch.md) statement common to many C-like languages.
+[`try` ... `catch`](../control-flow/try-catch.md) statement common to many C-like languages.
 
 ```js
 fn code_that_throws() {

@@ -16,7 +16,7 @@ If a bit is set (i.e. `1`), the index access returns `true`.
 
 If a bit is not set (i.e. `0`), the index access returns `false`.
 
-When a [range](variables/ranges.md) is used, the bits within the [range](variables/ranges.md) are shifted and extracted
+When a [range](../variables/ranges.md) is used, the bits within the [range](../variables/ranges.md) are shifted and extracted
 as an integer value.
 
 Bit-fields are very commonly used in embedded systems which must squeeze data into limited memory.
@@ -61,7 +61,7 @@ _most-significant bit_, with −1 being the _highest_ bit.
 >
 > _integer_ `[` _index from −1 to −64 or −32_ `] =` `true` or `false` ;
 
-[ranges](variables/ranges.md) always count from the least-significant bit (LSB) and has no support for
+[ranges](../variables/ranges.md) always count from the least-significant bit (LSB) and has no support for
 negative positions.
 
 ```admonish warning.small "Number of bits"
@@ -81,11 +81,11 @@ The following standard functions operate on bit-fields.
 | `get_bit`                  | bit number, counting from MSB if < 0                                                                                                                           | returns the state of a bit: `true` if `1`, `false` if `0` |
 | `set_bit`                  | <ol><li>bit number, counting from MSB if < 0</li><li>new state: `true` if `1`, `false` if `0`</li></ol>                                                        | sets the state of a bit                                   |
 | `get_bits`                 | <ol><li>starting bit number, counting from MSB if < 0</li><li>number of bits to extract, none if < 1, to MSB if ≥ _length_</li></ol>                           | extracts a number of bits, shifted towards LSB            |
-| `get_bits`                 | [range](variables/ranges.md) of bits                                                                                                                                     | extracts a number of bits, shifted towards LSB            |
+| `get_bits`                 | [range](../variables/ranges.md) of bits                                                                                                                                     | extracts a number of bits, shifted towards LSB            |
 | `set_bits`                 | <ol><li>starting bit number, counting from MSB if < 0</li><li>number of bits to set, none if < 1, to MSB if ≥ _length_<br/>3) new value</li></ol>              | sets a number of bits from the new value                  |
-| `set_bits`                 | <ol><li>[range](variables/ranges.md) of bits</li><li>new value</li></ol>                                                                                                 | sets a number of bits from the new value                  |
+| `set_bits`                 | <ol><li>[range](../variables/ranges.md) of bits</li><li>new value</li></ol>                                                                                                 | sets a number of bits from the new value                  |
 | `bits` method and property | <ol><li>_(optional)_ starting bit number, counting from MSB if < 0</li><li>_(optional)_ number of bits to extract, none if < 1, to MSB if ≥ _length_</li></ol> | allows iteration over the bits of a bit-field             |
-| `bits`                     | [range](variables/ranges.md) of bits                                                                                                                                     | allows iteration over the bits of a bit-field             |
+| `bits`                     | [range](../variables/ranges.md) of bits                                                                                                                                     | allows iteration over the bits of a bit-field             |
 
 
 Example

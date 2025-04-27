@@ -3,17 +3,17 @@
 
 ```admonish warning.side "Functions are pure"
 
-The only way for a script-defined [function](functions/functions.md) to change an external value is via `this`.
+The only way for a script-defined [function](../functions/functions.md) to change an external value is via `this`.
 ```
 
-Arguments passed to script-defined [functions](functions/functions.md) are always by _value_ because
-[functions](functions/functions.md) are _pure_.
+Arguments passed to script-defined [functions](../functions/functions.md) are always by _value_ because
+[functions](../functions/functions.md) are _pure_.
 
-However, [functions](functions/functions.md) can also be called in _method-call_ style:
+However, [functions](../functions/functions.md) can also be called in _method-call_ style:
 
 > _object_ `.` _method_ `(` _parameters_ ... `)`
 
-When a [function](functions/functions.md) is called this way, the keyword `this` binds to the object in the
+When a [function](../functions/functions.md) is called this way, the keyword `this` binds to the object in the
 method call and can be changed.
 
 ```rust
@@ -34,7 +34,7 @@ change();           // <- error: 'this' is unbound
 Elvis Operator
 --------------
 
-The [_Elvis_ operator](https://en.wikipedia.org/wiki/Elvis_operator) can be used to short-circuit
+The [_Elvis_ operator](../https://en.wikipedia.org/wiki/Elvis_operator) can be used to short-circuit
 the method call when the object itself is `()`.
 
 > _object_ `?.` _method_ `(` _parameters_ ... `)`
@@ -51,12 +51,12 @@ Methods defined this way are automatically exposed to the global namespace.
 ```
 
 In many cases it may be desirable to implement _methods_ for different custom types using
-script-defined [functions](functions/functions.md).
+script-defined [functions](../functions/functions.md).
 
 ### The Problem
 
 Doing so is brittle and requires a lot of type checking code because there can only be one
-[function](functions/functions.md) definition for the same name and arity:
+[function](../functions/functions.md) definition for the same name and arity:
 
 ```js
 // Really painful way to define a method called 'do_update' on various data types
@@ -75,7 +75,7 @@ fn do_update(x) {
 
 ### The Solution
 
-With a special syntax, it is possible to restrict a [function](functions/functions.md) to be callable only
+With a special syntax, it is possible to restrict a [function](../functions/functions.md) to be callable only
 when the object pointed to by `this` is of a certain type:
 
 > `fn`  _type name_ `.` _method_ `(` _parameters_ ... `)  {`  ...  `}`
@@ -86,8 +86,8 @@ or in quotes if the type name is not a valid identifier itself:
 
 ~~~admonish warning.small "Type name must be the same as `type_of`"
 
-The _type name_ specified in front of the [function](functions/functions.md) name must match the output of
-[`type_of`](meta/type-of.md) for the required type.
+The _type name_ specified in front of the [function](../functions/functions.md) name must match the output of
+[`type_of`](../meta/type-of.md) for the required type.
 ~~~
 
 ~~~admonish tip.small "Tip: `int` and `float`"
@@ -152,8 +152,8 @@ Bind to `this` for Module Functions
 
 ### The Problem
 
-The _method-call_ syntax is not possible for [functions](functions/functions.md) [imported](modules/import.md)
-from [modules](modules/index.md).
+The _method-call_ syntax is not possible for [functions](../functions/functions.md) [imported](../modules/import.md)
+from [modules](../modules/index.md).
 
 ```js
 import "my_module" as foo;
@@ -165,7 +165,7 @@ x.foo::change_value(1);     // <- syntax error
 
 ### The Solution
 
-In order to call a [module](modules/index.md) [function](functions/functions.md) as a method, it must be
+In order to call a [module](../modules/index.md) [function](../functions/functions.md) as a method, it must be
 defined with a restriction on the type of object pointed to by `this`:
 
 ```js

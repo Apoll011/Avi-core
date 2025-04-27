@@ -1,7 +1,7 @@
 Catch Exceptions
 ================
 
-When an [exception](control-flow/throw.md) is thrown via a [`throw`](control-flow/throw.md) statement, the script halts with
+When an [exception](../control-flow/throw.md) is thrown via a [`throw`](../control-flow/throw.md) statement, the script halts with
 the exception value.
 
 It is possible, via the `try` ... `catch` statement, to _catch_ exceptions, optionally with an
@@ -50,7 +50,7 @@ catch
 ~~~admonish tip "Tip: Re-throw exception"
 
 Like the `try` ... `catch` syntax in most languages, it is possible to _re-throw_ an exception
-within the `catch` block simply by another [`throw`](control-flow/throw.md) statement without a value.
+within the `catch` block simply by another [`throw`](../control-flow/throw.md) statement without a value.
 
 ```js
 try
@@ -75,13 +75,13 @@ Many script-oriented exceptions can be caught via `try` ... `catch`.
 
 | Error type                                                                                      |              Error value               |
 | ----------------------------------------------------------------------------------------------- | :------------------------------------: |
-| Runtime error thrown by a [`throw`](control-flow/throw.md) statement                                         | value in [`throw`](control-flow/throw.md) statement |
-| Arithmetic error                                                                                |      [object map](types/object-maps.md)      |
-| [Variable](variables/variables.md) not found                                                              |      [object map](types/object-maps.md)      |
-| [Function](functions/functions.md) not found                                                              |      [object map](types/object-maps.md)      |
-| [Module](modules/index.md) not found                                                            |      [object map](types/object-maps.md)      |
-| Unbound `this`                                                                                  |      [object map](types/object-maps.md)      |
-| Data type mismatch                                                                              |      [object map](types/object-maps.md)      |
+| Runtime error thrown by a [`throw`](../control-flow/throw.md) statement                                         | value in [`throw`](../control-flow/throw.md) statement |
+| Arithmetic error                                                                                |      [object map](../types/object-maps.md)      |
+| [Variable](../variables/variables.md) not found                                                              |      [object map](../types/object-maps.md)      |
+| [Function](../functions/functions.md) not found                                                              |      [object map](../types/object-maps.md)      |
+| [Module](../modules/index.md) not found                                                            |      [object map](../types/object-maps.md)      |
+| Unbound `this`                                                                                  |      [object map](../types/object-maps.md)      |
+| Data type mismatch                                                                              |      [object map](../types/object-maps.md)      |
 | Assignment to a calculated/[constant](variables/constants.md) value                                       |      [object map](types/object-maps.md)      |
 | [array](types/arrays.md)/[string](types/strings-chars.md)/[bit-field](types/bit-fields.md) indexing out-of-bounds |      [object map](types/object-maps.md)      |
 | Indexing with an inappropriate data type                                                        |      [object map](types/object-maps.md)      |

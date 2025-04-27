@@ -3,7 +3,7 @@ Strings and Characters
 
 String in AviScript contain any text sequence of valid Unicode characters.
 
-[`type_of()`](meta/type-of.md) a string returns `"string"`.
+[`type_of()`](../meta/type-of.md) a string returns `"string"`.
 
 
 String and Character Literals
@@ -199,11 +199,11 @@ Interpolation is not supported for normal string or character literals.
 statements block, including another interpolated string!
 The last result of the block is taken as the value for interpolation.
 
-AviScript uses [`to_string`](operators/convert.md) to convert any value into a string, then physically joins all
+AviScript uses [`to_string`](../operators/convert.md) to convert any value into a string, then physically joins all
 the sub-strings together.
 
-For convenience, if any interpolated value is a [BLOB](types/blobs.md), however, it is automatically treated as a
-UTF-8 encoded string.  That is because it is rarely useful to interpolate a [BLOB](types/blobs.md) into a string,
+For convenience, if any interpolated value is a [BLOB](../types/blobs.md), however, it is automatically treated as a
+UTF-8 encoded string.  That is because it is rarely useful to interpolate a [BLOB](../types/blobs.md) into a string,
 but extremely useful to be able to directly manipulate UTF-8 encoded text.
 
 ```js
@@ -272,14 +272,14 @@ Sub-Strings
 
 Sub-strings, or _slices_ in some programming languages, are parts of strings.
 
-In AviScript, a sub-string can be specified by indexing with a [range](variables/ranges.md) of characters:
+In AviScript, a sub-string can be specified by indexing with a [range](../variables/ranges.md) of characters:
 
 > _string_ `[` _first character (starting from zero)_ `..` _last character (exclusive)_ `]`
 >
 > _string_ `[` _first character (starting from zero)_ `..=` _last character (inclusive)_ `]`
 
-Sub-string [ranges](variables/ranges.md) always start from zero counting towards the end of the string.
-Negative [ranges](variables/ranges.md) are not supported.
+Sub-string [ranges](../variables/ranges.md) always start from zero counting towards the end of the string.
+Negative [ranges](../variables/ranges.md) are not supported.
 
 
 Examples
