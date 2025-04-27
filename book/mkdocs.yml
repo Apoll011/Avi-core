@@ -1,0 +1,119 @@
+site_name: AviScript
+site_description: A comprehensive tutorial-style guide for learning the aviscript programming language
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Values and Types: types/values-and-types.md
+      - Variables: variables/variables.md
+      - Assignment: variables/assignment.md
+      - Constants: variables/constants.md
+      - Print and Debug: meta/print-debug.md
+      - Comments: meta/comments.md
+
+  - Basic Types:
+      - Numbers: types/numbers.md
+      - Strings and Characters: types/strings-chars.md
+      - Arrays: types/arrays.md
+      - Object Maps: types/object-maps.md
+      - Type Of: meta/type-of.md
+
+  - Control Flow:
+      - Control Flow Basics: control-flow/index.md
+      - If Statements: control-flow/control-flow/if.md
+      - While Loops: control-flow/while.md
+      - For Loops: control-flow/for.md
+      - Loop: control-flow/loop.md
+      - Do: control-flow/do.md
+      - Switch: control-flow/switch.md
+      - Return: control-flow/return.md
+
+  - Functions:
+      - Functions Basics: functions/functions.md
+      - Function Closures: functions/fn-closure.md
+      - Function Pointers: types/fn-ptr.md
+      - Function Methods: functions/fn-method.md
+      - Function Metadata: functions/fn-metadata.md
+      - Overloading: functions/overload.md
+
+  - Operators:
+      - Basic Operators: operators/operators.md
+      - Numeric Operations: operators/num-op.md
+      - Assignment Operators: operators/assignment-op.md
+      - Type Conversion: operators/convert.md
+
+  - Advanced Variables:
+      - Indexing: variables/indexing.md
+      - Ranges: variables/ranges.md
+
+  - Error Handling:
+      - Try-Catch: control-flow/try-catch.md
+      - Throw: control-flow/throw.md
+
+  - Object-Oriented Programming:
+      - OOP Basics: types/oop/index.md
+      - Methods: types/oop/methods.md
+      - Getters and Setters: types/oop/getters-setters.md
+
+  - Dynamic Types:
+      - Dynamic Typing: types/dynamic/dynamic.md
+      - Dynamic Tags: types/dynamic/dynamic-tag.md
+
+  - Events:
+      - Event Handling: events/index.md
+      - On Start and On End: events/on_start_on_end.md
+      - On Intent: events/on_intent.md
+
+  - Advanced Types:
+      - Timestamps: types/timestamps.md
+      - Bit Fields: types/bit-fields.md
+      - Blobs: types/blobs.md
+
+  - Modules:
+      - Module System: modules/index.md
+      - Import: modules/import.md
+      - Export: modules/export.md
+
+  - Built-in Modules:
+      - Overview: modules/builtin/index.md
+      - Ask: modules/builtin/ask.md
+      - Speak: modules/builtin/speak.md
+      - HTTP: modules/builtin/http.md
+      - Config: modules/builtin/config.md
+      - Context: modules/builtin/context.md
+      - Assets: modules/builtin/assets.md
+      - Translation: modules/builtin/translation.md
+
+  - Advanced Concepts:
+      - Statements: statements/statements.md
+      - Eval: statements/eval.md
+
+  - Reference:
+      - Keywords: meta/keywords.md
+      - Helper Functions:
+          - String Functions: functions/helpers/string-fn.md
+          - Number Functions: functions/helpers/num-fn.md
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.details
+  - attr_list
+  - def_list
+  - toc:
+      permalink: true
