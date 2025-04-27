@@ -1,5 +1,6 @@
 site_name: AviScript
 site_description: A comprehensive tutorial-style guide for learning the aviscript programming language
+docs_dir: .
 theme:
   name: material
   features:
