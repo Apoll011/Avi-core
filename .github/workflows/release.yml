@@ -75,5 +75,5 @@ jobs:
         with:
           tag: ${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
-          #body: ${{ steps.generate-release-note.outputs.release_note }}
+          body: ${{ steps.generate-release-note.outputs.release_note }}
           artifacts: "target/release/Avi-core"
