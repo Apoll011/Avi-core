@@ -85,10 +85,15 @@ jobs:
       - name: Generate Release Note
         id: generate-release-note
         uses: combinatrix-ai/release-note-writer@v1
+        continue-on-error: true
         with:
           compare_to: specified
           tag: ${{ env.LAST_TAG }}
           api_key: ${{ secrets.GOOGLE_CLOUD_API_KEY }}
+
+      - name: Set release note
+        run: |
+          echo "RELEASE_NOTE=${{ steps.generate-release-note.outputs.release_note || 'No release notes available.' }}" >> $GITHUB_ENV
 
       - uses: actions/download-artifact@v4
         with:
@@ -107,5 +112,5 @@ jobs:
         with:
           tag: ${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
-          body: ${{ steps.generate-release-note.outputs.release_note }}
+          body: ${{ env.RELEASE_NOTE }}
           artifacts: artifacts/**
