@@ -8,6 +8,11 @@ on:
       - '**.md'
       - 'book/**'
       - '.github/**'
+  workflow_dispatch:  
+    inputs:
+      version:
+        description: 'Release Version'
+        required: false
 
 permissions:
   contents: write
@@ -17,7 +22,11 @@ env:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
+    name: Build and Release (Multi-platform)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -31,9 +40,10 @@ jobs:
           git fetch --tags
           LAST_TAG=$(git describe --tags --abbrev=0)
           echo "LAST_TAG=$LAST_TAG" >> $GITHUB_ENV
-  
+
       - name: Generate Release Note
         id: generate-release-note
+        if: matrix.os == 'ubuntu-latest'  # Only generate once (on Linux)
         uses: combinatrix-ai/release-note-writer@v1
         with:
           compare_to: specified
@@ -45,7 +55,7 @@ jobs:
         with:
           toolchain: stable
           override: true
-          components: rustfmt,clippy
+          components: rustfmt, clippy
 
       - name: Cache Cargo registry
         uses: actions/cache@v3
@@ -59,10 +69,28 @@ jobs:
         run: cargo build --release --verbose
 
       - name: Run Clippy
-        run: cargo clippy --verbose --
+        run: cargo clippy --verbose
 
       - name: Check formatting
         run: cargo fmt -- --check
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Avi-core-${{ runner.os }}
+          path: target/release/Avi-core
+
+  release:
+    name: Create GitHub Release
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: Avi-core-*
+          merge-multiple: true
+          path: artifacts
 
       - name: Get version from Cargo.toml
         id: get_version
@@ -76,4 +104,4 @@ jobs:
           tag: ${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
           body: ${{ steps.generate-release-note.outputs.release_note }}
-          artifacts: "target/release/Avi-core"
+          artifacts: artifacts/**
