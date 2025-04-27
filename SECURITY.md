@@ -9,7 +9,7 @@ At AVI, we take security issues seriously. We appreciate your efforts to respons
 If you believe you've found a security vulnerability in AVI, please follow these steps:
 
 1. **Do not disclose the vulnerability publicly** (including in GitHub issues)
-2. Email your findings to: security@example.com
+2. Email your findings to: tiagobernrdo@gmail.com
 3. Include the following information:
    - Description of the vulnerability
    - Steps to reproduce
@@ -69,15 +69,6 @@ If you're deploying AVI in your environment, consider the following security rec
 6. **Authentication**: Implement strong authentication mechanisms for administrative access
 7. **Logging**: Enable comprehensive logging for security monitoring
 
-## Security Features
-
-AVI includes several security features:
-
-- **Encrypted Storage**: Sensitive data is encrypted at rest
-- **Session Management**: Secure session handling to prevent unauthorized access
-- **API Authentication**: Robust authentication for API access
-- **Module Isolation**: Modules operate in isolated environments to prevent cross-module exploitation
-
 ## Disclosure Policy
 
 We believe in responsible disclosure. When we receive a security bug report, we will:
@@ -94,7 +85,7 @@ We appreciate security researchers who help improve our security. Contributors w
 
 ## Version History
 
-This security policy was last updated on April 26, 2025.
+This security policy was last updated on April 27, 2025.
 
 ---
 
