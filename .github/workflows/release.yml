@@ -104,7 +104,11 @@ jobs:
       - name: Get version from Cargo.toml
         id: get_version
         run: |
-          VERSION=$(cargo pkgid | sed -E 's/.*#(.*)/\1/')
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION=$(cargo pkgid | sed -E 's/.*#(.*)/\1/')
+          fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Create GitHub Release
