@@ -50,7 +50,7 @@ commas `,`:
 > `#{` _property_ `:` _value_`,` ... `,` _property_ `:` _value_ `,` `}`     `// trailing comma is OK`
 
 The property _name_ can be a simple identifier following the same naming rules as
-[variables](../variables/variables.md), or a [string literal](../../appendix/literals.md) without interpolation.
+[variables](../variables/variables.md), or a [string literal](../appendix/literals.md) without interpolation.
 
 
 Property Access Syntax

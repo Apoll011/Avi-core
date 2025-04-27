@@ -105,7 +105,7 @@ Boolean Operators
 
 ```admonish note.side
 
-All boolean operators are [built in](../../engine/builtin.md) for the `bool` data type.
+All boolean operators are [built in](../engine/builtin.md) for the `bool` data type.
 ```
 
 |     Operator      | Description | Arity  | Short-circuits? |

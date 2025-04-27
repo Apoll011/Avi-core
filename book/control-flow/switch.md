@@ -1,7 +1,7 @@
 Switch Statement
 ================
 
-The `switch` statement allows matching on [literal](../../appendix/literals.md) values.
+The `switch` statement allows matching on [literal](../appendix/literals.md) values.
 
 ```js
 switch calc_secret_value(x) {
@@ -51,8 +51,8 @@ switch wrong_default {
 Array and Object Map Literals Also Work
 ---------------------------------------
 
-The `switch` expression can match against any _[literal](../../appendix/literals.md)_, including
-[array](../types/arrays.md) and [object map](../types/object-maps.md) [literals](../../appendix/literals.md).
+The `switch` expression can match against any _[literal](../appendix/literals.md)_, including
+[array](../types/arrays.md) and [object map](../types/object-maps.md) [literals](../appendix/literals.md).
 
 ```js
 // Match on arrays
@@ -133,7 +133,7 @@ switch value.type_of() {
 Range Cases
 -----------
 
-Because of their popularity, [literal](../../appendix/literals.md) integer [ranges](../variables/ranges.md) can also
+Because of their popularity, [literal](../appendix/literals.md) integer [ranges](../variables/ranges.md) can also
 be used as `switch` cases.
 
 Numeric [ranges](../variables/ranges.md) are only searched when the `switch` value is itself a number (including

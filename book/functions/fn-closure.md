@@ -1,7 +1,7 @@
 Closures
 ========
 
-Many functions in the standard API expect [function pointer](../../types/fn-ptr.md) as parameters.
+Many functions in the standard API expect [function pointer](../types/fn-ptr.md) as parameters.
 
 For example:
 
@@ -22,7 +22,7 @@ let z = y.map(Fn("square"));
 ```
 
 Sometimes it gets tedious to define separate [functions](../functions/functions.md) only to dispatch them via
-single [function pointers](../../types/fn-ptr.md) &ndash; essentially, those [functions](../functions/functions.md) are only
+single [function pointers](../types/fn-ptr.md) &ndash; essentially, those [functions](../functions/functions.md) are only
 ever called in one place.
 
 This scenario is especially common when simulating object-oriented programming ([OOP]).

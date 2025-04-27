@@ -16,11 +16,11 @@ Short-Hand Notation
 Native Rust functions cannot use this short-hand notation.
 ```
 
-Having to write `Fn("foo")` in order to create a function pointer to the [function](../../functions/functions.md)
+Having to write `Fn("foo")` in order to create a function pointer to the [function](../functions/functions.md)
 `foo` is a chore, so there is a short-hand available.
 
-A function pointer to any _script-defined_ [function](../../functions/functions.md) _within the same script_ can be
-obtained simply by referring to the [function's](../../functions/functions.md) name.
+A function pointer to any _script-defined_ [function](../functions/functions.md) _within the same script_ can be
+obtained simply by referring to the [function's](../functions/functions.md) name.
 
 ```rust
 fn foo() { ... }        // function definition
@@ -32,8 +32,8 @@ let f = Fn("foo");      // <- the above is equivalent to this
 let g = bar;            // error: variable 'bar' not found
 ```
 
-The short-hand notation is particularly useful when passing [functions](../../functions/functions.md) as
-[closure](../../functions/fn-closure.md) arguments.
+The short-hand notation is particularly useful when passing [functions](../functions/functions.md) as
+[closure](../functions/fn-closure.md) arguments.
 
 ```rust
 fn is_even(n) { n % 2 == 0 }
@@ -55,9 +55,9 @@ The following standard methods operate on function pointers.
 
 | Function                           | Parameter(s) | Description                                                                                              |
 | ---------------------------------- | ------------ |----------------------------------------------------------------------------------------------------------|
-| `name` method and property         | _none_       | returns the name of the [function](../../functions/functions.md) encapsulated by the function pointer       |
+| `name` method and property         | _none_       | returns the name of the [function](../functions/functions.md) encapsulated by the function pointer       |
 | `is_anonymous` method and property | _none_       | does the function pointer refer to an [anonymous function](../functions/fn-closure.md)?                               |
-| `call`                             | _arguments_  | calls the [function](../../functions/functions.md) matching the function pointer's name with the _arguments_ |
+| `call`                             | _arguments_  | calls the [function](../functions/functions.md) matching the function pointer's name with the _arguments_ |
 
 
 Examples
@@ -212,7 +212,7 @@ x.call(func, 1);            // 'this' is bound to 'x', dispatched to 'func'
 x == 42;
 ```
 
-Beware that this only works for [_method-call_](../../functions/fn-method.md) style.
+Beware that this only works for [_method-call_](../functions/fn-method.md) style.
 Normal function-call style cannot bind the `this` pointer (for syntactic reasons).
 
 
