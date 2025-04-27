@@ -28,6 +28,13 @@ jobs:
         run: |
           pip install mkdocs mkdocs-material mkdocs-minify-plugin
 
-      - name: Build and Deploy
+      - name: Build MkDocs
         run: |
-          mkdocs gh-deploy --force
+          cd book
+          mkdocs build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book/site
