@@ -1,7 +1,7 @@
 Assignments
 ===========
 
-Value assignments to [variables](variables/variables.md) use the `=` symbol.
+Value assignments to [variables](../variables/variables.md use the `=` symbol.
 
 ```rust
 let foo = 42;
@@ -16,8 +16,8 @@ Valid Assignment Targets
 ------------------------
 
 The left-hand-side (LHS) of an assignment statement must be a valid
-_[l-value](https://en.wikipedia.org/wiki/Value_(computer_science))_, which must be rooted in a
-[variable](variables/variables.md), potentially extended via indexing or properties.
+_[l-value](../https://en.wikipedia.org/wiki/Value_(computer_science)_, which must be rooted in a
+[variable](../variables/variables.md, potentially extended via indexing or properties.
 
 ~~~admonish bug "Assigning to invalid l-value"
 
@@ -42,7 +42,7 @@ Values are Cloned
 -----------------
 
 Values assigned are always _cloned_.
-So care must be taken when assigning large data types (such as [arrays](types/arrays.md)).
+So care must be taken when assigning large data types (such as [arrays](../types/arrays.md).
 
 ```rust
 x = y;                  // value of 'y' is cloned
@@ -71,7 +71,7 @@ x != y;                 // 'x' holds the original value of 'y'
 
 ### Return large data types from functions
 
-`take` is convenient when returning large data types from a [function](functions/functions.md).
+`take` is convenient when returning large data types from a [function](../functions/functions.md.
 
 ```rust
 fn get_large_value_naive() {
@@ -97,7 +97,7 @@ fn get_large_value_smart() {
 
 ### Assigning large data types to object map properties
 
-`take` is useful when assigning large data types to [object map](types/object-maps.md) properties.
+`take` is useful when assigning large data types to [object map](../types/object-maps.md properties.
 
 ```rust
 let x = [];

@@ -1,7 +1,7 @@
 Closures
 ========
 
-Many functions in the standard API expect [function pointer](../types/fn-ptr.md) as parameters.
+Many functions in the standard API expect [function pointer](../../types/fn-ptr.md as parameters.
 
 For example:
 
@@ -21,8 +21,8 @@ let y = x.map(double);
 let z = y.map(Fn("square"));
 ```
 
-Sometimes it gets tedious to define separate [functions](functions/functions.md) only to dispatch them via
-single [function pointers](../types/fn-ptr.md) &ndash; essentially, those [functions](functions/functions.md) are only
+Sometimes it gets tedious to define separate [functions](../functions/functions.md only to dispatch them via
+single [function pointers](../../types/fn-ptr.md &ndash; essentially, those [functions](../functions/functions.md are only
 ever called in one place.
 
 This scenario is especially common when simulating object-oriented programming ([OOP]).
@@ -112,18 +112,18 @@ Capture External Variables
 Use `is_shared` to check whether a particular dynamic value is shared.
 ~~~
 
-Closures differ from standard functions because they can _captures_ [variables](variables/variables.md) that
+Closures differ from standard functions because they can _captures_ [variables](../variables/variables.md that
 are not defined within the current scope, but are instead defined in an external scope &ndash; i.e.
 where the it is created.
 
-All [variables](variables/variables.md) that are accessible during the time the closure is created are
+All [variables](../variables/variables.md that are accessible during the time the closure is created are
 automatically captured when they are used, as long as they are not shadowed by local
-[variables](variables/variables.md) defined within the function's.
+[variables](../variables/variables.md defined within the function's.
 
-The captured [variables](variables/variables.md) are automatically converted into **reference-counted shared values**.
+The captured [variables](../variables/variables.md are automatically converted into **reference-counted shared values**.
 
 Therefore, similar to closures in many languages, these captured shared values persist through
-reference counting, and may be read or modified even after the [variables](variables/variables.md) that hold
+reference counting, and may be read or modified even after the [variables](../variables/variables.md that hold
 them go out of scope and no longer exist.
 
 ```rust
@@ -154,11 +154,11 @@ let f = anon_0001.curry(x);         // shared 'x' is curried
 ~~~admonish bug "Beware: Captured variables are truly shared"
 
 The example below is a typical tutorial sample for many languages to illustrate the traps
-that may accompany capturing external [variables](variables/variables.md) in closures.
+that may accompany capturing external [variables](../variables/variables.md in closures.
 
 It prints `9`, `9`, `9`, ... `9`, `9`, not `0`, `1`, `2`, ... `8`, `9`, because there is ever only
-_one_ captured [variable](variables/variables.md), and all ten closures capture the _same_
-[variable](variables/variables.md).
+_one_ captured [variable](../variables/variables.md, and all ten closures capture the _same_
+[variable](../variables/variables.md.
 
 ```rust
 let list = [];
@@ -181,8 +181,8 @@ for f in list {
 
 Data races are possible in AviScript scripts.
 
-Avoid performing a method call on a captured shared [variable](variables/variables.md) (which essentially
-takes a mutable reference to the shared object) while using that same [variable](variables/variables.md) as a
+Avoid performing a method call on a captured shared [variable](../variables/variables.md (which essentially
+takes a mutable reference to the shared object) while using that same [variable](../variables/variables.md as a
 parameter in the method call &ndash; this is a sure-fire way to generate a data race error.
 
 If a shared value is used as the `this` pointer in a method call to a closure function,

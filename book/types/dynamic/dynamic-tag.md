@@ -113,7 +113,7 @@ for (data, i) in filtered {
 
 ### Identify code conditions
 
-The tag value may also contain a _[bit-field](types/bit-fields.md)_ of up to 32 (16 under 32-bit targets)
+The tag value may also contain a _[bit-field](../types/bit-fields.md_ of up to 32 (16 under 32-bit targets)
 individual bits, recording up to 32 (or 16 under 32-bit targets) logic conditions that contributed
 to the value.
 
@@ -168,7 +168,7 @@ print(`Result check = ${my_result.tag[3]}`);
 
 ### Return auxillary info
 
-Sometimes it is useful to return auxillary info from a [function](functions/functions.md).
+Sometimes it is useful to return auxillary info from a [function](../functions/functions.md.
 
 ```rust
 // Verify Bell's Inequality by calculating a norm
@@ -208,14 +208,14 @@ if dist.tag == 1 {
 AviScript does not have _tuples_ (nor does JavaScript in this sense).
 
 Similar to the JavaScript situation, practical alternatives using AviScript include returning an
-[object map](types/object-maps.md) or an [array](types/arrays.md).
+[object map](../types/object-maps.md or an [array](../types/arrays.md.
 
 Both of these alternatives, however, incur overhead that may be wasteful when the amount of
 additional information is small &ndash; e.g. in many cases, a single `bool`, or a small number.
 
-To return a number of _small_ values from [functions](functions/functions.md), the tag value as a
-[bit-field](types/bit-fields.md) is an ideal container without resorting to a full-blown
-[object map](types/object-maps.md) or [array](types/arrays.md).
+To return a number of _small_ values from [functions](../functions/functions.md, the tag value as a
+[bit-field](../types/bit-fields.md is an ideal container without resorting to a full-blown
+[object map](../types/object-maps.md or [array](../types/arrays.md.
 
 ```rust
 // This function essentially returns a tuple of four numbers:

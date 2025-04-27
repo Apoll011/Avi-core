@@ -3,7 +3,7 @@ Timestamps
 
 Timestamps are provided by the via the `timestamp` function.
 
-[`type_of()`](meta/type-of.md) a timestamp returns `"timestamp"`.
+[`type_of()`](../meta/type-of.md a timestamp returns `"timestamp"`.
 
 
 Built-in Functions

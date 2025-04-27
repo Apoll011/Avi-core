@@ -37,10 +37,10 @@ Parse String into Number
 
 | Function                    |         From type          |          To type          |
 | --------------------------- | :------------------------: | :-----------------------: |
-| `parse_int`                 | [string](types/strings-chars.md) |          integer          |
-| `parse_int` with radix 2-36 | [string](types/strings-chars.md) | integer (specified radix) |
-| `parse_float`               | [string](types/strings-chars.md) |      floating-point       |
-| `parse_decimal`             | [string](types/strings-chars.md) |          decimal          |
+| `parse_int`                 | [string](../types/strings-chars.md |          integer          |
+| `parse_int` with radix 2-36 | [string](../types/strings-chars.md | integer (specified radix) |
+| `parse_float`               | [string](../types/strings-chars.md |      floating-point       |
+| `parse_decimal`             | [string](../types/strings-chars.md |          decimal          |
 
 ```rust
 let x = parse_float("123.4");   // parse as floating-point
@@ -76,9 +76,9 @@ Format Numbers
 
 | Function    | From type |          To type           |             Format             |
 | ----------- | :-------: | :------------------------: | :----------------------------: |
-| `to_binary` |  integer  | [string](types/strings-chars.md) | binary (i.e. only `1` and `0`) |
-| `to_octal`  |  integer  | [string](types/strings-chars.md) |    octal (i.e. `0` ... `7`)    |
-| `to_hex`    |  integer  | [string](types/strings-chars.md) |     hex (i.e. `0` ... `f`)     |
+| `to_binary` |  integer  | [string](../types/strings-chars.md | binary (i.e. only `1` and `0`) |
+| `to_octal`  |  integer  | [string](../types/strings-chars.md |    octal (i.e. `0` ... `7`)    |
+| `to_hex`    |  integer  | [string](../types/strings-chars.md |     hex (i.e. `0` ... `f`)     |
 
 ```rust
 let x = 0x1234abcd;

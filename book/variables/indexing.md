@@ -4,10 +4,10 @@ Indexing
 ```admonish tip.side "Tip: Non-integer index"
 
 Some data types take an index that is not an integer.
-For example, [object map](types/object-maps.md) indices are [strings](types/strings-chars.md).
+For example, [object map](../types/object-maps.md indices are [strings](../types/strings-chars.md.
 ```
 
-Some data types, such as [arrays](types/arrays.md), can be _indexed_ via a Rust-like syntax:
+Some data types, such as [arrays](../types/arrays.md, can be _indexed_ via a Rust-like syntax:
 
 > _object_ `[` _index_ `]`
 >
@@ -20,7 +20,7 @@ object's data type.
 Elvis Notation
 --------------
 
-The [_Elvis notation_](https://en.wikipedia.org/wiki/Elvis_operator) is similar except that it
+The [_Elvis notation_](../https://en.wikipedia.org/wiki/Elvis_operator is similar except that it
 returns `()` if the object itself is `()`.
 
 > `// returns () if object is ()`  

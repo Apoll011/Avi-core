@@ -13,7 +13,7 @@ A runtime error is raised if the property does not exist for the object's data t
 Elvis Operator
 --------------
 
-The [_Elvis operator_](https://en.wikipedia.org/wiki/Elvis_operator) can be used to short-circuit
+The [_Elvis operator_](../https://en.wikipedia.org/wiki/Elvis_operator can be used to short-circuit
 processing if the object itself is `()`.
 
 > `// returns () if object is ()`  

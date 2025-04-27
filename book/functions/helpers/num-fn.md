@@ -43,7 +43,7 @@ The following standard functions operate on floating-point and decimal numbers o
 | Logarithmic      |   yes    | `ln` (base _e_), `log` (base 10)                                                         |
 | Logarithmic      |  **no**  | `log(`_x_`,`_base_`)`                                                                    |
 | Rounding         |   yes    | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
-| Conversion       |   yes    | [`to_int`](operators/convert.md), [`to_decimal`](operators/convert.md), [`to_float`](operators/convert.md)             |
+| Conversion       |   yes    | [`to_int`](../operators/convert.md, [`to_decimal`](../operators/convert.md, [`to_float`](../operators/convert.md             |
 | Conversion       |  **no**  | `to_degrees`, `to_radians`                                                               |
 | Comparison       |   yes    | `min`, `max` (also inter-operates with integers)                                         |
 | Testing          |  **no**  | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
@@ -72,22 +72,22 @@ The following standard functions parse numbers.
 
 | Function                      | Description                                                             |
 | ----------------------------- | ----------------------------------------------------------------------- |
-| [`parse_int`](operators/convert.md)     | converts a [string](types/strings-chars.md) to integer with an optional radix |
-| [`parse_float`](operators/convert.md)   | converts a [string](types/strings-chars.md) to floating-point                 |
-| [`parse_decimal`](operators/convert.md) | converts a [string](types/strings-chars.md) to decimal                        |
+| [`parse_int`](../operators/convert.md     | converts a [string](../types/strings-chars.md to integer with an optional radix |
+| [`parse_float`](../operators/convert.md   | converts a [string](../types/strings-chars.md to floating-point                 |
+| [`parse_decimal`](../operators/convert.md | converts a [string](../types/strings-chars.md to decimal                        |
 
 
 Formatting Functions
 --------------------
 
-The following standard functions convert integer numbers into a [string](types/strings-chars.md) of hex,
+The following standard functions convert integer numbers into a [string](../types/strings-chars.md of hex,
 octal or binary representations.
 \{\{#.*\}\}
 | Function                  | Description                          |
 | ------------------------- | ------------------------------------ |
-| [`to_binary`](operators/convert.md) | converts an integer number to binary |
-| [`to_octal`](operators/convert.md)  | converts an integer number to octal  |
-| [`to_hex`](operators/convert.md)    | converts an integer number to hex    |
+| [`to_binary`](../operators/convert.md | converts an integer number to binary |
+| [`to_octal`](../operators/convert.md  | converts an integer number to octal  |
+| [`to_hex`](../operators/convert.md    | converts an integer number to hex    |
 
 
 Floating-point Constants
