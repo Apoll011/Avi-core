@@ -62,7 +62,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Avi-core-${{ runner.os }}
-          path: target/release/Avi-core
+          path: target/release/Avi-core-${{ runner.os }}
 
   release:
     name: Create GitHub Release
