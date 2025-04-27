@@ -6,7 +6,7 @@ use uuid::Uuid;
 
 use std::time::Instant;
 
-use crate::skills::avi_librarymanager::initialize_rhai_library;
+use crate::skills::avi_script::avi_librarymanager::initialize_rhai_library;
 
 #[export_module]
 mod speak {
