@@ -1,7 +1,7 @@
 For Loop
 ========
 
-Iterating through a numeric [range](../variables/ranges.md or an [array](../types/arrays.md, or any iterable type,
+Iterating through a numeric [range](variables/ranges.md) or an [array](types/arrays.md), or any iterable type,
 is provided by the `for` ... `in` loop.
 
 There are two alternative syntaxes, one including a counter variable:
@@ -75,7 +75,7 @@ for (item, count) in a {
 Iterate Through Arrays
 ----------------------
 
-Iterating through an [array](../types/arrays.md yields cloned _copies_ of each element.
+Iterating through an [array](types/arrays.md) yields cloned _copies_ of each element.
 
 ```rust
 let a = [1, 3, 5, 7, 9, 42];
@@ -93,13 +93,13 @@ for x in a {
 Iterate Through Strings
 -----------------------
 
-Iterating through a [string](../types/strings-chars.md yields individual [characters](../types/strings-chars.md.
+Iterating through a [string](types/strings-chars.md) yields individual [characters](types/strings-chars.md).
 
-The `chars` method also allow iterating through characters in a [string](../types/strings-chars.md,
+The `chars` method also allow iterating through characters in a [string](types/strings-chars.md),
 optionally accepting the character position to start from (counting from the end if negative), as
 well as the number of characters to iterate (defaults to all).
 
-`char` also accepts a [range](../variables/ranges.md which can be created via the `..` (exclusive) and `..=`
+`char` also accepts a [range](variables/ranges.md) which can be created via the `..` (exclusive) and `..=`
 (inclusive) operators.
 
 ```rust
@@ -133,9 +133,9 @@ for ch in s.chars(2..s.len) {
 Iterate Through Numeric Ranges
 ------------------------------
 
-[ranges](../variables/ranges.md are created via the `..` (exclusive) and `..=` (inclusive) operators.
+[ranges](variables/ranges.md) are created via the `..` (exclusive) and `..=` (inclusive) operators.
 
-The `range` function similarly creates exclusive [ranges](../variables/ranges.md, plus allowing optional step values.
+The `range` function similarly creates exclusive [ranges](variables/ranges.md), plus allowing optional step values.
 
 ```rust
 // Iterate starting from 0 and stopping at 49
@@ -188,12 +188,12 @@ for x in range(5.0, 0.0, -2.0) {    // step down by -2.0
 Iterate Through Bit-Fields
 --------------------------
 
-The `bits` function allows iterating through an integer as a [bit-field](../types/bit-fields.md.
+The `bits` function allows iterating through an integer as a [bit-field](types/bit-fields.md).
 
 `bits` optionally accepts the bit number to start from (counting from the most-significant-bit if
 negative), as well as the number of bits to iterate (defaults all).
 
-`bits` also accepts a [range](../variables/ranges.md which can be created via the `..` (exclusive) and `..=`
+`bits` also accepts a [range](variables/ranges.md) which can be created via the `..` (exclusive) and `..=`
 (inclusive) operators.
 
 ```js , no_run
@@ -227,10 +227,10 @@ for (bit, index) in x.bits(3..=12) {
 Iterate Through Object Maps
 ---------------------------
 
-Two methods, `keys` and `values`, return [arrays](../types/arrays.md containing cloned _copies_
-of all property names and values of an [object map](../types/object-maps.md, respectively.
+Two methods, `keys` and `values`, return [arrays](types/arrays.md) containing cloned _copies_
+of all property names and values of an [object map](types/object-maps.md), respectively.
 
-These [arrays](../types/arrays.md can be iterated.
+These [arrays](types/arrays.md) can be iterated.
 
 ```rust
 let map = #{a:1, b:3, c:5, d:7, e:9};

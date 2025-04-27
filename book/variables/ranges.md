@@ -13,7 +13,7 @@ Numeric ranges can be constructed by the `..` (exclusive) or `..=` (inclusive) o
 
 An _exclusive_ range does not include the last (i.e. "end") value.
 
-[`type_of()`](../meta/type-of.md an exclusive range returns `"range"`.
+[`type_of()`](meta/type-of.md) an exclusive range returns `"range"`.
 
 ### Inclusive range
 
@@ -21,7 +21,7 @@ An _exclusive_ range does not include the last (i.e. "end") value.
 
 An _inclusive_ range includes the last (i.e. "end") value.
 
-[`type_of()`](../meta/type-of.md an inclusive range returns `"range="`.
+[`type_of()`](meta/type-of.md) an inclusive range returns `"range="`.
 
 
 Usage Scenarios
@@ -31,15 +31,15 @@ Ranges are commonly used in the following scenarios.
 
 | Scenario                                      | Example                                 |
 |-----------------------------------------------| --------------------------------------- |
-| [`for`](../control-flow/for.md statements                    | `for n in 0..100 { ... }`               |
-| [`in`](../operators/operators.md expressions              | `if n in 0..100 { ... }`                |
-| [`switch`](../control-flow/switch.mdexpressions             | `switch n { 0..100 => ... }`            |
-| [Bit-fields](../types/bit-fields.md access            | `let x = n[2..6];`                      |
+| [`for`](control-flow/for.md) statements                    | `for n in 0..100 { ... }`               |
+| [`in`](operators/operators.md) expressions              | `if n in 0..100 { ... }`                |
+| [`switch`](control-flow/switch.md)expressions             | `switch n { 0..100 => ... }`            |
+| [Bit-fields](types/bit-fields.md) access            | `let x = n[2..6];`                      |
 | Bits iteration                                | `for bit in n.bits(2..=9) { ... }`      |
-| [Array](../types/arrays.md range-based APIs | `array.extract(2..8)`                   |
-| [BLOB](../types/blobs.md range-based APIs             | `blob.parse_le_int(4..8)`               |
-| [string](../types/strings-chars.md range-based APIs   | `string.sub_string(4..=12)`             |
-| [Characters](../types/strings-chars.md iteration      | `for ch in string.bits(4..=12) { ... }` |
+| [Array](types/arrays.md) range-based APIs | `array.extract(2..8)`                   |
+| [BLOB](types/blobs.md) range-based APIs             | `blob.parse_le_int(4..8)`               |
+| [string](types/strings-chars.md) range-based APIs   | `string.sub_string(4..=12)`             |
+| [Characters](types/strings-chars.md) iteration      | `for ch in string.bits(4..=12) { ... }` |
 
 
 Built-in Functions

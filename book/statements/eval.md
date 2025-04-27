@@ -4,7 +4,7 @@
 Or "How to Shoot Yourself in the Foot even Easier"
 --------------------------------------------------
 
-Saving the best for last, there is the ever-dreaded... `eval` [function](../functions/functions.md!
+Saving the best for last, there is the ever-dreaded... `eval` [function](functions/functions.md)!
 
 ```rust
 let x = 10;
@@ -35,7 +35,7 @@ print(z);                       // <- error: variable 'z' not found
 ~~~admonish danger.small "`eval` executes inside the current scope!"
 
 Script segments passed to `eval` execute inside the _current_ scope, so they can access and modify
-_everything_, including all [variables](../variables/variables.md that are visible at that position in code!
+_everything_, including all [variables](variables/variables.md) that are visible at that position in code!
 
 ```rust
 let script = "x += 32";
@@ -51,8 +51,8 @@ x += 32;
 print(x);
 ```
 
-`eval` can also be used to define new [variables](../variables/variables.md and do other things normally forbidden inside
-a [function](../functions/functions.md call.
+`eval` can also be used to define new [variables](variables/variables.md) and do other things normally forbidden inside
+a [function](functions/functions.md) call.
 
 ```rust
 let script = "let x = 42";
@@ -65,6 +65,6 @@ Treat it as if the script segments are physically pasted in at the position of t
 
 ~~~admonish warning.small "Cannot define new functions"
 
-New [functions](../functions/functions.md cannot be defined within an `eval` call, since [functions](../functions/functions.md
+New [functions](functions/functions.md) cannot be defined within an `eval` call, since [functions](functions/functions.md)
 can only be defined at the _global_ level!
 ~~~

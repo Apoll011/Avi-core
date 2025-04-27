@@ -10,7 +10,7 @@ Comparison Operators
 |   `<`    | `x` is less than `y`                 |       error if not defined        |  `false` if not defined  |
 |   `<=`   | `x` is less than or equals to `y`    |       error if not defined        |  `false` if not defined  |
 
-Comparison operators between most values of the same type are built in for all [standard types](../types/values-and-types.md.
+Comparison operators between most values of the same type are built in for all [standard types](types/values-and-types.md).
 
 
 ### Floating-point numbers interoperate with integers
@@ -49,8 +49,8 @@ d < 42;             // false
 
 ### Strings interoperate with characters
 
-Comparing a [string](../types/strings-chars.md with a [character](../types/strings-chars.md is also supported, with
-the character first turned into a [string](../types/strings-chars.md before performing the comparison.
+Comparing a [string](types/strings-chars.md) with a [character](types/strings-chars.md) is also supported, with
+the character first turned into a [string](types/strings-chars.md) before performing the comparison.
 
 ```rust
 'x' == "x";         // true
@@ -105,7 +105,7 @@ Boolean Operators
 
 ```admonish note.side
 
-All boolean operators are [built in](../../engine/builtin.md for the `bool` data type.
+All boolean operators are [built in](../engine/builtin.md) for the `bool` data type.
 ```
 
 |     Operator      | Description | Arity  | Short-circuits? |
@@ -154,7 +154,7 @@ a() ?? b();         // b() is only evaluated if a() is ()
 ~~~admonish tip.small "Tip: Default value for object map property"
 
 Use the null-coalescing operator to implement default values for non-existent
-[object map](../types/object-maps.md properties.
+[object map](types/object-maps.md) properties.
 
 ```rust
 let map = #{ foo: 42 };
@@ -177,8 +177,8 @@ The following statements are allowed to follow the null-coalescing operator:
 
 * `break`
 * `continue`
-* [`return`](../control-flow/return.md
-* [`throw`](../control-flow/throw.md
+* [`return`](control-flow/return.md)
+* [`throw`](control-flow/throw.md)
 
 This means that you can use the null-coalescing operator to short-circuit loops and/or
 early-return from functions when the value tested is `()`.
@@ -223,10 +223,10 @@ array.contains(42);     // <- the above is equivalent to this
 
 |          Data type           |                            Check for                            |
 | :--------------------------: | :-------------------------------------------------------------: |
-|  Numeric [range](../variables/ranges.md  |                         integer number                          |
-|      [array](../types/arrays.md      |                         contained item                          |
-| [Object map](../types/object-maps.md |                          property name                          |
-|  [string](../types/strings-chars.md  | [sub-string](../types/strings-chars.md or [character](../types/strings-chars.md |
+|  Numeric [range](variables/ranges.md)  |                         integer number                          |
+|      [array](types/arrays.md)      |                         contained item                          |
+| [Object map](types/object-maps.md) |                          property name                          |
+|  [string](types/strings-chars.md)  | [sub-string](types/strings-chars.md) or [character](types/strings-chars.md) |
 
 ### Examples
 

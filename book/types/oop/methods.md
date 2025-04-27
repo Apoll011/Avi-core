@@ -11,7 +11,7 @@ A runtime error is raised if the appropriate method does not exist for the objec
 Elvis Operator
 --------------
 
-The [_Elvis_ operator](../https://en.wikipedia.org/wiki/Elvis_operator can be used to short-circuit
+The [_Elvis_ operator](https://en.wikipedia.org/wiki/Elvis_operator) can be used to short-circuit
 the method call when the object itself is `()`.
 
 > `// method is not called if object is ()`  

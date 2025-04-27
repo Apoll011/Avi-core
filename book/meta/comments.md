@@ -27,7 +27,7 @@ Doc-Comments
 
 Comments starting with `///` (three slashes) or `/**` (two asterisks) are _doc-comments_.
 
-Doc-comments can only appear in front of [function](../functions/functions.md definitions, not any other elements.
+Doc-comments can only appear in front of [function](functions/functions.md) definitions, not any other elements.
 
 ```rust
 /// This is a valid one-line doc-comment
@@ -84,7 +84,7 @@ Module Documentation
 
 Comment lines starting with `//!` make up the _module documentation_.
 
-They are used to document the containing [module](../modules/index.md &ndash;
+They are used to document the containing [module](modules/index.md) &ndash;
 or for a AviScript script file, to document the file itself.
 
 ```rust
