@@ -86,7 +86,3 @@ We appreciate security researchers who help improve our security. Contributors w
 ## Version History
 
 This security policy was last updated on April 27, 2025.
-
----
-
-For any questions about this security policy, please contact security@example.com.
