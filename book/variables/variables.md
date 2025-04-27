@@ -18,13 +18,12 @@ However, a variable name must also contain at least one ASCII letter, and an ASC
 letter must come _before_ any digits. In other words, the first character that is not an underscore `_`
 must be an ASCII letter and not a digit.
 
-```admonish question.side.wide "Why this restriction?"
 
 To reduce confusion (and subtle bugs) because, for instance, `_1` can easily be misread (or mistyped)
 as `-1`.
 
 AviScript is dynamic without type checking, so there is no compiler to catch these typos.
-```
+
 
 Therefore, some names, e.g. `_`, `_42foo`, `_1` etc., are not valid in AviScript.
 
@@ -33,8 +32,6 @@ For example: `c3po` and `_r2d2_` are valid variable names, but `3abc` and `____4
 Variable names are case _sensitive_.
 
 Variable names also cannot be the same as a [keyword](../meta/keywords.md) (active or reserved).
-
-```admonish warning "Avoid names longer than 11 letters on 32-Bit"
 
 AviScript _inlines_ a string, which avoids allocations unless it is over its internal limit
 (23 ASCII characters on 64-bit, but only 11 ASCII characters on 32-bit).
@@ -46,7 +43,7 @@ However, on 32-bit systems, take care to limit, where possible, variable names t
 This is particularly true for local variables inside a hot loop, where they are created and
 destroyed in rapid succession.
 
-~~~js
+```js
 // The following is SLOW on 32-bit
 for my_super_loop_variable in array {
     print(`Super! ${my_super_loop_variable}`);
@@ -56,30 +53,19 @@ for my_super_loop_variable in array {
 for loop_var in array {
     print(`Super! ${loop_var}`);
 }
-~~~
 ```
-
 
 Declare a Variable
 ------------------
 
 Variables are declared using the `let` keyword.
 
-```admonish tip.small "Tip: No initial value"
-
 Variables do not have to be given an initial value.
 If none is provided, it defaults to `()`.
-```
-
-```admonish warning.small "Variables are local"
 
 A variable defined within a [statements block](../statements/statements.md) is _local_ to that block.
-```
-
-~~~admonish tip.small "Tip: `is_def_var`"
 
 Use `is_def_var` to detect if a variable is defined.
-~~~
 
 ```rust
 let x;              // ok - value is '()'

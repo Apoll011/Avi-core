@@ -23,25 +23,16 @@ The following primitive value types are supported natively.
 | **Nothing/void/nil/null/Unit** (or whatever it is called)                                          | `"()"`                    | `""` _(empty string)_           |
 
 
-```admonish warning.small "All types are distinct"
-
 All types are treated strictly distinct by AviScript, meaning that `i32` and `i64` and `u32` are
 completely different. They cannot even be added together.
 
 This is very similar to Rust.
-```
-
-```admonish info.small "Strings"
 
 [strings](../types/strings-chars.md) in AviScript are _immutable_, meaning that they can be shared but not modified.
 
 Any modification done to a AviScript string causes the [string](../types/strings-chars.md) to be cloned and
 the modifications made to the copy.
-```
-
-```admonish tip.small "Tip: Convert to string"
 
 The `to_string` function converts a standard type into a [string](../types/strings-chars.md) for display purposes.
 
 The `to_debug` function converts a standard type into a [string](../types/strings-chars.md) in debug format.
-```
