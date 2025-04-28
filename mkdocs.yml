@@ -16,8 +16,8 @@ theme:
     - search.highlight
     - navigation.top
   palette:
-    accent: cyan
     - scheme: default
+      accent: cyan
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
