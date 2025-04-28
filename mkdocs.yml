@@ -16,7 +16,6 @@ theme:
     - search.highlight
     - navigation.top
   palette:
-    accent: cyan
     - scheme: default
       toggle:
         icon: material/brightness-7
