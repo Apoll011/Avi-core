@@ -7,7 +7,7 @@ Integers
 
 Integer numbers follow C-style format with support for decimal, binary (`0b`), octal (`0o`) and hex (`0x`) notations.
 
-Integers can also be conveniently manipulated as [bit-fields](../types/bit-fields.md).
+Integers can also be conveniently manipulated as [bit-fields](./bit-fields.md).
 
 
 Floating-Point Numbers

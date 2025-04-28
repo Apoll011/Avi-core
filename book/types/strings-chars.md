@@ -186,8 +186,8 @@ The last result of the block is taken as the value for interpolation.
 AviScript uses [`to_string`](../operators/convert.md) to convert any value into a string, then physically joins all
 the sub-strings together.
 
-For convenience, if any interpolated value is a [BLOB](../types/blobs.md), however, it is automatically treated as a
-UTF-8 encoded string.  That is because it is rarely useful to interpolate a [BLOB](../types/blobs.md) into a string,
+For convenience, if any interpolated value is a [BLOB](./blobs.md), however, it is automatically treated as a
+UTF-8 encoded string.  That is because it is rarely useful to interpolate a [BLOB](./blobs.md) into a string,
 but extremely useful to be able to directly manipulate UTF-8 encoded text.
 
 ```js

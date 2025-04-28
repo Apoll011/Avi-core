@@ -1,7 +1,7 @@
 Switch Statement
 ================
 
-The `switch` statement allows matching on [literal](../appendix/literals.md) values.
+The `switch` statement allows matching on literal values.
 
 ```js
 switch calc_secret_value(x) {
@@ -49,8 +49,8 @@ switch wrong_default {
 Array and Object Map Literals Also Work
 ---------------------------------------
 
-The `switch` expression can match against any _[literal](../appendix/literals.md)_, including
-[array](../types/arrays.md) and [object map](../types/object-maps.md) [literals](../appendix/literals.md).
+The `switch` expression can match against any _literal_, including
+[array](../types/arrays.md) and [object map](../types/object-maps.md) literals.
 
 ```js
 // Match on arrays
@@ -128,7 +128,7 @@ switch value.type_of() {
 Range Cases
 -----------
 
-Because of their popularity, [literal](../appendix/literals.md) integer [ranges](../variables/ranges.md) can also
+Because of their popularity, literal integer [ranges](../variables/ranges.md) can also
 be used as `switch` cases.
 
 Numeric [ranges](../variables/ranges.md) are only searched when the `switch` value is itself a number (including
@@ -166,7 +166,7 @@ Numeric [range](../variables/ranges.md) cases are tried in the order that they a
 Switch Expression
 =================
 
-Like [`if`](../control-flow/if.md), `switch` also works as an _expression_.
+Like [`if`](if.md), `switch` also works as an _expression_.
 
 This means that a `switch` expression can appear anywhere a regular expression can,
 e.g. as [function](../functions/functions.md) call arguments.
@@ -197,13 +197,13 @@ if foo == "hello" {
 Difference From `if`-`else if` Chain
 ------------------------------------
 
-Although a `switch` expression looks _almost_ the same as an [`if`-`else if`](../control-flow/if.md) chain, there
+Although a `switch` expression looks _almost_ the same as an [`if`-`else if`](if.md) chain, there
 are subtle differences between the two.
 
 ### Look-up Table vs `x == y`
 
 A `switch` expression matches through _hashing_ via a look-up table. Therefore, matching is very
-fast.  Walking down an [`if`-`else if`](../control-flow/if.md) chain is _much_ slower.
+fast.  Walking down an [`if`-`else if`](if.md) chain is _much_ slower.
 
 On the other hand, operators can be [overloaded](../functions/overload.md) in AviScript, meaning that it is possible
 to override the `==` operator for integers such that `x == y` returns a different result from the
@@ -215,7 +215,7 @@ matching extremely efficient, but it also means that [overloading](../functions/
 will have no effect.
 
 Therefore, in environments where it is desirable to [overload](../functions/overload.md) the `==` operator for
-[standard types](type/values-and-types.md) &ndash; though it is difficult to think of valid scenarios
+[standard types](../type/values-and-types.md) &ndash; though it is difficult to think of valid scenarios
 where you'd want `1 == 1` to return something other than `true` &ndash; avoid using the `switch`
 expression.
 

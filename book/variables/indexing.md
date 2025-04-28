@@ -17,7 +17,7 @@ object's data type.
 Elvis Notation
 --------------
 
-The [_Elvis notation_](../https://en.wikipedia.org/wiki/Elvis_operator) is similar except that it
+The [_Elvis notation_](https://en.wikipedia.org/wiki/Elvis_operator) is similar except that it
 returns `()` if the object itself is `()`.
 
 > `// returns () if object is ()`  

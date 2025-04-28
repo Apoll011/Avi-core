@@ -5,14 +5,14 @@ Special Support for OOP
 ------------------------
 
 Object maps can be used to simulate object-oriented programming (OOP) by storing data as properties
-and methods as properties holding [function pointers](../types/fn-ptr.md).
+and methods as properties holding [function pointers](../fn-ptr.md).
 
-If an object map's property holds a [function pointer](../types/fn-ptr.md), the property can simply be called
+If an object map's property holds a [function pointer](../fn-ptr.md), the property can simply be called
 like a normal method in method-call syntax.
 
 This is a _short-hand_ to avoid the more verbose syntax of using the `call` function keyword.
 
-When a property holding a [function pointer](../types/fn-ptr.md) or a [closure](../types/fn-closure.md) is called like
+When a property holding a [function pointer](../fn-ptr.md) or a [closure](../fn-closure.md) is called like
 a method, it is replaced as a method call on the object map itself.
 
 ```rust

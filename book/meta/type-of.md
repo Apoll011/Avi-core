@@ -32,4 +32,4 @@ switch type_of(x) {
 }
 ```
 
-See [here](../type/values-and-types.md) for the `type_of` output of standard types.
+See [here](../types/values-and-types.md) for the `type_of` output of standard types.

@@ -1,7 +1,7 @@
 Compound Assignments
 ====================
 
-Compound assignments are [assignments](../variables/assignments.md) with a [binary operator](../operators/operators.md) attached.
+Compound assignments are [assignments](../variables/assignment.md) with a [binary operator](../operators/operators.md) attached.
 
 ```rust
 number += 8;            // number = number + 8

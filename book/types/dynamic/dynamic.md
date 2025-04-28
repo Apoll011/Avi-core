@@ -21,7 +21,7 @@ x = #{x: x};        // value is now an object map
 Use `type_of()` to Get Value Type
 ---------------------------------
 
-Because [`type_of()`](../meta/type-of.md) a dynamic value returns the type of the actual value,
+Because [`type_of()`](../../meta/type-of.md) a dynamic value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value's type.
 
 ```js

@@ -3,7 +3,7 @@ Function Pointers
 
 It is possible to store a _function pointer_ in a variable just like a normal value.
 
-A function pointer is created via the `Fn` function, which takes a [string](../types/strings-chars.md) parameter.
+A function pointer is created via the `Fn` function, which takes a [string](./strings-chars.md) parameter.
 
 Call a function pointer via the `call` method.
 

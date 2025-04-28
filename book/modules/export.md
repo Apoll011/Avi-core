@@ -1,14 +1,14 @@
 Export Variables, Functions and Sub-Modules From a Script
 =========================================================
 
-The easiest way to expose a collection of [functions](../functions.md) as a self-contained [module](../modules/index.md)
+The easiest way to expose a collection of [functions](../functions/functions.md) as a self-contained [module](../modules/index.md)
 is to do it via a AviScript script itself.
 
 The script text is evaluated.
 
-[Variables](../variables.md) are then selectively exposed via the `export` statement.
+[Variables](../variables/variables.md) are then selectively exposed via the `export` statement.
 
-[Functions](../functions.md) defined by the script are automatically exported, unless marked as `private`.
+[Functions](../functions/functions.md) defined by the script are automatically exported, unless marked as `private`.
 
 Modules loaded within this [module](../modules/index.md) at the global level become _sub-modules_ and are also
 automatically exported.
@@ -18,12 +18,12 @@ Export Global Constants
 -----------------------
 
 The `export` statement, which can only be at global level, exposes a selected
-[variable](../variables.md) as member of a [module](../modules/index.md).
+[variable](../variables/variables.md) as member of a [module](../modules/index.md).
 
-[Variables](../variables.md) not exported are _private_ and hidden. They are merely used to
+[Variables](../variables/variables.md) not exported are _private_ and hidden. They are merely used to
 initialize the [module](../modules/index.md), but cannot be accessed from outside.
 
-Everything exported from a [module](../modules/index.md) is **[constant](../constants.md)** (i.e. read-only).
+Everything exported from a [module](../modules/index.md) is **[constant](../variables/constants.md)** (i.e. read-only).
 
 ```js
 // This is a module script.
@@ -68,13 +68,13 @@ export z;
 Export Functions
 ----------------
 
-`private` [functions](../functions.md) are commonly called within the [module](../modules/index.md) only.
+`private` [functions](../functions/functions.md) are commonly called within the [module](../modules/index.md) only.
 They cannot be accessed otherwise.
 
-All [functions](../functions.md) are automatically exported, _unless_ it is explicitly opt-out with
+All [functions](../functions/functions.md) are automatically exported, _unless_ it is explicitly opt-out with
 the `private` prefix.
 
-[Functions](../functions.md) declared `private` are hidden to the outside.
+[Functions](../functions/functions.md) declared `private` are hidden to the outside.
 
 ```rust
 // This is a module script.

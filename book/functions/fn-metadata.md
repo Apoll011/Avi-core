@@ -22,8 +22,8 @@ single concise line of definition:
 Get Functions Metadata
 ======================
 
-The built-in [function](../functions/functions.md) `get_fn_metadata_list` returns an [array](../arrays) of [object
-maps](types/object-maps.md), each containing the metadata of one script-defined [function](../functions/functions.md)
+The built-in [function](../functions/functions.md) `get_fn_metadata_list` returns an [array](../types/arrays.md) of [object
+maps](../types/object-maps.md), each containing the metadata of one script-defined [function](../functions/functions.md)
 in scope.
 
 `get_fn_metadata_list` has a few versions taking different parameters:

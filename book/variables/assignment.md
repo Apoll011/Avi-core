@@ -16,7 +16,7 @@ Valid Assignment Targets
 ------------------------
 
 The left-hand-side (LHS) of an assignment statement must be a valid
-_[l-value](../https://en.wikipedia.org/wiki/Value_(computer_science))_, which must be rooted in a
+_[l-value](https://en.wikipedia.org/wiki/Value_(computer_science))_, which must be rooted in a
 [variable](../variables/variables.md), potentially extended via indexing or properties.
 
 Expressions that are not valid _l-values_ cannot be assigned to.
