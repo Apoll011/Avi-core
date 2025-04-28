@@ -78,14 +78,14 @@ Many script-oriented exceptions can be caught via `try` ... `catch`.
 | Unbound `this`                                                                                  |      [object map](../types/object-maps.md)      |
 | Data type mismatch                                                                              |      [object map](../types/object-maps.md)      |
 | Assignment to a calculated/[constant](../variables/constants.md) value                                       |      [object map](../types/object-maps.md)      |
-| [array](../types/arrays.md)/[string](types/strings-chars.md)/[bit-field](../types/bit-fields.md) indexing out-of-bounds |      [object map](../types/object-maps.md)      |
+| [array](../types/arrays.md)/[string](../types/strings-chars.md)/[bit-field](../types/bit-fields.md) indexing out-of-bounds |      [object map](../types/object-maps.md)      |
 | Indexing with an inappropriate data type                                                        |      [object map](../types/object-maps.md)      |
 | Error in property access                                                                        |      [object map](../types/object-maps.md)      |
 | [`for`](for.md) statement on a type that is not iterable                                        |      [object map](../types/object-maps.md)      |
 | Data race detected                                                                              |      [object map](../types/object-maps.md)      |
 | Other runtime error                                                                             |      [object map](../types/object-maps.md)      |
 
-The error value in the `catch` clause is an [object map](types/object-maps.md) containing information on
+The error value in the `catch` clause is an [object map](../types/object-maps.md) containing information on
 the particular error, including its type, line and character position (if any), and source etc.
 
 Some system exceptions _cannot_ be caught.

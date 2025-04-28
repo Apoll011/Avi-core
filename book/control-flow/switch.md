@@ -215,7 +215,7 @@ matching extremely efficient, but it also means that [overloading](../functions/
 will have no effect.
 
 Therefore, in environments where it is desirable to [overload](../functions/overload.md) the `==` operator for
-[standard types](../type/values-and-types.md) &ndash; though it is difficult to think of valid scenarios
+[standard types](../types/values-and-types.md) &ndash; though it is difficult to think of valid scenarios
 where you'd want `1 == 1` to return something other than `true` &ndash; avoid using the `switch`
 expression.
 
@@ -225,5 +225,5 @@ Because the `switch` expression works through a look-up table, it is very effici
 number of cases; in fact, switching is an O(1) operation regardless of the size of the data and
 number of cases to match.
 
-A long [`if`-`else if`](control-flow/if.md) chain becomes increasingly slower with each additional case because
+A long [`if`-`else if`](if.md) chain becomes increasingly slower with each additional case because
 essentially an O(n) _linear scan_ is performed.

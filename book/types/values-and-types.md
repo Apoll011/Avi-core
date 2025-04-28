@@ -19,7 +19,7 @@ The following primitive value types are supported natively.
 | **[Timestamp](./timestamps.md)**                                                                     | `"timestamp"`             | `"<timestamp>"`                 |
 | **[Function pointer](./fn-ptr.md)**                                                                  | `"Fn"`                    | `"Fn(foo)"` etc.                |
 | **Dynamic value** (i.e. can be anything)                                                           | _the actual type_         | _actual value_                  |
-| **Shared value** (a reference-counted, shared dynamic value, created via [closures](./fn-closure.md) | _the actual type_         | _actual value_                  |
+| **Shared value** (a reference-counted, shared dynamic value, created via [closures](../functions/fn-closure.md) | _the actual type_         | _actual value_                  |
 | **Nothing/void/nil/null/Unit** (or whatever it is called)                                          | `"()"`                    | `""` _(empty string)_           |
 
 
