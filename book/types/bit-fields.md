@@ -1,13 +1,10 @@
 Integer as Bit-Fields
 =====================
 
-```admonish note.side
-
 Nothing here cannot be done via standard bit-manipulation (i.e. shifting and masking).
 
 Built-in support is more elegant and performant since it usually replaces a sequence of multiple steps.
 
-```
 
 Since bit-wise operators are defined on integer numbers, individual bits can also be accessed and
 manipulated via an indexing syntax.
@@ -43,14 +40,10 @@ Bits in a bit-field are accessed with zero-based, non-negative integer indices:
 > _integer_ `[` _start_ `..` _end_ `] =` _new integer value_ ;  
 > _integer_ `[` _start_ `..=` _end_ `] =` _new integer value_ ;
 
-```admonish warning.small "Number of bits"
-
 The maximum bit number that can be accessed is one less than the number of bits for the
 system integer type (usually 63).
 
 Bits outside of the range are ignored.
-```
-
 
 ### From Most-Significant Bit (MSB)
 
@@ -64,12 +57,8 @@ _most-significant bit_, with −1 being the _highest_ bit.
 [ranges](../variables/ranges.md) always count from the least-significant bit (LSB) and has no support for
 negative positions.
 
-```admonish warning.small "Number of bits"
-
 The maximum bit number that can be accessed is negative the number of bits for the
 system integer type (usually −64).
-```
-
 
 Bit-Field Functions
 -------------------

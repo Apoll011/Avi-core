@@ -32,8 +32,6 @@ print(z);                       // <- error: variable 'z' not found
 "print(42)".eval();             // <- nope... method-call style doesn't work with 'eval'
 ```
 
-~~~admonish danger.small "`eval` executes inside the current scope!"
-
 Script segments passed to `eval` execute inside the _current_ scope, so they can access and modify
 _everything_, including all [variables](../variables/variables.md) that are visible at that position in code!
 
@@ -61,10 +59,6 @@ print(x);           // prints 42
 ```
 
 Treat it as if the script segments are physically pasted in at the position of the `eval` call.
-~~~
-
-~~~admonish warning.small "Cannot define new functions"
 
 New [functions](../functions/functions.md) cannot be defined within an `eval` call, since [functions](../functions/functions.md)
 can only be defined at the _global_ level!
-~~~

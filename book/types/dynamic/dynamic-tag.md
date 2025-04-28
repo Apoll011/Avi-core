@@ -7,10 +7,7 @@ On 32-bit targets, however, the tag is only `i16` (16-bit signed).
 
 The tag defaults to zero.
 
-```admonish bug.small "Value out of bounds"
-
 It is an error to set a tag to a value beyond the bounds of `i32` (`i16` on 32-bit targets).
-```
 
 
 Examples

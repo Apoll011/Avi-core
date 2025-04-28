@@ -1,11 +1,8 @@
 Indexing
 ========
 
-```admonish tip.side "Tip: Non-integer index"
-
 Some data types take an index that is not an integer.
 For example, [object map](../types/object-maps.md) indices are [strings](../types/strings-chars.md).
-```
 
 Some data types, such as [arrays](../types/arrays.md), can be _indexed_ via a Rust-like syntax:
 

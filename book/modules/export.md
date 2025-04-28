@@ -49,33 +49,27 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 }
 ```
 
-```admonish tip.small "Tip: Multiple exports"
-
 [Variables] can be exported under multiple names.
 For example, the following exports three [variables]:
 * `x` as `x` and `hello`
 * `y` as `foo` and `bar`
 * `z` as `z`
 
-~~~js
+```js
 export x;
 export x as hello;
 export y as foo;
 export x as world;
 export y as bar;
 export z;
-~~~
 ```
 
 
 Export Functions
 ----------------
 
-```admonish info.side.wide "Private functions"
-
 `private` [functions](../functions.md) are commonly called within the [module](../modules/index.md) only.
 They cannot be accessed otherwise.
-```
 
 All [functions](../functions.md) are automatically exported, _unless_ it is explicitly opt-out with
 the `private` prefix.
@@ -96,8 +90,6 @@ Sub-Modules
 
 All loaded [modules](../modules/index.md) are automatically exported as sub-modules.
 
-~~~admonish tip.small "Tip: Skip exporting a module"
-
 To prevent a [module](../modules/index.md) from being exported, load it inside a block statement
 so that it goes away at the end of the block.
 
@@ -110,4 +102,3 @@ import "hello" as foo;      // <- exported
     import "world" as bar;  // <- not exported
 }
 ```
-~~~

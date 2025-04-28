@@ -30,13 +30,9 @@ _last_ element.
 
 > _blob_ `[` _index position from −1 to −length_ `]`
 
-```admonish info.small "Byte values"
-
 The value of a particular byte in a BLOB is mapped to an integer.
 
 Only the lowest 8 bits are significant, all other bits are ignored.
-```
-
 
 Create a BLOB
 -------------
@@ -52,14 +48,12 @@ let x = blob(10);           // BLOB with ten zeros
 let x = blob(50, 42);       // BLOB with 50x 42's
 ```
 
-```admonish tip "Tip: Initialize with byte stream"
-
 To quickly initialize a BLOB with a particular byte stream, the `write_be` method can be used to
 write eight bytes at a time (four under 32-bit) in big-endian byte order.
 
 If fewer than eight bytes are needed, remember to right-pad the number as big-endian byte order is used.
 
-~~~rust
+```rust
 let buf = blob(12, 0);      // BLOB with 12x zeros
 
 // Write eight bytes at a time, in big-endian order
@@ -76,17 +70,13 @@ buf[10] == 0x0c;
 buf.write_be(0, 4, 0xab_cd_ef_12);
 buf.write_be(4, 4, 0x34_56_78_90);
 buf.write_be(8, 4, 0x0a_0b_0c_0d);
-~~~
 ```
 
 
 Writing ASCII Bytes
 -------------------
 
-```admonish warning.side "Non-ASCII"
-
 Non-ASCII characters (i.e. characters not within 1-127) are ignored.
-```
 
 For many embedded applications, it is necessary to encode an ASCII [string](../types/strings-chars.md) as a
 byte stream.
@@ -125,13 +115,9 @@ print(buf);                 // prints "[4209666f6f202620 626172000000abcd]"
 device.send(buf);           // send command to device
 ```
 
-```admonish question.small "What if I need UTF-8?"
-
 The `write_utf8` function writes a string in UTF-8 encoding.
 
 UTF-8, however, is not very common for embedded applications.
-```
-
 
 Built-in Functions
 ------------------

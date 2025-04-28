@@ -18,10 +18,7 @@ String and character literals follow JavaScript-style syntax.
 | Multi-line literal string |   `` `...` ``   |  **no**  |    **no**     | with `${...}`  |
 | Character                 |     `'...'`     |   yes    |    **no**     |     **no**     |
 
-```admonish tip.small "Tip: Building strings"
-
 Strings can be built up from other strings and types via the `+` or `+=` operators.
-```
 
 
 Standard Escape Sequences

@@ -22,6 +22,4 @@ The following are reserved keywords in AviScript.
 | [`type_of`](../meta/type-of.md), [`print`](../meta/print-debug.md), [`debug`](../meta/print-debug.md), [`eval`](../statements/eval.md), `is_def_var`                                                                         |                                                            | special functions                           |
 |                                                                                                                                                                                        | `default`, `void`, `null`, `nil`                           | special values                              |
 
-```admonish warning.small
 Keywords cannot become the name of a function or variable, even when they are disabled.
-```

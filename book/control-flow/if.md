@@ -17,8 +17,6 @@ if foo(x) {
 }
 ```
 
-~~~admonish warning.small "Braces are mandatory"
-
 Unlike C, the condition expression does _not_ need to be enclosed in parentheses `(`...`)`, but all
 branches of the `if` statement must be enclosed within braces `{`...`}`, even when there is only
 one statement inside the branch.
@@ -30,7 +28,6 @@ There is no ambiguity regarding which `if` clause a branch belongs to.
 if (decision) print(42);
 //            ^ syntax error, expecting '{'
 ```
-~~~
 
 
 If Expression
@@ -47,8 +44,6 @@ x == 22;
 let x = if decision { 42 }; // no else branch defaults to '()'
 x == ();
 ```
-
-~~~admonish danger.small "Statement before expression"
 
 Beware that, like Rust, `if` is parsed primarily as a statement where it makes sense.
 This is to avoid surprises.
@@ -82,4 +77,3 @@ fn calc_index(b, offset) {
 //  ^---------------------^ parentheses
 }
 ```
-~~~

@@ -103,10 +103,7 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 Boolean Operators
 =================
 
-```admonish note.side
-
 All boolean operators are [built in](../engine/builtin.md) for the `bool` data type.
-```
 
 |     Operator      | Description | Arity  | Short-circuits? |
 | :---------------: | :---------: | :----: | :-------------: |
@@ -151,8 +148,6 @@ a ?? b              // returns 'a' if it is not (), otherwise 'b'
 a() ?? b();         // b() is only evaluated if a() is ()
 ```
 
-~~~admonish tip.small "Tip: Default value for object map property"
-
 Use the null-coalescing operator to implement default values for non-existent
 [object map](../types/object-maps.md) properties.
 
@@ -168,7 +163,6 @@ let x = map.bar;            // x == ()
 // Default value for property
 let x = map.bar ?? 42;      // x == 42
 ```
-~~~
 
 Short-circuit loops and early returns
 -------------------------------------
@@ -196,12 +190,9 @@ for value in list {
 In Operator
 ===========
 
-```admonish question.side "Trivia"
-
 The `in` operator is simply syntactic sugar for a call to the `contains` function.
 
 Similarly, `!in` is a call to `!contains`.
-```
 
 The `in` operator is used to check for _containment_ &ndash; i.e. whether a particular collection
 data type _contains_ a particular item.
@@ -268,7 +259,7 @@ If `expression1` evaluates to a non-empty string, it's returned. Otherwise, `exp
 
 ### Example
 
-```
+``` rust
 let user_input = "";
 let name = user_input or "Anonymous";  // name will be "Anonymous"
 

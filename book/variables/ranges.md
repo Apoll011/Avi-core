@@ -60,8 +60,6 @@ The following methods operate on ranges.
 TL;DR
 -----
 
-```admonish question "What happened to the _open-ended_ ranges?"
-
 Rust has _open-ended_ ranges, such as `start..`, `..end` and `..=end`.  They are not available in AviScript.
 
 They are not needed because AviScript can overload functions.
@@ -79,7 +77,7 @@ position with a length that corresponds to the end position (for `..end`).
 
 The right-open form (i.e. `start..`) is trivially replaced by the version taking a single starting position.
 
-~~~rust
+```rust
 let x = [1, 2, 3, 4, 5];
 
 x.extract(0..3);    // normal range argument
@@ -90,5 +88,4 @@ x.extract(2);       // copies 'x' from position 2 onwards
 
 x.extract(0, 2);    // copies 'x' from beginning for 2 items
                     // equivalent to '..2'
-~~~
 ```

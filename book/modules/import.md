@@ -4,12 +4,9 @@ Import a Module
 `import` Statement
 ------------------
 
-```admonish tip.side.wide "Tip"
-
 A [module](../modules/index.md) that is only `import`-ed but not given any name is simply run.
 
 This is a very simple way to run another script file from within a script.
-```
 
 A [module](../modules/index.md) can be _imported_ via the `import` statement, and be given a name.
 
@@ -37,12 +34,9 @@ print(lock::status);            // module variables are constants
 lock::status = "off";           // <- runtime error: cannot modify a constant
 ```
 
-
-```admonish info "Imports are _scoped_"
-
 [Modules](../modules/index.md) imported via `import` statements are only accessible inside the relevant block scope.
 
-~~~js
+```js
 import "hacker" as h;           // import module - visible globally
 
 if secured {                    // <- new block scope
@@ -69,10 +63,7 @@ for x in 0..1000 {
 
     c.encrypt(something);
 }
-~~~
 ```
-
-~~~admonish note "Place `import` statements at the top"
 
 `import` statements can appear anywhere a normal statement can be, but in the vast majority of cases they are
 usually grouped at the top (beginning) of a script for manageability and visibility.
@@ -81,9 +72,6 @@ It is not advised to deviate from this common practice unless there is a _Very G
 
 Especially, do not place an `import` statement within a loop; doing so will repeatedly re-load the
 same [module](../modules/index.md) during every iteration of the loop!
-~~~
-
-~~~admonish danger "Recursive imports"
 
 Beware of _import cycles_ &ndash; i.e. recursively loading the same [module](../modules/index.md).
 This is a sure-fire way to cause a stack overflow error.
@@ -92,7 +80,7 @@ For instance, importing itself always causes an infinite recursion:
 
 ```js
 ┌────────────┐
-│ hello.avi │
+│ hello.avi  │
 └────────────┘
 
 import "hello" as foo;          // import itself - infinite recursion!
@@ -118,4 +106,3 @@ foo::do_something();
 import "hello" as bar;
 bar::do_something_else();
 ```
-~~~
