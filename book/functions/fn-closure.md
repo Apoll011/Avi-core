@@ -107,10 +107,8 @@ let obj = #{
 Capture External Variables
 --------------------------
 
-~~~admonish tip.side "Tip: `is_shared`"
-
 Use `is_shared` to check whether a particular dynamic value is shared.
-~~~
+
 
 Closures differ from standard functions because they can _captures_ [variables](../variables/variables.md) that
 are not defined within the current scope, but are instead defined in an external scope &ndash; i.e.
@@ -149,10 +147,7 @@ make_shared(x);                     // convert variable 'x' into a shared value
 
 let f = anon_0001.curry(x);         // shared 'x' is curried
 ```
-
-
-~~~admonish bug "Beware: Captured variables are truly shared"
-
+    
 The example below is a typical tutorial sample for many languages to illustrate the traps
 that may accompany capturing external [variables](../variables/variables.md) in closures.
 
@@ -175,9 +170,6 @@ for f in list {
     f.call();                   // all references to 'i' point to the same variable!
 }
 ```
-~~~
-
-~~~admonish danger "Prevent data races"
 
 Data races are possible in AviScript scripts.
 
@@ -200,4 +192,3 @@ x.is_shared() == true;          // now 'x' is shared
 
 x.call(f, 2);                   // <- error: data race detected on 'x'
 ```
-~~~

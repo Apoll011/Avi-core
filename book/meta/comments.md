@@ -51,9 +51,6 @@ let x = 42;
 }
 ```
 
-
-~~~admonish tip "Tip: Special cases"
-
 Long streams of `//////`... and `/*****`... do _NOT_ form doc-comments.
 This is consistent with popular comment block styles for C-like languages.
 
@@ -76,7 +73,6 @@ This is consistent with popular comment block styles for C-like languages.
  *                                      *
  ****************************************/
 ```
-~~~
 
 
 Module Documentation

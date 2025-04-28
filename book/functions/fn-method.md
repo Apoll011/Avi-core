@@ -1,10 +1,7 @@
 `this` &ndash; Simulating an Object Method
 ==========================================
 
-```admonish warning.side "Functions are pure"
-
 The only way for a script-defined [function](../functions/functions.md) to change an external value is via `this`.
-```
 
 Arguments passed to script-defined [functions](../functions/functions.md) are always by _value_ because
 [functions](../functions/functions.md) are _pure_.
@@ -45,10 +42,7 @@ In the above, the _method_ is never called if _object_ is `()`.
 Restrict the Type of `this` in Function Definitions
 ---------------------------------------------------
 
-```admonish tip.side.wide "Tip: Automatically global"
-
 Methods defined this way are automatically exposed to the global namespace.
-```
 
 In many cases it may be desirable to implement _methods_ for different custom types using
 script-defined [functions](../functions/functions.md).
@@ -84,19 +78,15 @@ or in quotes if the type name is not a valid identifier itself:
 
 > `fn`  `"`_type name string_`"` `.` _method_ `(` _parameters_ ... `)  {`  ...  `}`
 
-~~~admonish warning.small "Type name must be the same as `type_of`"
-
 The _type name_ specified in front of the [function](../functions/functions.md) name must match the output of
 [`type_of`](../meta/type-of.md) for the required type.
-~~~
 
-~~~admonish tip.small "Tip: `int` and `float`"
 `int` can be used in place of the system integer type (usually `i64` or `i32`).
 
 `float` can be used in place of the system floating-point type (usually `f64` or `f32`).
 
 Using these make scripts more portable.
-~~~
+
 
 ### Examples
 

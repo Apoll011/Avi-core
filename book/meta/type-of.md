@@ -32,7 +32,4 @@ switch type_of(x) {
 }
 ```
 
-```admonish info.small "Standard types"
-
 See [here](../type/values-and-types.md) for the `type_of` output of standard types.
-```

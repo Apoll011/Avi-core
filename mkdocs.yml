@@ -29,7 +29,7 @@ nav:
 
   - Control Flow:
       - Control Flow Basics: control-flow/index.md
-      - If Statements: control-flow/control-flow/if.md
+      - If Statements: control-flow/if.md
       - While Loops: control-flow/while.md
       - For Loops: control-flow/for.md
       - Loop: control-flow/loop.md

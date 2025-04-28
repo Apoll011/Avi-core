@@ -27,10 +27,7 @@ Strings can be built up from other strings and types via the `+` or `+=` operato
 Standard Escape Sequences
 -------------------------
 
-~~~admonish tip.side "Tip: Character `to_int()`"
-
 Use the `to_int` method to convert a Unicode character into its 32-bit Unicode encoding.
-~~~
 
 There is built-in support for Unicode (`\u`_xxxx_ or `\U`_xxxxxxxx_) and hex (`\x`_xx_) escape
 sequences for normal strings and characters.
@@ -87,8 +84,6 @@ let x = "hello, world!\n\
 let x = "hello, world!\nhello world again!\nthis is the last time!!!";
 ```
 
-~~~admonish warning.small "No ending quote before the line ends is a syntax error"
-
 If the ending double-quote is omitted, it is a syntax error.
 
 ```rust
@@ -96,9 +91,6 @@ let x = "hello
 # ";
 //            ^ syntax error: unterminated string literal
 ```
-~~~
-
-```admonish question.small "Why not go multi-line?"
 
 Technically speaking, there is no difficulty in allowing strings to run for multiple lines
 _without_ the continuation back-slash.
@@ -107,8 +99,6 @@ AviScript forces you to manually mark a continuation with a back-slash because t
 Once it happens, the entire remainder of the script would become one giant, multi-line string.
 
 This behavior is different from Rust, where string literals can run for multiple lines.
-```
-
 
 Raw Strings
 -----------
@@ -178,8 +168,6 @@ let x = "I have a quote \" as well as a back-tick ` here.";
 String Interpolation
 --------------------
 
-~~~admonish question.side.wide "What if I want `${` inside?"
-
 🤦 Well, you just _have_ to ask for the impossible, don't you?
 
 Currently there is no way to escape `${`.  Build the string in three pieces:
@@ -189,7 +177,6 @@ Currently there is no way to escape `${`.  Build the string in three pieces:
     + "${"
     + `" and end with }.`
 ```
-~~~
 
 Multi-line literal strings support _string interpolation_ wrapped in `${` ... `}`.
 
@@ -254,8 +241,6 @@ _last_ character.
 
 > _string_ `[` _index from −1 to −(total number of characters)_ `]`
 
-```admonish warning.small "Character indexing can be SLOOOOOOOOW"
-
 Internally, a AviScript string is still stored compactly as a Rust UTF-8 string in order to save memory.
 
 Therefore, getting the character at a particular index involves walking through the entire UTF-8
@@ -264,7 +249,6 @@ encoded bytes stream to extract individual Unicode characters, counting them on 
 Because of this, indexing can be a _slow_ procedure, especially for long strings.
 Along the same lines, getting the _length_ of a string (which returns the number of characters, not
 bytes) can also be slow.
-```
 
 
 Sub-Strings

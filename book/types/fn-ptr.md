@@ -11,10 +11,7 @@ Call a function pointer via the `call` method.
 Short-Hand Notation
 -------------------
 
-```admonish warning.side "Not for native"
-
 Native Rust functions cannot use this short-hand notation.
-```
 
 Having to write `Fn("foo")` in order to create a function pointer to the [function](../functions/functions.md)
 `foo` is a chore, so there is a short-hand available.
@@ -96,8 +93,6 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 ```
 
 
-```admonish warning "Not First-Class Functions"
-
 Beware that function pointers are _not_ first-class functions.
 
 They are _syntactic sugar_ only, capturing only the _name_ of a [function](../functions/functions.md) to call.
@@ -105,9 +100,6 @@ They do not hold the actual [functions](../functions/functions.md).
 
 The actual [function](../functions/functions.md) must be defined in the appropriate namespace for the call to
 succeed.
-```
-
-~~~admonish warning "Global Namespace Only"
 
 Because of their dynamic nature, function pointers cannot refer to functions in
 [`import`](../modules/import.md)-ed [modules](../modules/index.md).
@@ -130,7 +122,6 @@ let p = Fn("do_work_now");
 
 p.call();                   // works!
 ```
-~~~
 
 
 Dynamic Dispatch

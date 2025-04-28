@@ -54,7 +54,7 @@ Counter Variable
 
 The counter variable, if specified, starts from zero, incrementing upwards.
 
-```js , no_run
+```js
 let a = [42, 123, 999, 0, true, "hello", "world!", 987.6543];
 
 // Loop through the array
@@ -196,7 +196,7 @@ negative), as well as the number of bits to iterate (defaults all).
 `bits` also accepts a [range](../variables/ranges.md) which can be created via the `..` (exclusive) and `..=`
 (inclusive) operators.
 
-```js , no_run
+```js
 let x = 0b_1001110010_1101100010_1100010100;
 let num_on = 0;
 

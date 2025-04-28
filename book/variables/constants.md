@@ -13,11 +13,9 @@ print(X * 2);       // prints 84
 X = 123;            // <- syntax error: constant modified
 ```
 
-```admonish tip.small "Tip: Naming"
 
 Constants follow the same naming rules as [variables](../variables/variables.md),
 but as a convention are often named with all-capital letters.
-```
 
 
 Automatic Global Module

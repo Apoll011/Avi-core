@@ -19,8 +19,6 @@ add(2, 3) == 5;
 sub(2, 3,) == -1;   // trailing comma in arguments list is OK
 ```
 
-~~~admonish tip.small "Tip: `is_def_fn`"
-
 Use `is_def_fn` to detect if a AviScript function is defined (and therefore callable)
 based on its name and the number of parameters (_arity_).
 
@@ -34,8 +32,7 @@ is_def_fn("foo", 0) == false;
 is_def_fn("foo", 2) == false;
 
 is_def_fn("bar", 1) == false;
-```
-~~~
+``` 
 
 
 Implicit Return
@@ -203,8 +200,5 @@ change(x);
 x == 500;           // 'x' is NOT changed!
 ```
 
-```admonish warning.small "AviScript functions are pure"
-
 The only possibility for a AviScript script-defined function to modify an external variable is
 via the [`this`](../functions/fn-method.md) pointer.
-```

@@ -24,11 +24,9 @@ Default Case
 ------------
 
 A _default_ case (i.e. when no other cases match) can be specified with `_`.
-
-```admonish warning.small "Must be last"
-
+ 
 The default case must be the _last_ case in the `switch` statement.
-```
+
 
 ```js
 switch wrong_default {
@@ -101,8 +99,6 @@ let result = switch calc_secret_value(x) {
 };
 ```
 
-~~~admonish tip "Tip: Use with `type_of()`"
-
 Case conditions, together with [`type_of()`](../meta/type-of.md), makes it extremely easy to work with
 values which may be of several different types (like properties in a JSON object).
 
@@ -127,7 +123,6 @@ switch value.type_of() {
     _ => ...
 }
 ```
-~~~
 
 
 Range Cases
@@ -139,10 +134,7 @@ be used as `switch` cases.
 Numeric [ranges](../variables/ranges.md) are only searched when the `switch` value is itself a number (including
 floating-point and decimal). They never match any other data types.
 
-```admonish warning.small "Must come after numeric cases"
-
 Range cases must come _after_ all numeric cases.
-```
 
 ```js
 let x = 42;
@@ -166,25 +158,18 @@ switch x {
 }
 ```
 
-```admonish tip.small "Tip: Ranges can overlap"
-
 When more then one [range](../variables/ranges.md) contain the `switch` value, the _first_ one with a fulfilled condition
 (if any) is evaluated.
 
 Numeric [range](../variables/ranges.md) cases are tried in the order that they appear in the original script.
-```
-
 
 Switch Expression
 =================
 
 Like [`if`](../control-flow/if.md), `switch` also works as an _expression_.
 
-```admonish tip.small "Tip"
-
 This means that a `switch` expression can appear anywhere a regular expression can,
 e.g. as [function](../functions/functions.md) call arguments.
-```
 
 ```js
 let x = switch foo { 1 => true, _ => false };

@@ -20,12 +20,8 @@ loop {
 }
 ```
 
-~~~admonish danger.small "Remember the `break` statement"
-
 A `loop` statement without a `break` statement inside its loop block is infinite.
 There is no way for the loop to stop iterating.
-~~~
-
 
 Loop Expression
 ---------------

@@ -91,7 +91,7 @@ The following standard functions operate on bit-fields.
 Example
 -------
 
-```js , no_run
+```js
 // Assume the following bits fields in a single 16-bit word:
 // ┌─────────┬────────────┬──────┬─────────┐
 // │  15-12  │    11-4    │  3   │   2-0   │
