@@ -1,4 +1,6 @@
 # AVI - Autonomous Voice Interface
+> You can check the **progress** here [Dev Log Avi Series]([url](https://apolloproto.hashnode.dev/series/avi-voiceassistant)).
+
 _A Rust-based, modular voice assistant framework_
 
 Avi is a high-performance, extensible voice assistant framework reimagined in Rust. It is the evolution of [ALEX](https://github.com/Apoll011/Alex), rewritten from the ground up for reliability, speed, and scalability. Avi powers voice and command interfaces across devices—ranging from desktops to IoT nodes and satellite computers—built with modularity and developer experience in mind.
