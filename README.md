@@ -1,5 +1,5 @@
 # AVI - Autonomous Voice Interface
-> You can check the **progress** here [Dev Log Avi Series]([url](https://apolloproto.hashnode.dev/series/avi-voiceassistant)).
+> You can check the **progress** here [Dev Log Avi Series](https://apolloproto.hashnode.dev/series/avi-voiceassistant).
 
 _A Rust-based, modular voice assistant framework_
 
