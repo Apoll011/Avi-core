@@ -1,6 +1,5 @@
 mod broker;
 mod intent;
-mod language;
 mod skills;
 mod utils;
 mod version;
@@ -18,18 +17,7 @@ Protocols:
    - MessageBus -> (Neon (Audio | Speech) | GUI | Enclosure)
 */
 
-fn main() {
-    cli::header();
-    let mut im = IntentEngine::new();
-
-    let mqtt = start_mqtt();
-
-    let mut skill_manager = SkillManager::new();
-
-    skill_manager
-        .load_skills_from_directory("skills", &mut im)
-        .unwrap();
-
+fn main_loop(manager: &mut SkillManager, im: &mut IntentEngine) {
     let rec = Recognizer::new(&im);
 
     loop {
@@ -39,10 +27,29 @@ fn main() {
             println!("Sorry, I didn't understand.");
         } else {
             for m in matches {
-                skill_manager
+                manager
                     .process_intent(m)
                     .expect("Error processing the intent!");
             }
+        }
+    }
+}
+
+fn main() {
+    cli::header();
+    let mut im = IntentEngine::new();
+
+    let mqtt = start_mqtt();
+
+    let mut skill_manager = SkillManager::new();
+
+    match skill_manager.load_skills_from_directory("skills", &mut im) {
+        Ok(manager) => {
+            main_loop(manager, &mut im);
+        }
+        Err(e) => {
+            println!("Error loading skills: {}", e);
+            return;
         }
     }
 }
